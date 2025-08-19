@@ -13,15 +13,7 @@ class SejarahController extends Controller
     public function index()
     {
         $data = Sejarah::latest()->get();
-        return view('sejarah.index', compact('data'));
-    }
-
-    /**
-     * Form tambah sejarah
-     */
-    public function create()
-    {
-        return view('sejarah.create');
+        return view('admin.sejarah', compact('data')); // View: resources/views/admin/sejarah.blade.php
     }
 
     /**
@@ -33,18 +25,11 @@ class SejarahController extends Controller
             'isi_sejarah' => 'required|string',
         ]);
 
-        Sejarah::create($request->all());
+        Sejarah::create([
+            'isi_sejarah' => $request->isi_sejarah,
+        ]);
 
-        return redirect()->route('sejarah.index')->with('success', 'Data sejarah berhasil ditambahkan.');
-    }
-
-    /**
-     * Form edit sejarah
-     */
-    public function edit($id)
-    {
-        $item = Sejarah::findOrFail($id);
-        return view('sejarah.edit', compact('item'));
+        return redirect()->route('admin.sejarah.index')->with('success', 'Sejarah berhasil ditambahkan.');
     }
 
     /**
@@ -57,9 +42,11 @@ class SejarahController extends Controller
         ]);
 
         $item = Sejarah::findOrFail($id);
-        $item->update($request->all());
+        $item->update([
+            'isi_sejarah' => $request->isi_sejarah,
+        ]);
 
-        return redirect()->route('sejarah.index')->with('success', 'Data sejarah berhasil diperbarui.');
+        return redirect()->route('admin.sejarah.index')->with('success', 'Sejarah berhasil diperbarui.');
     }
 
     /**
@@ -70,6 +57,6 @@ class SejarahController extends Controller
         $item = Sejarah::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('sejarah.index')->with('success', 'Data sejarah berhasil dihapus.');
+        return redirect()->route('admin.sejarah.index')->with('success', 'Sejarah berhasil dihapus.');
     }
 }

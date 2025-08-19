@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('pendidikan', function (Blueprint $table) {
             $table->id();
-            $table->string('isi_pendidikan');
+            $table->text('isi_pendidikan');
             $table->timestamps();
         });
     }

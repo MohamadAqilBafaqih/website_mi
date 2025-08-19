@@ -13,15 +13,7 @@ class VisiMisiController extends Controller
     public function index()
     {
         $data = VisiMisi::latest()->get();
-        return view('visi_misi.index', compact('data'));
-    }
-
-    /**
-     * Form tambah visi misi
-     */
-    public function create()
-    {
-        return view('visi_misi.create');
+        return view('admin.visimisi', compact('data')); // View: resources/views/admin/visimisi.blade.php
     }
 
     /**
@@ -30,22 +22,16 @@ class VisiMisiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'visi' => 'required|string|max:255',
-            'misi' => 'required|string|max:255',
+            'visi' => 'required|string',
+            'misi' => 'required|string',
         ]);
 
-        VisiMisi::create($request->all());
+        VisiMisi::create([
+            'visi' => $request->visi,
+            'misi' => $request->misi,
+        ]);
 
-        return redirect()->route('visi-misi.index')->with('success', 'Visi & Misi berhasil ditambahkan.');
-    }
-
-    /**
-     * Form edit visi misi
-     */
-    public function edit($id)
-    {
-        $item = VisiMisi::findOrFail($id);
-        return view('visi_misi.edit', compact('item'));
+        return redirect()->route('admin.visimisi.index')->with('success', 'Visi & Misi berhasil ditambahkan.');
     }
 
     /**
@@ -54,14 +40,17 @@ class VisiMisiController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'visi' => 'required|string|max:255',
-            'misi' => 'required|string|max:255',
+            'visi' => 'required|string',
+            'misi' => 'required|string',
         ]);
 
         $item = VisiMisi::findOrFail($id);
-        $item->update($request->all());
+        $item->update([
+            'visi' => $request->visi,
+            'misi' => $request->misi,
+        ]);
 
-        return redirect()->route('visi-misi.index')->with('success', 'Visi & Misi berhasil diperbarui.');
+        return redirect()->route('admin.visimisi.index')->with('success', 'Visi & Misi berhasil diperbarui.');
     }
 
     /**
@@ -72,6 +61,6 @@ class VisiMisiController extends Controller
         $item = VisiMisi::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('visi-misi.index')->with('success', 'Visi & Misi berhasil dihapus.');
+        return redirect()->route('admin.visimisi.index')->with('success', 'Visi & Misi berhasil dihapus.');
     }
 }

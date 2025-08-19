@@ -13,15 +13,8 @@ class PendidikanController extends Controller
     public function index()
     {
         $data = Pendidikan::latest()->get();
-        return view('pendidikan.index', compact('data'));
-    }
-
-    /**
-     * Form tambah pendidikan
-     */
-    public function create()
-    {
-        return view('pendidikan.create');
+        return view('admin.pendidikan', compact('data')); 
+        // View: resources/views/admin/pendidikan/index.blade.php
     }
 
     /**
@@ -33,18 +26,12 @@ class PendidikanController extends Controller
             'isi_pendidikan' => 'required|string',
         ]);
 
-        Pendidikan::create($request->all());
+        Pendidikan::create([
+            'isi_pendidikan' => $request->isi_pendidikan,
+        ]);
 
-        return redirect()->route('pendidikan.index')->with('success', 'Data pendidikan berhasil ditambahkan.');
-    }
-
-    /**
-     * Form edit pendidikan
-     */
-    public function edit($id)
-    {
-        $item = Pendidikan::findOrFail($id);
-        return view('pendidikan.edit', compact('item'));
+        return redirect()->route('admin.pendidikan.index')
+            ->with('success', 'Data pendidikan berhasil ditambahkan.');
     }
 
     /**
@@ -57,9 +44,12 @@ class PendidikanController extends Controller
         ]);
 
         $item = Pendidikan::findOrFail($id);
-        $item->update($request->all());
+        $item->update([
+            'isi_pendidikan' => $request->isi_pendidikan,
+        ]);
 
-        return redirect()->route('pendidikan.index')->with('success', 'Data pendidikan berhasil diperbarui.');
+        return redirect()->route('admin.pendidikan.index')
+            ->with('success', 'Data pendidikan berhasil diperbarui.');
     }
 
     /**
@@ -70,6 +60,7 @@ class PendidikanController extends Controller
         $item = Pendidikan::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('pendidikan.index')->with('success', 'Data pendidikan berhasil dihapus.');
+        return redirect()->route('admin.pendidikan.index')
+            ->with('success', 'Data pendidikan berhasil dihapus.');
     }
 }

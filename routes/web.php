@@ -9,13 +9,21 @@ Route::get('/', function () {
 
 use App\Http\Controllers\CalonSiswaController;
 
-Route::prefix('admin')->group(function () {
-    Route::get('/calon_siswa', [CalonSiswaController::class, 'index'])->name('calon_siswa.index');
-    Route::get('/calon_siswa/create', [CalonSiswaController::class, 'create'])->name('calon_siswa.create');
-    Route::post('/calon_siswa', [CalonSiswaController::class, 'store'])->name('calon_siswa.store');
-    Route::get('/calon_siswa/{id}/edit', [CalonSiswaController::class, 'edit'])->name('calon_siswa.edit');
-    Route::put('/calon_siswa/{id}', [CalonSiswaController::class, 'update'])->name('calon_siswa.update');
-    Route::delete('/calon_siswa/{id}', [CalonSiswaController::class, 'destroy'])->name('calon_siswa.destroy');
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Halaman daftar calon siswa
+    Route::get('/calon-siswa', [CalonSiswaController::class, 'index'])->name('calonsiswa.index');
+
+    // Simpan data baru
+    Route::post('/calon-siswa', [CalonSiswaController::class, 'store'])->name('calonsiswa.store');
+
+    // Update data
+    Route::put('/calon-siswa/{id}', [CalonSiswaController::class, 'update'])->name('calonsiswa.update');
+
+    // Hapus data
+    Route::delete('/calon-siswa/{id}', [CalonSiswaController::class, 'destroy'])->name('calonsiswa.destroy');
+
+
+    Route::get('/admin/calonsiswa/create', [CalonSiswaController::class, 'create'])->name('admin.calonsiswa.create');
 });
 
 use App\Http\Controllers\BeritaController;
@@ -43,24 +51,24 @@ Route::prefix('admin')->group(function () {
 use App\Http\Controllers\DataGuruController;
 
 Route::prefix('admin')->group(function () {
-   
-// Tampilkan semua data guru
-Route::get('/admin/data-guru', [DataGuruController::class, 'index'])->name('admin.data-guru.index');
 
-// Form tambah data guru
-Route::get('/admin/data-guru/create', [DataGuruController::class, 'create'])->name('admin.data-guru.create');
+    // Tampilkan semua data guru
+    Route::get('/admin/data-guru', [DataGuruController::class, 'index'])->name('admin.data-guru.index');
 
-// Simpan data guru baru
-Route::post('/admin/data-guru', [DataGuruController::class, 'store'])->name('admin.data-guru.store');
+    // Form tambah data guru
+    Route::get('/admin/data-guru/create', [DataGuruController::class, 'create'])->name('admin.data-guru.create');
 
-// Form edit data guru
-Route::get('/admin/data-guru/{id}/edit', [DataGuruController::class, 'edit'])->name('admin.data-guru.edit');
+    // Simpan data guru baru
+    Route::post('/admin/data-guru', [DataGuruController::class, 'store'])->name('admin.data-guru.store');
 
-// Update data guru
-Route::put('/admin/data-guru/{id}', [DataGuruController::class, 'update'])->name('admin.data-guru.update');
+    // Form edit data guru
+    Route::get('/admin/data-guru/{id}/edit', [DataGuruController::class, 'edit'])->name('admin.data-guru.edit');
 
-// Hapus data guru
-Route::delete('/admin/data-guru/{id}', [DataGuruController::class, 'destroy'])->name('admin.data-guru.destroy');
+    // Update data guru
+    Route::put('/admin/data-guru/{id}', [DataGuruController::class, 'update'])->name('admin.data-guru.update');
+
+    // Hapus data guru
+    Route::delete('/admin/data-guru/{id}', [DataGuruController::class, 'destroy'])->name('admin.data-guru.destroy');
 });
 
 use App\Http\Controllers\GaleriKegiatanController;
@@ -85,45 +93,22 @@ Route::delete('/admin/galeri-kegiatan/{id}', [GaleriKegiatanController::class, '
 
 use App\Http\Controllers\KritikSaranController;
 
-// Tampilkan semua kritik & saran
-Route::get('/admin/kritik-saran', [KritikSaranController::class, 'index'])->name('admin.kritik-saran.index');
-
-// Form tambah kritik & saran
-Route::get('/admin/kritik-saran/create', [KritikSaranController::class, 'create'])->name('admin.kritik-saran.create');
-
-// Simpan kritik & saran baru
-Route::post('/admin/kritik-saran', [KritikSaranController::class, 'store'])->name('admin.kritik-saran.store');
-
-// Form edit kritik & saran
-Route::get('/admin/kritik-saran/{id}/edit', [KritikSaranController::class, 'edit'])->name('admin.kritik-saran.edit');
-
-// Update kritik & saran
-Route::put('/admin/kritik-saran/{id}', [KritikSaranController::class, 'update'])->name('admin.kritik-saran.update');
-
-// Hapus kritik & saran
-Route::delete('/admin/kritik-saran/{id}', [KritikSaranController::class, 'destroy'])->name('admin.kritik-saran.destroy');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/kritik-saran', [KritikSaranController::class, 'index'])->name('kritiksaran.index');
+    Route::get('/kritik-saran/create', [KritikSaranController::class, 'create'])->name('kritiksaran.create');
+    Route::post('/kritik-saran', [KritikSaranController::class, 'store'])->name('kritiksaran.store');
+    Route::get('/kritik-saran/{id}/edit', [KritikSaranController::class, 'edit'])->name('kritiksaran.edit');
+    Route::put('/kritik-saran/{id}', [KritikSaranController::class, 'update'])->name('kritiksaran.update');
+    Route::delete('/kritik-saran/{id}', [KritikSaranController::class, 'destroy'])->name('kritiksaran.destroy');
+});
 
 
 use App\Http\Controllers\PendidikanController;
 
-// Tampilkan semua pendidikan
-Route::get('/admin/pendidikan', [PendidikanController::class, 'index'])->name('admin.pendidikan.index');
-
-// Form tambah pendidikan
-Route::get('/admin/pendidikan/create', [PendidikanController::class, 'create'])->name('admin.pendidikan.create');
-
-// Simpan pendidikan baru
-Route::post('/admin/pendidikan', [PendidikanController::class, 'store'])->name('admin.pendidikan.store');
-
-// Form edit pendidikan
-Route::get('/admin/pendidikan/{id}/edit', [PendidikanController::class, 'edit'])->name('admin.pendidikan.edit');
-
-// Update pendidikan
-Route::put('/admin/pendidikan/{id}', [PendidikanController::class, 'update'])->name('admin.pendidikan.update');
-
-// Hapus pendidikan
-Route::delete('/admin/pendidikan/{id}', [PendidikanController::class, 'destroy'])->name('admin.pendidikan.destroy');
-
+// Route untuk admin pendidikan
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('pendidikan', PendidikanController::class);
+});
 
 use App\Http\Controllers\PrestasiSiswaController;
 
@@ -168,40 +153,31 @@ Route::delete('/admin/sarana-prasarana/{id}', [SaranaPrasaranaController::class,
 
 use App\Http\Controllers\SejarahController;
 
-// Tampilkan semua sejarah
-Route::get('/admin/sejarah', [SejarahController::class, 'index'])->name('admin.sejarah.index');
-
-// Form tambah sejarah
-Route::get('/admin/sejarah/create', [SejarahController::class, 'create'])->name('admin.sejarah.create');
-
-// Simpan sejarah baru
-Route::post('/admin/sejarah', [SejarahController::class, 'store'])->name('admin.sejarah.store');
-
-// Form edit sejarah
-Route::get('/admin/sejarah/{id}/edit', [SejarahController::class, 'edit'])->name('admin.sejarah.edit');
-
-// Update sejarah
-Route::put('/admin/sejarah/{id}', [SejarahController::class, 'update'])->name('admin.sejarah.update');
-
-// Hapus sejarah
-Route::delete('/admin/sejarah/{id}', [SejarahController::class, 'destroy'])->name('admin.sejarah.destroy');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('sejarah', SejarahController::class);
+});
 
 use App\Http\Controllers\VisiMisiController;
 
-// Tampilkan semua visi & misi
-Route::get('/admin/visi-misi', [VisiMisiController::class, 'index'])->name('admin.visi-misi.index');
+// Group route admin visi misi
+Route::prefix('admin')->group(function () {
+    Route::get('/visi-misi', [VisiMisiController::class, 'index'])->name('admin.visimisi.index');
+    Route::post('/visi-misi', [VisiMisiController::class, 'store'])->name('admin.visimisi.store');
+    Route::put('/visi-misi/{id}', [VisiMisiController::class, 'update'])->name('admin.visimisi.update');
+    Route::delete('/visi-misi/{id}', [VisiMisiController::class, 'destroy'])->name('admin.visimisi.destroy');
+});
 
-// Form tambah visi & misi
-Route::get('/admin/visi-misi/create', [VisiMisiController::class, 'create'])->name('admin.visi-misi.create');
 
-// Simpan visi & misi baru
-Route::post('/admin/visi-misi', [VisiMisiController::class, 'store'])->name('admin.visi-misi.store');
+use App\Http\Controllers\AuthController;
 
-// Form edit visi & misi
-Route::get('/admin/visi-misi/{id}/edit', [VisiMisiController::class, 'edit'])->name('admin.visi-misi.edit');
+// Form login
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 
-// Update visi & misi
-Route::put('/admin/visi-misi/{id}', [VisiMisiController::class, 'update'])->name('admin.visi-misi.update');
+// Proses login
+Route::post('login', [AuthController::class, 'login'])->name('login.process');
 
-// Hapus visi & misi
-Route::delete('/admin/visi-misi/{id}', [VisiMisiController::class, 'destroy'])->name('admin.visi-misi.destroy');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+use App\Http\Controllers\AdminDashboardController;
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
