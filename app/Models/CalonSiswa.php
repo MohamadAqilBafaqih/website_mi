@@ -13,12 +13,10 @@ class CalonSiswa extends Model
 
     protected $fillable = [
         'nama_lengkap',
-        'nisn',
         'nik',
         'jenis_kelamin',
         'tempat_lahir',
         'tanggal_lahir',
-        'agama',
         'alamat',
         'kelurahan',
         'kecamatan',
@@ -30,16 +28,21 @@ class CalonSiswa extends Model
         'asal_sekolah',
         'tahun_lulus',
         'nama_ayah',
-        'nik_ayah',
         'pekerjaan_ayah',
         'pendidikan_ayah',
+        'penghasilan_ayah',
         'nama_ibu',
-        'nik_ibu',
         'pekerjaan_ibu',
         'pendidikan_ibu',
-        'penghasilan_ortu',
+        'penghasilan_ibu',
         'akta_kelahiran',
         'kartu_keluarga',
         'status_pendaftaran'
     ];
+
+    protected $attributes = [
+        'status_pendaftaran' => 'Baru',
+    ];
 }
+
+

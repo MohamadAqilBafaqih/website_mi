@@ -741,7 +741,7 @@
 
         <a href="#" class="header-brand">
             <img src="{{ asset('gambar/logobaru.png') }}" alt="MI Diponegoro 03" style="height: 50px; width: auto;">
-            <span>MI Diponegoro 03</span>
+            <span>MI Diponegoro 03 Karangklesem</span>
         </a>
 
         <nav class="header-nav">
@@ -792,13 +792,13 @@
                 </a>
                 <ul class="submenu collapse show" id="pendaftaranSubmenu">
                     <li class="submenu-item">
-                        <a href="#" class="menu-link active">
+                        <a href="{{ route('admin.datasiswa.index') }}" class="menu-link active">
                             <i class="fas fa-circle-notch me-1" style="font-size: 8px;"></i>
                             <span class="menu-text">Data Calon Siswa</span>
                         </a>
                     </li>
                     <li class="submenu-item">
-                        <a href="#" class="menu-link">
+                        <a href="{{ route('admin.seleksisiswa.index') }}" class="menu-link">
                             <i class="fas fa-circle-notch me-1" style="font-size: 8px;"></i>
                             <span class="menu-text">Seleksi Penerimaan</span>
                         </a>
@@ -813,21 +813,21 @@
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.dataguru.index') }}" class="menu-link">
                     <i class="fas fa-chalkboard-teacher menu-icon"></i>
                     <span class="menu-text">Data Guru</span>
                 </a>
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.saranaprasarana.index') }}" class="menu-link">
                     <i class="fas fa-school menu-icon"></i>
                     <span class="menu-text">Sarana Prasarana</span>
                 </a>
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.prestasisiswa.index') }}" class="menu-link">
                     <i class="fas fa-trophy menu-icon"></i>
                     <span class="menu-text">Prestasi Siswa</span>
                 </a>
@@ -857,14 +857,14 @@
 
             <li class="menu-title">Konten Website</li>
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.berita.index') }}" class="menu-link">
                     <i class="fas fa-newspaper menu-icon"></i>
                     <span class="menu-text">Berita</span>
                 </a>
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="{{ route('admin.galerikegiatan.index') }}" class="menu-link">
                     <i class="fas fa-images menu-icon"></i>
                     <span class="menu-text">Galeri Kegiatan</span>
                 </a>

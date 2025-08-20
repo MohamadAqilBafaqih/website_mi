@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_siswa', 50);
             $table->string('nama_prestasi', 150);
+            $table->string('foto')->nullable();
             $table->enum('tingkat', ['Sekolah','Kecamatan','Kabupaten','Provinsi','Nasional','Internasional']);
             $table->enum('jenis_prestasi', ['Akademik','Non Akademik']);
             $table->string('penyelenggara', 150)->nullable();

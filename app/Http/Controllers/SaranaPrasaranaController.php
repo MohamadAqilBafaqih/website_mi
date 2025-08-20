@@ -4,103 +4,103 @@ namespace App\Http\Controllers;
 
 use App\Models\SaranaPrasarana;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SaranaPrasaranaController extends Controller
 {
     /**
-     * Tampilkan semua data sarana prasarana
+     * Tampilkan semua sarana & prasarana
      */
     public function index()
     {
         $data = SaranaPrasarana::latest()->get();
-        return view('sarana_prasarana.index', compact('data'));
+        return view('admin.saranaprasarana', compact('data'));
+        // View: resources/views/admin/sarana_prasarana.blade.php
     }
 
     /**
-     * Form tambah sarana prasarana
-     */
-    public function create()
-    {
-        return view('sarana_prasarana.create');
-    }
-
-    /**
-     * Simpan data sarana prasarana baru
+     * Simpan sarana/prasarana baru
      */
     public function store(Request $request)
     {
         $request->validate([
-            'nama_fasilitas' => 'required|string|max:100',
-            'jenis_fasilitas' => 'required|in:Sarana,Prasarana',
+            'nama_fasilitas' => 'required|string|max:150',
+            'jenis_fasilitas' => 'nullable|string|max:100',
             'deskripsi' => 'nullable|string',
-            'kondisi' => 'required|in:Baik,Cukup,Kurang',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tahun_pengadaan' => 'nullable|digits:4|integer|min:1900|max:' . date('Y'),
+            'kondisi' => 'nullable|string|max:50',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tahun_pengadaan' => 'nullable|date_format:Y',
         ]);
 
         $data = $request->all();
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('foto_sarana', 'public');
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('uploads/sarana_prasarana'), $fileName);
+            $data['foto'] = $fileName;
         }
 
         SaranaPrasarana::create($data);
 
-        return redirect()->route('sarana-prasarana.index')->with('success', 'Data sarana/prasarana berhasil ditambahkan.');
+        return redirect()->route('admin.saranaprasarana.index')
+            ->with('success', 'Sarana & prasarana berhasil ditambahkan.');
     }
 
     /**
-     * Form edit sarana prasarana
+     * Form edit sarana/prasarana
      */
     public function edit($id)
     {
-        $item = SaranaPrasarana::findOrFail($id);
-        return view('sarana_prasarana.edit', compact('item'));
+        $sarana = SaranaPrasarana::findOrFail($id);
+        $data = SaranaPrasarana::latest()->get(); // untuk daftar di tabel
+        return view('admin.saranaprasarana', compact('sarana', 'data'));
     }
 
     /**
-     * Update data sarana prasarana
+     * Update sarana/prasarana
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_fasilitas' => 'required|string|max:100',
-            'jenis_fasilitas' => 'required|in:Sarana,Prasarana',
+            'nama_fasilitas' => 'required|string|max:150',
+            'jenis_fasilitas' => 'nullable|string|max:100',
             'deskripsi' => 'nullable|string',
-            'kondisi' => 'required|in:Baik,Cukup,Kurang',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tahun_pengadaan' => 'nullable|digits:4|integer|min:1900|max:' . date('Y'),
+            'kondisi' => 'nullable|string|max:50',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tahun_pengadaan' => 'nullable|date_format:Y',
         ]);
 
-        $item = SaranaPrasarana::findOrFail($id);
-        $data = $request->all();
+        $sarana = SaranaPrasarana::findOrFail($id);
+        $updateData = $request->all();
 
         if ($request->hasFile('foto')) {
-            if ($item->foto && Storage::disk('public')->exists($item->foto)) {
-                Storage::disk('public')->delete($item->foto);
+            if ($sarana->foto && file_exists(public_path('uploads/sarana_prasarana/' . $sarana->foto))) {
+                unlink(public_path('uploads/saranaprasarana/' . $sarana->foto));
             }
-            $data['foto'] = $request->file('foto')->store('foto_sarana', 'public');
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('uploads/sarana_prasarana'), $fileName);
+            $updateData['foto'] = $fileName;
         }
 
-        $item->update($data);
+        $sarana->update($updateData);
 
-        return redirect()->route('sarana-prasarana.index')->with('success', 'Data sarana/prasarana berhasil diperbarui.');
+        return redirect()->route('admin.saranaprasarana.index')
+            ->with('success', 'Sarana & prasarana berhasil diperbarui.');
     }
 
     /**
-     * Hapus data sarana prasarana
+     * Hapus sarana/prasarana
      */
     public function destroy($id)
     {
-        $item = SaranaPrasarana::findOrFail($id);
+        $sarana = SaranaPrasarana::findOrFail($id);
 
-        if ($item->foto && Storage::disk('public')->exists($item->foto)) {
-            Storage::disk('public')->delete($item->foto);
+        if ($sarana->foto && file_exists(public_path('uploads/sarana_prasarana/' . $sarana->foto))) {
+            unlink(public_path('uploads/sarana_prasarana/' . $sarana->foto));
         }
 
-        $item->delete();
+        $sarana->delete();
 
-        return redirect()->route('sarana-prasarana.index')->with('success', 'Data sarana/prasarana berhasil dihapus.');
+        return redirect()->route('admin.saranaprasarana.index')
+            ->with('success', 'Sarana & prasarana berhasil dihapus.');
     }
 }

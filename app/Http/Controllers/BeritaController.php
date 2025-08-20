@@ -7,25 +7,27 @@ use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
+    /**
+     * Tampilkan semua berita
+     */
     public function index()
     {
         $data = Berita::latest()->get();
-        return view('admin.berita.index', compact('data'));
+        return view('admin.berita', compact('data'));
+        // View: resources/views/admin/berita.blade.php
     }
 
-    public function create()
-    {
-        return view('admin.berita.create');
-    }
-
+    /**
+     * Simpan berita baru
+     */
     public function store(Request $request)
     {
         $request->validate([
             'judul' => 'nullable|string|max:150',
             'isi' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
             'penulis' => 'nullable|string|max:100',
-            'tanggal' => 'nullable|date'
+            'tanggal' => 'nullable|date',
         ]);
 
         $data = $request->all();
@@ -38,15 +40,24 @@ class BeritaController extends Controller
 
         Berita::create($data);
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('admin.berita.index')
+            ->with('success', 'Berita berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        $data = Berita::findOrFail($id);
-        return view('admin.berita.edit', compact('data'));
+        // Ambil data berita sesuai ID
+        $berita = Berita::findOrFail($id);
+
+        // Kirim data ke view yang sama, gunakan variabel $berita untuk form edit
+        $data = Berita::latest()->get(); // Untuk daftar berita di tabel bawah
+        return view('admin.berita', compact('berita', 'data'));
     }
 
+
+    /**
+     * Update berita
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -54,7 +65,7 @@ class BeritaController extends Controller
             'isi' => 'required|string',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'penulis' => 'nullable|string|max:100',
-            'tanggal' => 'nullable|date'
+            'tanggal' => 'nullable|date',
         ]);
 
         $berita = Berita::findOrFail($id);
@@ -71,9 +82,13 @@ class BeritaController extends Controller
 
         $berita->update($updateData);
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui.');
+        return redirect()->route('admin.berita.index')
+            ->with('success', 'Berita berhasil diperbarui.');
     }
 
+    /**
+     * Hapus berita
+     */
     public function destroy($id)
     {
         $berita = Berita::findOrFail($id);
@@ -84,6 +99,7 @@ class BeritaController extends Controller
 
         $berita->delete();
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('admin.berita.index')
+            ->with('success', 'Berita berhasil dihapus.');
     }
 }

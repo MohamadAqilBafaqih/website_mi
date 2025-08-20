@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DataGuru;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class DataGuruController extends Controller
 {
@@ -13,16 +12,9 @@ class DataGuruController extends Controller
      */
     public function index()
     {
-        $guru = DataGuru::latest()->get();
-        return view('data_guru.index', compact('guru'));
-    }
-
-    /**
-     * Form tambah data guru
-     */
-    public function create()
-    {
-        return view('data_guru.create');
+        $data = DataGuru::latest()->get();
+        return view('admin.dataguru', compact('data'));
+        // View: resources/views/admin/dataguru.blade.php
     }
 
     /**
@@ -31,26 +23,29 @@ class DataGuruController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_lengkap' => 'required|string|max:100',
-            'jenis_kelamin' => 'required',
-            'jabatan' => 'required|string|max:50',
-            'mata_pelajaran' => 'nullable|string|max:50',
-            'pendidikan_terakhir' => 'nullable|string|max:50',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'email' => 'nullable|email|max:100',
+            'nama_lengkap' => 'required|string|max:150',
+            'jenis_kelamin' => 'required|in:L,P',
+            'jabatan' => 'nullable|string|max:100',
+            'mata_pelajaran' => 'nullable|string|max:100',
+            'pendidikan_terakhir' => 'nullable|string|max:100',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'email' => 'nullable|email|max:150',
             'no_hp' => 'nullable|string|max:20',
-            'status' => 'required|in:Aktif,Nonaktif',
+            'status' => 'nullable|string|max:50',
         ]);
 
         $data = $request->all();
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('foto_guru', 'public');
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('uploads/guru'), $fileName);
+            $data['foto'] = $fileName;
         }
 
         DataGuru::create($data);
 
-        return redirect()->route('data-guru.index')->with('success', 'Data guru berhasil ditambahkan.');
+        return redirect()->route('admin.dataguru.index')
+            ->with('success', 'Data guru berhasil ditambahkan.');
     }
 
     /**
@@ -59,7 +54,8 @@ class DataGuruController extends Controller
     public function edit($id)
     {
         $guru = DataGuru::findOrFail($id);
-        return view('data_guru.edit', compact('guru'));
+        $data = DataGuru::latest()->get();
+        return view('admin.dataguru', compact('guru', 'data'));
     }
 
     /**
@@ -67,33 +63,34 @@ class DataGuruController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $guru = DataGuru::findOrFail($id);
-
         $request->validate([
-            'nama_lengkap' => 'required|string|max:100',
-            'jenis_kelamin' => 'required',
-            'jabatan' => 'required|string|max:50',
-            'mata_pelajaran' => 'nullable|string|max:50',
-            'pendidikan_terakhir' => 'nullable|string|max:50',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'email' => 'nullable|email|max:100',
+            'nama_lengkap' => 'required|string|max:150',
+            'jenis_kelamin' => 'required|in:L,P',
+            'jabatan' => 'nullable|string|max:100',
+            'mata_pelajaran' => 'nullable|string|max:100',
+            'pendidikan_terakhir' => 'nullable|string|max:100',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'email' => 'nullable|email|max:150',
             'no_hp' => 'nullable|string|max:20',
-            'status' => 'required|in:Aktif,Nonaktif',
+            'status' => 'nullable|string|max:50',
         ]);
 
-        $data = $request->all();
+        $guru = DataGuru::findOrFail($id);
+        $updateData = $request->all();
 
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
-            if ($guru->foto && Storage::disk('public')->exists($guru->foto)) {
-                Storage::disk('public')->delete($guru->foto);
+            if ($guru->foto && file_exists(public_path('uploads/guru/' . $guru->foto))) {
+                unlink(public_path('uploads/guru/' . $guru->foto));
             }
-            $data['foto'] = $request->file('foto')->store('foto_guru', 'public');
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('uploads/guru'), $fileName);
+            $updateData['foto'] = $fileName;
         }
 
-        $guru->update($data);
+        $guru->update($updateData);
 
-        return redirect()->route('data-guru.index')->with('success', 'Data guru berhasil diperbarui.');
+        return redirect()->route('admin.dataguru.index')
+            ->with('success', 'Data guru berhasil diperbarui.');
     }
 
     /**
@@ -103,13 +100,13 @@ class DataGuruController extends Controller
     {
         $guru = DataGuru::findOrFail($id);
 
-        // Hapus foto jika ada
-        if ($guru->foto && Storage::disk('public')->exists($guru->foto)) {
-            Storage::disk('public')->delete($guru->foto);
+        if ($guru->foto && file_exists(public_path('uploads/guru/' . $guru->foto))) {
+            unlink(public_path('uploads/guru/' . $guru->foto));
         }
 
         $guru->delete();
 
-        return redirect()->route('data-guru.index')->with('success', 'Data guru berhasil dihapus.');
+        return redirect()->route('admin.dataguru.index')
+            ->with('success', 'Data guru berhasil dihapus.');
     }
 }

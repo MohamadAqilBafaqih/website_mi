@@ -8,40 +8,43 @@ use Illuminate\Http\Request;
 class PrestasiSiswaController extends Controller
 {
     /**
-     * Tampilkan semua data prestasi siswa
+     * Tampilkan semua prestasi siswa
      */
     public function index()
     {
         $data = PrestasiSiswa::latest()->get();
-        return view('prestasi_siswa.index', compact('data'));
+        return view('admin.prestasisiswa', compact('data'));
+        // View: resources/views/admin/prestasisiswa.blade.php
     }
 
     /**
-     * Form tambah prestasi siswa
-     */
-    public function create()
-    {
-        return view('prestasi_siswa.create');
-    }
-
-    /**
-     * Simpan data prestasi siswa baru
+     * Simpan prestasi siswa baru
      */
     public function store(Request $request)
     {
         $request->validate([
-            'nama_siswa' => 'required|string|max:50',
+            'nama_siswa' => 'required|string|max:150',
             'nama_prestasi' => 'required|string|max:150',
-            'tingkat' => 'required|in:Sekolah,Kecamatan,Kabupaten,Provinsi,Nasional,Internasional',
-            'jenis_prestasi' => 'required|in:Akademik,Non Akademik',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tingkat' => 'nullable|string|max:100',
+            'jenis_prestasi' => 'nullable|string|max:100',
             'penyelenggara' => 'nullable|string|max:150',
-            'tahun' => 'nullable|digits:4|integer|min:1900|max:' . date('Y'),
-            'keterangan' => 'nullable|string'
+            'tahun' => 'nullable|integer',
+            'keterangan' => 'nullable|string',
         ]);
 
-        PrestasiSiswa::create($request->all());
+        $data = $request->all();
 
-        return redirect()->route('prestasi-siswa.index')->with('success', 'Prestasi siswa berhasil ditambahkan.');
+        if ($request->hasFile('foto')) {
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('uploads/prestasisiswa'), $fileName);
+            $data['foto'] = $fileName;
+        }
+
+        PrestasiSiswa::create($data);
+
+        return redirect()->route('admin.prestasisiswa.index')
+            ->with('success', 'Prestasi siswa berhasil ditambahkan.');
     }
 
     /**
@@ -49,39 +52,59 @@ class PrestasiSiswaController extends Controller
      */
     public function edit($id)
     {
-        $item = PrestasiSiswa::findOrFail($id);
-        return view('prestasi_siswa.edit', compact('item'));
+        $prestasi = PrestasiSiswa::findOrFail($id);
+        $data = PrestasiSiswa::latest()->get(); // Untuk tabel daftar prestasi
+        return view('admin.prestasisiswa', compact('prestasi', 'data'));
     }
 
     /**
-     * Update data prestasi siswa
+     * Update prestasi siswa
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_siswa' => 'required|string|max:50',
+            'nama_siswa' => 'required|string|max:150',
             'nama_prestasi' => 'required|string|max:150',
-            'tingkat' => 'required|in:Sekolah,Kecamatan,Kabupaten,Provinsi,Nasional,Internasional',
-            'jenis_prestasi' => 'required|in:Akademik,Non Akademik',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tingkat' => 'nullable|string|max:100',
+            'jenis_prestasi' => 'nullable|string|max:100',
             'penyelenggara' => 'nullable|string|max:150',
-            'tahun' => 'nullable|digits:4|integer|min:1900|max:' . date('Y'),
-            'keterangan' => 'nullable|string'
+            'tahun' => 'nullable|integer',
+            'keterangan' => 'nullable|string',
         ]);
 
-        $item = PrestasiSiswa::findOrFail($id);
-        $item->update($request->all());
+        $prestasi = PrestasiSiswa::findOrFail($id);
+        $updateData = $request->all();
 
-        return redirect()->route('prestasi-siswa.index')->with('success', 'Prestasi siswa berhasil diperbarui.');
+        if ($request->hasFile('foto')) {
+            if ($prestasi->foto && file_exists(public_path('uploads/prestasisiswa/' . $prestasi->foto))) {
+                unlink(public_path('uploads/prestasisiswa/' . $prestasi->foto));
+            }
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('uploads/prestasisiswa'), $fileName);
+            $updateData['foto'] = $fileName;
+        }
+
+        $prestasi->update($updateData);
+
+        return redirect()->route('admin.prestasisiswa.index')
+            ->with('success', 'Prestasi siswa berhasil diperbarui.');
     }
 
     /**
-     * Hapus data prestasi siswa
+     * Hapus prestasi siswa
      */
     public function destroy($id)
     {
-        $item = PrestasiSiswa::findOrFail($id);
-        $item->delete();
+        $prestasi = PrestasiSiswa::findOrFail($id);
 
-        return redirect()->route('prestasi-siswa.index')->with('success', 'Prestasi siswa berhasil dihapus.');
+        if ($prestasi->foto && file_exists(public_path('uploads/prestasisiswa/' . $prestasi->foto))) {
+            unlink(public_path('uploads/prestasisiswa/' . $prestasi->foto));
+        }
+
+        $prestasi->delete();
+
+        return redirect()->route('admin.prestasisiswa.index')
+            ->with('success', 'Prestasi siswa berhasil dihapus.');
     }
 }

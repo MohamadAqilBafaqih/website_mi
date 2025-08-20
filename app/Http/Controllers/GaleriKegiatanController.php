@@ -7,87 +7,96 @@ use Illuminate\Http\Request;
 
 class GaleriKegiatanController extends Controller
 {
-    // Tampilkan semua galeri
+    /**
+     * Tampilkan semua galeri kegiatan
+     */
     public function index()
     {
         $data = GaleriKegiatan::latest()->get();
-        return view('admin.galeri_kegiatan.index', compact('data'));
+        return view('admin.galerikegiatan', compact('data'));
+        // View: resources/views/admin/galeri_kegiatan.blade.php
     }
 
-    // Form tambah
-    public function create()
-    {
-        return view('admin.galeri_kegiatan.create');
-    }
-
-    // Simpan data baru
+    /**
+     * Simpan galeri kegiatan baru
+     */
     public function store(Request $request)
     {
         $request->validate([
             'judul_kegiatan' => 'required|string|max:150',
             'deskripsi' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tanggal' => 'nullable|date'
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tanggal' => 'nullable|date',
         ]);
 
         $data = $request->all();
 
-        // Upload foto jika ada
         if ($request->hasFile('foto')) {
             $fileName = time() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('uploads/galeri'), $fileName);
+            $request->foto->move(public_path('uploads/galeri_kegiatan'), $fileName);
             $data['foto'] = $fileName;
         }
 
         GaleriKegiatan::create($data);
 
-        return redirect()->route('galeri-kegiatan.index')->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->route('admin.galerikegiatan.index')
+            ->with('success', 'Galeri kegiatan berhasil ditambahkan.');
     }
 
-    // Form edit
+    /**
+     * Edit galeri kegiatan
+     */
     public function edit($id)
     {
-        $data = GaleriKegiatan::findOrFail($id);
-        return view('admin.galeri_kegiatan.edit', compact('data'));
+        $galeri = GaleriKegiatan::findOrFail($id);
+        $data = GaleriKegiatan::latest()->get(); // Untuk daftar di tabel
+        return view('admin.galerikegiatan', compact('galeri', 'data'));
     }
 
-    // Update data
+    /**
+     * Update galeri kegiatan
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
             'judul_kegiatan' => 'required|string|max:150',
             'deskripsi' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tanggal' => 'nullable|date'
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tanggal' => 'nullable|date',
         ]);
 
-        $data = GaleriKegiatan::findOrFail($id);
+        $galeri = GaleriKegiatan::findOrFail($id);
         $updateData = $request->all();
 
-        // Jika ganti foto
         if ($request->hasFile('foto')) {
-            if ($data->foto && file_exists(public_path('uploads/galeri/' . $data->foto))) {
-                unlink(public_path('uploads/galeri/' . $data->foto));
+            if ($galeri->foto && file_exists(public_path('uploads/galeri_kegiatan/' . $galeri->foto))) {
+                unlink(public_path('uploads/galeri_kegiatan/' . $galeri->foto));
             }
             $fileName = time() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('uploads/galeri'), $fileName);
+            $request->foto->move(public_path('uploads/galeri_kegiatan'), $fileName);
             $updateData['foto'] = $fileName;
         }
 
-        $data->update($updateData);
+        $galeri->update($updateData);
 
-        return redirect()->route('galeri-kegiatan.index')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('admin.galerikegiatan.index')
+            ->with('success', 'Galeri kegiatan berhasil diperbarui.');
     }
 
-    // Hapus data
+    /**
+     * Hapus galeri kegiatan
+     */
     public function destroy($id)
     {
-        $data = GaleriKegiatan::findOrFail($id);
-        if ($data->foto && file_exists(public_path('uploads/galeri/' . $data->foto))) {
-            unlink(public_path('uploads/galeri/' . $data->foto));
-        }
-        $data->delete();
+        $galeri = GaleriKegiatan::findOrFail($id);
 
-        return redirect()->route('galeri-kegiatan.index')->with('success', 'Data berhasil dihapus.');
+        if ($galeri->foto && file_exists(public_path('uploads/galeri_kegiatan/' . $galeri->foto))) {
+            unlink(public_path('uploads/galeri_kegiatan/' . $galeri->foto));
+        }
+
+        $galeri->delete();
+
+        return redirect()->route('admin.galerikegiatan.index')
+            ->with('success', 'Galeri kegiatan berhasil dihapus.');
     }
 }

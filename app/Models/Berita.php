@@ -18,4 +18,8 @@ class Berita extends Model
         'penulis',
         'tanggal'
     ];
+
+    protected $casts = [
+        'tanggal' => 'datetime:Y-m-d', // otomatis menjadi Carbon
+    ];
 }
