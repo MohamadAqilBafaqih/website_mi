@@ -10,4 +10,8 @@ class AdminDashboardController extends Controller
     {
         return view('admin.dashboard'); // pastikan file view ada di resources/views/admin/dashboard.blade.php
     }
+    public function dashboardContent()
+    {
+        return view('admin.dashboard-content')->render();
+    }
 }

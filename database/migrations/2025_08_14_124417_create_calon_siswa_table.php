@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('calon_siswa', function (Blueprint $table) {
+
             $table->id();
             $table->string('nama_lengkap', 100);
             $table->string('nik', 20)->nullable();
@@ -38,8 +39,8 @@ return new class extends Migration {
             $table->string('penghasilan_ibu', 50)->nullable();
 
             // Upload file
-            $table->string('akta_kelahiran', 255)->nullable(); // file path akta
-            $table->string('kartu_keluarga', 255)->nullable(); // file path KK
+            $table->string('akta_kelahiran', 255)->nullable();
+            $table->string('kartu_keluarga', 255)->nullable();
 
             // Status pendaftaran
             $table->enum('status_pendaftaran', ['Baru', 'Diterima', 'Ditolak'])->default('Baru');
@@ -52,6 +53,5 @@ return new class extends Migration {
         Schema::dropIfExists('calon_siswa');
     }
 };
-
 
 

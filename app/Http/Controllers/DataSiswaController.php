@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\CalonSiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DataSiswaController extends Controller
 {
     /**
      * Tampilkan semua siswa yang diterima
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = CalonSiswa::where('status_pendaftaran', 'Diterima')
-                    ->latest()
-                    ->get();
+        $query = CalonSiswa::where('status_pendaftaran', 'Diterima');
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('nama_lengkap', 'like', "%{$search}%")
+                ->orWhere('nik', 'like', "%{$search}%")
+                ->orWhere('asal_sekolah', 'like', "%{$search}%");
+        }
+
+        $siswa = $query->paginate(10);
 
         return view('admin.datasiswa', compact('siswa'));
     }
@@ -89,6 +97,32 @@ class DataSiswaController extends Controller
     }
 
     /**
+     * Export 1 siswa ke PDF
+     */
+    public function export($id)
+    {
+        $siswa = CalonSiswa::findOrFail($id);
+        $pdf = Pdf::loadView('admin.export_siswa', compact('siswa'))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('data_siswa_' . $siswa->nama_lengkap . '.pdf');
+    }
+
+    /**
+     * Export semua siswa ke PDF
+     */
+    public function exportAll()
+    {
+        $siswa = CalonSiswa::where('status_pendaftaran', 'Diterima')->get();
+
+        $pdf = PDF::loadView('admin.export_all_siswa', compact('siswa'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('data_semua_siswa.pdf');
+    }
+
+
+    /**
      * Hapus data siswa
      */
     public function destroy($id)
@@ -101,5 +135,16 @@ class DataSiswaController extends Controller
         $item->delete();
 
         return redirect()->route('admin.datasiswa.index')->with('success', 'Data siswa berhasil dihapus.');
+    }
+
+    // app/Http/Controllers/Admin/DataSiswaController.php
+
+    public function cetak()
+    {
+        $siswa = CalonSiswa::where('status_pendaftaran', 'Diterima')
+            ->orderBy('nama_lengkap', 'asc')
+            ->paginate(10);
+
+        return view('admin.datasiswa', compact('siswa'));
     }
 }

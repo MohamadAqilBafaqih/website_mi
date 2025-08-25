@@ -739,7 +739,7 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <a href="#" class="header-brand">
+        <a href="{{ route('admin.dashboard-content') }}" class="header-brand">
             <img src="{{ asset('gambar/logobaru.png') }}" alt="MI Diponegoro 03" style="height: 50px; width: auto;">
             <span>MI Diponegoro 03 Karangklesem</span>
         </a>
@@ -759,13 +759,13 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-
-                            <a class="dropdown-item" href="{{ route('login') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
                         </form>
+                        <a class="dropdown-item" href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -777,7 +777,7 @@
         <ul class="sidebar-menu">
             <li class="menu-title">Menu Utama</li>
             <li class="menu-item">
-                <a href="#" class="menu-link active">
+                <a href="{{ route('admin.dashboard-content') }}" class="menu-link" id="dashboard-link">
                     <i class="fas fa-tachometer-alt menu-icon"></i>
                     <span class="menu-text">Dashboard</span>
                 </a>
@@ -792,7 +792,7 @@
                 </a>
                 <ul class="submenu collapse show" id="pendaftaranSubmenu">
                     <li class="submenu-item">
-                        <a href="{{ route('admin.datasiswa.index') }}" class="menu-link active">
+                        <a href="{{ route('admin.datasiswa.index') }}" class="menu-link">
                             <i class="fas fa-circle-notch me-1" style="font-size: 8px;"></i>
                             <span class="menu-text">Data Calon Siswa</span>
                         </a>
@@ -839,7 +839,6 @@
                     <i class="fas fa-bullseye menu-icon"></i>
                     <span class="menu-text">Visi & Misi</span>
                 </a>
-
             </li>
 
             <li class="menu-item">
@@ -891,200 +890,14 @@
     <main class="main-content">
         <div class="container-fluid">
             @yield('content')
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
-                </nav>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="row animate-fade-in">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card stats-card stats-card-1">
-                        <div class="card-body">
-                            <i class="fas fa-users icon"></i>
-                            <div class="count">245</div>
-                            <div class="label">Total Siswa</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card stats-card stats-card-2">
-                        <div class="card-body">
-                            <i class="fas fa-chalkboard-teacher icon"></i>
-                            <div class="count">24</div>
-                            <div class="label">Total Guru</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card stats-card stats-card-3">
-                        <div class="card-body">
-                            <i class="fas fa-trophy icon"></i>
-                            <div class="count">18</div>
-                            <div class="label">Prestasi</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card stats-card stats-card-4">
-                        <div class="card-body">
-                            <i class="fas fa-calendar-check icon"></i>
-                            <div class="count">5</div>
-                            <div class="label">Kegiatan Terbaru</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Links -->
-            <div class="row mt-4 animate-fade-in" style="animation-delay: 0.2s;">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title"><i class="fas fa-bolt"></i> Akses Cepat</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="quick-links">
-                                <a href="#" class="quick-link">
-                                    <div class="quick-link-icon"><i class="fas fa-user-plus"></i></div>
-                                    <div class="quick-link-text">Tambah Siswa</div>
-                                </a>
-                                <a href="#" class="quick-link">
-                                    <div class="quick-link-icon"><i class="fas fa-file-invoice"></i></div>
-                                    <div class="quick-link-text">Laporan Bulanan</div>
-                                </a>
-                                <a href="#" class="quick-link">
-                                    <div class="quick-link-icon"><i class="fas fa-calendar-plus"></i></div>
-                                    <div class="quick-link-text">Jadwal Baru</div>
-                                </a>
-                                <a href="#" class="quick-link">
-                                    <div class="quick-link-icon"><i class="fas fa-bullhorn"></i></div>
-                                    <div class="quick-link-text">Pengumuman</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Progress and Activities -->
-            <div class="row mt-4">
-                <div class="col-lg-6">
-                    <div class="card animate-fade-in" style="animation-delay: 0.3s;">
-                        <div class="card-header">
-                            <h5 class="card-title"><i class="fas fa-chart-line"></i> Statistik Pendaftaran</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="progress-card">
-                                <div class="progress-card-title"><i class="fas fa-male"></i> Pendaftar Laki-laki</div>
-                                <div class="progress-info">
-                                    <span>45 Siswa</span>
-                                    <span>75% dari target</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 75%"></div>
-                                </div>
-                            </div>
-
-                            <div class="progress-card">
-                                <div class="progress-card-title"><i class="fas fa-female"></i> Pendaftar Perempuan
-                                </div>
-                                <div class="progress-info">
-                                    <span>38 Siswa</span>
-                                    <span>63% dari target</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 63%"></div>
-                                </div>
-                            </div>
-
-                            <div class="progress-card">
-                                <div class="progress-card-title"><i class="fas fa-check-circle"></i> Siswa Diterima
-                                </div>
-                                <div class="progress-info">
-                                    <span>62 Siswa</span>
-                                    <span>82% dari pendaftar</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 82%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="card animate-fade-in" style="animation-delay: 0.4s;">
-                        <div class="card-header">
-                            <h5 class="card-title"><i class="fas fa-bell"></i> Aktivitas Terkini</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="activity-list">
-                                <div class="activity-item">
-                                    <div class="activity-dot"></div>
-                                    <div class="activity-content">
-                                        <h6 class="activity-title">Pendaftaran Baru</h6>
-                                        <p class="activity-text">Ahmad Fauzi mendaftar sebagai siswa baru</p>
-                                        <small class="activity-time">10 menit yang lalu</small>
-                                    </div>
-                                </div>
-
-                                <div class="activity-item">
-                                    <div class="activity-dot"></div>
-                                    <div class="activity-content">
-                                        <h6 class="activity-title">Penerimaan Siswa</h6>
-                                        <p class="activity-text">Siti Aminah diterima di kelas 1</p>
-                                        <small class="activity-time">1 jam yang lalu</small>
-                                    </div>
-                                </div>
-
-                                <div class="activity-item">
-                                    <div class="activity-dot"></div>
-                                    <div class="activity-content">
-                                        <h6 class="activity-title">Prestasi</h6>
-                                        <p class="activity-text">Budi Santoso memenangkan lomba MTQ</p>
-                                        <small class="activity-time">3 jam yang lalu</small>
-                                    </div>
-                                </div>
-
-                                <div class="activity-item">
-                                    <div class="activity-dot"></div>
-                                    <div class="activity-content">
-                                        <h6 class="activity-title">Kritik & Saran</h6>
-                                        <p class="activity-text">Orang tua mengirim masukan baru</p>
-                                        <small class="activity-time">5 jam yang lalu</small>
-                                    </div>
-                                </div>
-
-                                <div class="activity-item">
-                                    <div class="activity-dot"></div>
-                                    <div class="activity-content">
-                                        <h6 class="activity-title">Kegiatan Baru</h6>
-                                        <p class="activity-text">Pembagian rapor semester ganjil</p>
-                                        <small class="activity-time">Kemarin, 15:30</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container-fluid">
-            <p class="mb-0">&copy; <span id="current-year">{{ date('Y') }}</span> MI Diponegoro 03 Karangklesem.
+            <p class="mb-0">&copy; <span id="current-year">{{ date('Y') }}</span> MI Diponegoro 03
+                Karangklesem.
                 All rights reserved.</p>
         </div>
     </footer>
@@ -1145,12 +958,20 @@
         // Add active class to clicked menu item
         const menuLinks = document.querySelectorAll('.menu-link:not([data-bs-toggle="collapse"])');
         menuLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
+                // Jika link adalah anchor biasa, biarkan berperilaku normal
+                if (this.getAttribute('href') === '#' || this.getAttribute('href') === '') {
+                    e.preventDefault();
+                }
+
                 // Remove active class from all menu items
                 menuLinks.forEach(l => l.classList.remove('active'));
 
                 // Add active class to clicked item
                 this.classList.add('active');
+
+                // Simpan status aktif ke localStorage
+                localStorage.setItem('activeMenu', this.getAttribute('href'));
 
                 // Close sidebar on mobile after click
                 if (window.innerWidth < 992) {
@@ -1197,7 +1018,170 @@
                 }
             }
         });
+
+        // Function to update breadcrumb
+        function updateBreadcrumb(page) {
+            const breadcrumb = document.querySelector('.breadcrumb');
+            if (breadcrumb) {
+                breadcrumb.innerHTML = `
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${page}</li>`;
+            }
+        }
+
+        // Submenu toggle handler
+        document.querySelectorAll('.menu-item > a[data-bs-toggle="collapse"]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Untuk desktop, biarkan Bootstrap menangani collapse
+                if (window.innerWidth >= 992) return;
+
+                // Untuk mobile, tangani manual
+                e.preventDefault();
+                const submenu = this.nextElementSibling;
+                const isShowing = submenu.classList.contains('show');
+
+                // Tutup semua submenu lainnya
+                document.querySelectorAll('.submenu').forEach(menu => {
+                    if (menu !== submenu) {
+                        menu.classList.remove('show');
+                        menu.previousElementSibling.querySelector('.menu-arrow').classList.remove(
+                            'fa-angle-up');
+                        menu.previousElementSibling.querySelector('.menu-arrow').classList.add(
+                            'fa-angle-down');
+                    }
+                });
+
+                // Toggle submenu ini
+                submenu.classList.toggle('show');
+
+                // Toggle arrow icon
+                const arrow = this.querySelector('.menu-arrow');
+                if (submenu.classList.contains('show')) {
+                    arrow.classList.remove('fa-angle-down');
+                    arrow.classList.add('fa-angle-up');
+                } else {
+                    arrow.classList.remove('fa-angle-up');
+                    arrow.classList.add('fa-angle-down');
+                }
+            });
+        });
+
+        // Event listener untuk link dashboard
+        document.getElementById('dashboard-link').addEventListener('click', function(e) {
+            localStorage.setItem('activeMenu', this.getAttribute('href'));
+        });
+
+        // Set active menu based on current page
+        function setActiveMenu() {
+            const currentPath = window.location.pathname;
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            // Reset semua menu aktif terlebih dahulu
+            menuLinks.forEach(link => link.classList.remove('active'));
+
+            // Cari menu yang sesuai dengan path saat ini
+            let activeFound = false;
+
+            menuLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && currentPath === href) {
+                    link.classList.add('active');
+                    activeFound = true;
+
+                    // Jika ini adalah submenu item, expand parent menu
+                    const parentMenu = link.closest('.submenu');
+                    if (parentMenu) {
+                        parentMenu.classList.add('show');
+                        const parentMenuItem = parentMenu.previousElementSibling;
+                        if (parentMenuItem) {
+                            const arrow = parentMenuItem.querySelector('.menu-arrow');
+                            if (arrow) {
+                                arrow.classList.remove('fa-angle-down');
+                                arrow.classList.add('fa-angle-up');
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Jika tidak ada yang cocok, coba dengan partial match
+            if (!activeFound) {
+                menuLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && href !== '#' && currentPath.startsWith(href)) {
+                        link.classList.add('active');
+
+                        const parentMenu = link.closest('.submenu');
+                        if (parentMenu) {
+                            parentMenu.classList.add('show');
+                            const parentMenuItem = parentMenu.previousElementSibling;
+                            if (parentMenuItem) {
+                                const arrow = parentMenuItem.querySelector('.menu-arrow');
+                                if (arrow) {
+                                    arrow.classList.remove('fa-angle-down');
+                                    arrow.classList.add('fa-angle-up');
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Handle dashboard khusus
+            if (currentPath === '/admin' || currentPath === '/admin/dashboard' || currentPath ===
+                '/admin/dashboard-content') {
+                document.getElementById('dashboard-link').classList.add('active');
+            }
+        }
+
+        // Redirect to dashboard if accessing root admin URL
+        if (window.location.pathname === '/admin' || window.location.pathname === '/admin/') {
+            window.location.href = "{{ route('admin.dashboard-content') }}";
+        }
+
+        // Jalankan fungsi saat halaman pertama kali dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveMenu();
+
+            // Handle case khusus untuk dashboard
+            if (window.location.pathname === '/admin' ||
+                window.location.pathname === '/admin/dashboard' ||
+                window.location.pathname === '/admin/dashboard-content') {
+                document.getElementById('dashboard-link').classList.add('active');
+            }
+
+            // Restore submenu state dari localStorage
+            const savedMenu = localStorage.getItem('activeMenu');
+            if (savedMenu) {
+                const activeLink = document.querySelector(`.menu-link[href="${savedMenu}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    const parentMenu = activeLink.closest('.submenu');
+                    if (parentMenu) {
+                        parentMenu.classList.add('show');
+                        const arrow = parentMenu.previousElementSibling.querySelector('.menu-arrow');
+                        if (arrow) {
+                            arrow.classList.remove('fa-angle-down');
+                            arrow.classList.add('fa-angle-up');
+                        }
+                    }
+                }
+            }
+
+            // 🔹 Restore posisi scroll sidebar
+            const sidebar = document.getElementById('sidebar');
+            const savedScroll = localStorage.getItem('sidebar-scroll');
+            if (savedScroll !== null) {
+                sidebar.scrollTop = savedScroll;
+            }
+
+            // 🔹 Simpan posisi scroll saat di-scroll
+            sidebar.addEventListener('scroll', function() {
+                localStorage.setItem('sidebar-scroll', sidebar.scrollTop);
+            });
+        });
     </script>
+
 </body>
 
 </html>

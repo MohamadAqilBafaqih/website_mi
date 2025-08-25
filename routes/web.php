@@ -114,15 +114,24 @@ Route::prefix('admin')->group(function () {
     Route::get('/seleksi-siswa/{id}/edit', [SeleksiSiswaController::class, 'edit'])->name('admin.seleksisiswa.edit');
     Route::put('/seleksi-siswa/{id}', [SeleksiSiswaController::class, 'update'])->name('admin.seleksisiswa.update');
     Route::delete('/seleksi-siswa/{id}', [SeleksiSiswaController::class, 'destroy'])->name('admin.seleksisiswa.destroy');
+    Route::post('/seleksi-siswa/{id}/update-status', [SeleksiSiswaController::class, 'updateStatus'])
+    ->name('admin.seleksisiswa.updateStatus');
 });
 
 use App\Http\Controllers\DataSiswaController;
 
-Route::prefix('admin')->group(function () {
-    Route::get('/datasiswa', [DataSiswaController::class, 'index'])->name('admin.datasiswa.index');
-    Route::get('/datasiswa/{id}/edit', [DataSiswaController::class, 'edit'])->name('admin.datasiswa.edit');
-    Route::put('/datasiswa/{id}', [DataSiswaController::class, 'update'])->name('admin.datasiswa.update');
-    Route::delete('/datasiswa/{id}', [DataSiswaController::class, 'destroy'])->name('admin.datasiswa.destroy');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/datasiswa', [DataSiswaController::class, 'index'])->name('datasiswa.index');
+    Route::get('/datasiswa/{id}/edit', [DataSiswaController::class, 'edit'])->name('datasiswa.edit');
+    Route::put('/datasiswa/{id}', [DataSiswaController::class, 'update'])->name('datasiswa.update');
+    Route::delete('/datasiswa/{id}', [DataSiswaController::class, 'destroy'])->name('datasiswa.destroy');
+
+    // Export per siswa
+    Route::get('/datasiswa/{id}/export', [DataSiswaController::class, 'export'])->name('datasiswa.export');
+    
+    // Export semua siswa
+    Route::get('/datasiswa/export-all', [DataSiswaController::class, 'exportAll'])->name('datasiswa.export.all');
+    Route::get('/datasiswa/cetak', [DataSiswaController::class, 'cetak'])->name('datasiswa.cetak');
 });
 
 
@@ -139,6 +148,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/dashboard/content', [AdminDashboardController::class, 'dashboardContent'])->name('admin.dashboard-content');
 
 use App\Http\Controllers\BeritaController;
 
