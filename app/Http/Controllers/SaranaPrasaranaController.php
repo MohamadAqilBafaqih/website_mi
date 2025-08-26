@@ -103,4 +103,14 @@ class SaranaPrasaranaController extends Controller
         return redirect()->route('admin.saranaprasarana.index')
             ->with('success', 'Sarana & prasarana berhasil dihapus.');
     }
+
+    /**
+     * Tampilkan data sarana & prasarana untuk pengguna (frontend)
+     */
+    public function showSaranaPrasarana()
+    {
+        $data = SaranaPrasarana::latest()->get();
+        // View: resources/views/pengguna/profil/sarana-prasarana.blade.php
+        return view('pengguna.profil.saranaprasarana', compact('data'));
+    }
 }

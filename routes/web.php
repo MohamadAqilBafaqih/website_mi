@@ -40,6 +40,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/dataguru/{id}', [DataGuruController::class, 'destroy'])->name('dataguru.destroy');
 });
 
+Route::get('/guru', [DataGuruController::class, 'showGuru'])->name('pengguna.dataguru');
+
 
 use App\Http\Controllers\GaleriKegiatanController;
 
@@ -70,6 +72,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('pendidikan', PendidikanController::class);
 });
 
+Route::get('/profil/pendidikan', [PendidikanController::class, 'showPendidikan'])
+    ->name('pengguna.pendidikan');
+
 use App\Http\Controllers\PrestasiSiswaController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -79,6 +84,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/prestasisiswa/{id}', [PrestasiSiswaController::class, 'update'])->name('prestasisiswa.update');
     Route::delete('/prestasisiswa/{id}', [PrestasiSiswaController::class, 'destroy'])->name('prestasisiswa.destroy');
 });
+
+// Route untuk pengguna (frontend)
+Route::get('/prestasi-siswa', [PrestasiSiswaController::class, 'showPrestasi'])->name('pengguna.prestasisiswa');
 
 use App\Http\Controllers\SaranaPrasaranaController;
 
@@ -90,12 +98,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/sarana-prasarana/{id}', [SaranaPrasaranaController::class, 'destroy'])->name('saranaprasarana.destroy');
 });
 
+Route::get('/sarana-prasarana', [SaranaPrasaranaController::class, 'showSaranaPrasarana'])->name('pengguna.saranaprasarana');
+
 
 use App\Http\Controllers\SejarahController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('sejarah', SejarahController::class);
 });
+
+Route::get('/sejarah', [SejarahController::class, 'showSejarah'])->name('pengguna.sejarah');
+
 
 use App\Http\Controllers\VisiMisiController;
 
@@ -107,6 +120,8 @@ Route::prefix('admin')->group(function () {
     Route::delete('/visi-misi/{id}', [VisiMisiController::class, 'destroy'])->name('admin.visimisi.destroy');
 });
 
+Route::get('/visimisi', [VisiMisiController::class, 'showVisiMisi'])->name('pengguna.visimisi');
+
 use App\Http\Controllers\SeleksiSiswaController;
 
 Route::prefix('admin')->group(function () {
@@ -115,7 +130,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/seleksi-siswa/{id}', [SeleksiSiswaController::class, 'update'])->name('admin.seleksisiswa.update');
     Route::delete('/seleksi-siswa/{id}', [SeleksiSiswaController::class, 'destroy'])->name('admin.seleksisiswa.destroy');
     Route::post('/seleksi-siswa/{id}/update-status', [SeleksiSiswaController::class, 'updateStatus'])
-    ->name('admin.seleksisiswa.updateStatus');
+        ->name('admin.seleksisiswa.updateStatus');
 });
 
 use App\Http\Controllers\DataSiswaController;
@@ -128,7 +143,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Export per siswa
     Route::get('/datasiswa/{id}/export', [DataSiswaController::class, 'export'])->name('datasiswa.export');
-    
+
     // Export semua siswa
     Route::get('/datasiswa/export-all', [DataSiswaController::class, 'exportAll'])->name('datasiswa.export.all');
     Route::get('/datasiswa/cetak', [DataSiswaController::class, 'cetak'])->name('datasiswa.cetak');
@@ -159,4 +174,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('berita.edit'); // Form edit
     Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('berita.update');  // Update data
     Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('berita.destroy'); // Hapus
+
+});
+
+Route::prefix('pengguna')->name('pengguna.')->group(function () {
+    Route::get('/berita', [BeritaController::class, 'showAll'])->name('berita.index');
+    Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
+});
+
+
+Route::prefix('pengguna')->name('pengguna.')->group(function () {
+    Route::get('/galeri', [GaleriKegiatanController::class, 'showAll'])->name('galeri.index');
+    Route::get('/galeri/{id}', [GaleriKegiatanController::class, 'show'])->name('galeri.show');
+});
+
+use App\Http\Controllers\BerandaController;
+
+// Prefix untuk pengguna
+Route::prefix('pengguna')->group(function () {
+    Route::get('/', [BerandaController::class, 'index'])->name('pengguna.beranda-content');
+});
+
+// Biar root "/" tetap mengarah ke beranda pengguna
+Route::get('/', function () {
+    return redirect()->route('pengguna.beranda-content');
 });

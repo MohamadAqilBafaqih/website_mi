@@ -63,4 +63,15 @@ class PendidikanController extends Controller
         return redirect()->route('admin.pendidikan.index')
             ->with('success', 'Data pendidikan berhasil dihapus.');
     }
+
+    /**
+     * Tampilkan semua data pendidikan (Pengguna)
+     */
+    public function showPendidikan()
+    {
+        $data = Pendidikan::latest()->get();
+        return view('pengguna.profil.pendidikan', compact('data')); 
+        // View: resources/views/pengguna/profil/pendidikan.blade.php
+    }
+
 }

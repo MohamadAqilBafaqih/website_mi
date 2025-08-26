@@ -83,7 +83,7 @@
                                         <option value="">Pilih Tingkat</option>
                                         <option value="Sekolah" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Sekolah' ? 'selected' : '' }}>Sekolah</option>
                                         <option value="Kecamatan" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Kecamatan' ? 'selected' : '' }}>Kecamatan</option>
-                                        <option value="Kabupaten/Kota" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Kabupaten/Kota' ? 'selected' : '' }}>Kabupaten/Kota</option>
+                                        <option value="Kabupaten" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Kabupaten' ? 'selected' : '' }}>Kabupaten/Kota</option>
                                         <option value="Provinsi" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Provinsi' ? 'selected' : '' }}>Provinsi</option>
                                         <option value="Nasional" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Nasional' ? 'selected' : '' }}>Nasional</option>
                                         <option value="Internasional" {{ (empty($prestasi) ? old('tingkat') : $prestasi->tingkat) == 'Internasional' ? 'selected' : '' }}>Internasional</option>
@@ -104,7 +104,7 @@
                                     <select name="jenis_prestasi" id="jenis_prestasi" class="form-control border-success">
                                         <option value="">Pilih Jenis</option>
                                         <option value="Akademik" {{ (empty($prestasi) ? old('jenis_prestasi') : $prestasi->jenis_prestasi) == 'Akademik' ? 'selected' : '' }}>Akademik</option>
-                                        <option value="Non-Akademik" {{ (empty($prestasi) ? old('jenis_prestasi') : $prestasi->jenis_prestasi) == 'Non-Akademik' ? 'selected' : '' }}>Non-Akademik</option>
+                                        <option value="Non Akademik" {{ (empty($prestasi) ? old('jenis_prestasi') : $prestasi->jenis_prestasi) == 'Non Akademik' ? 'selected' : '' }}>Non Akademik</option>
                                     </select>
                                     @error('jenis_prestasi')
                                         <div class="text-danger small mt-2">
@@ -229,7 +229,7 @@
                                             <span class="badge 
                                                 @if($item->tingkat == 'Sekolah') bg-secondary
                                                 @elseif($item->tingkat == 'Kecamatan') bg-info
-                                                @elseif($item->tingkat == 'Kabupaten/Kota') bg-primary
+                                                @elseif($item->tingkat == 'Kabupaten') bg-primary
                                                 @elseif($item->tingkat == 'Provinsi') bg-warning
                                                 @elseif($item->tingkat == 'Nasional') bg-success
                                                 @elseif($item->tingkat == 'Internasional') bg-danger
@@ -244,9 +244,7 @@
                                         @if($item->jenis_prestasi)
                                             <span class="badge 
                                                 @if($item->jenis_prestasi == 'Akademik') bg-success
-                                                @elseif($item->jenis_prestasi == 'Non-Akademik') bg-info
-                                                @elseif($item->jenis_prestasi == 'Olahraga') bg-warning
-                                                @elseif($item->jenis_prestasi == 'Seni') bg-purple
+                                                @elseif($item->jenis_prestasi == 'Non Akademik') bg-info
                                                 @else bg-secondary @endif">
                                                 {{ $item->jenis_prestasi }}
                                             </span>

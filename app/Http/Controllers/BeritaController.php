@@ -102,4 +102,19 @@ class BeritaController extends Controller
         return redirect()->route('admin.berita.index')
             ->with('success', 'Berita berhasil dihapus.');
     }
+
+
+    public function showAll()
+    {
+        $data = Berita::latest()->paginate(6);
+        return view('pengguna.berita.index', compact('data'));
+        // View: resources/views/pengguna/berita/index.blade.php
+    }
+
+    public function show($id)
+    {
+        $berita = Berita::findOrFail($id);
+        return view('pengguna.berita.detail', compact('berita'));
+        // View: resources/views/pengguna/berita/detail.blade.php
+    }
 }

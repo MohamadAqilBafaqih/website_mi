@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
+        return redirect()->route('admin.dashboard-content')->with('success', 'Login berhasil');
     }
 
     /**

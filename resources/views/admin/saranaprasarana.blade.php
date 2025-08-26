@@ -63,10 +63,10 @@
                                 </label>
                                 <select name="jenis_fasilitas" id="jenis_fasilitas" class="form-control border-success">
                                     <option value="">Pilih Jenis Fasilitas</option>
-                                    <option value="Gedung"
+                                    <option value="Sarana"
                                         {{ (empty($sarana) ? old('jenis_fasilitas') : $sarana->jenis_fasilitas) == 'Sarana' ? 'selected' : '' }}>
                                         Sarana</option>
-                                    <option value="Laboratorium"
+                                    <option value="Prasarana"
                                         {{ (empty($sarana) ? old('jenis_fasilitas') : $sarana->jenis_fasilitas) == 'Prasarana' ? 'selected' : '' }}>
                                         Prasarana</option>
                                 </select>

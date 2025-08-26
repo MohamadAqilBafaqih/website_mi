@@ -68,11 +68,11 @@
                                         <select name="jenis_kelamin" id="jenis_kelamin" class="form-control border-success"
                                             required>
                                             <option value="">Pilih Jenis Kelamin</option>
-                                            <option value="L"
-                                                {{ (empty($guru) ? old('jenis_kelamin') : $guru->jenis_kelamin) == 'L' ? 'selected' : '' }}>
+                                            <option value="Laki-laki"
+                                                {{ (empty($guru) ? old('jenis_kelamin') : $guru->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
                                                 Laki-laki</option>
-                                            <option value="P"
-                                                {{ (empty($guru) ? old('jenis_kelamin') : $guru->jenis_kelamin) == 'P' ? 'selected' : '' }}>
+                                            <option value="Perempuan"
+                                                {{ (empty($guru) ? old('jenis_kelamin') : $guru->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
                                                 Perempuan</option>
                                         </select>
                                         @error('jenis_kelamin')
@@ -270,7 +270,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $item->nama_lengkap ?? '-' }}</td>
-                                            <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                            <td>{{ $item->jenis_kelamin == 'Laki-laki' ? 'Laki-laki' : 'Perempuan' }}</td>
                                             <td>{{ $item->jabatan ?? '-' }}</td>
                                             <td>{{ $item->mata_pelajaran ?? '-' }}</td>
                                             <td>

@@ -24,7 +24,7 @@ class DataGuruController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required|string|max:150',
-            'jenis_kelamin' => 'required|in:L,P',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'jabatan' => 'nullable|string|max:100',
             'mata_pelajaran' => 'nullable|string|max:100',
             'pendidikan_terakhir' => 'nullable|string|max:100',
@@ -65,7 +65,7 @@ class DataGuruController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required|string|max:150',
-            'jenis_kelamin' => 'required|in:L,P',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'jabatan' => 'nullable|string|max:100',
             'mata_pelajaran' => 'nullable|string|max:100',
             'pendidikan_terakhir' => 'nullable|string|max:100',
@@ -108,5 +108,15 @@ class DataGuruController extends Controller
 
         return redirect()->route('admin.dataguru.index')
             ->with('success', 'Data guru berhasil dihapus.');
+    }
+
+    /**
+     * Tampilkan data guru untuk pengguna (frontend)
+     */
+    public function showGuru()
+    {
+        $data = DataGuru::orderBy('nama_lengkap', 'asc')->get();
+        // View: resources/views/pengguna/profil/guru.blade.php
+        return view('pengguna.profil.dataguru', compact('data'));
     }
 }

@@ -63,4 +63,10 @@ class VisiMisiController extends Controller
 
         return redirect()->route('admin.visimisi.index')->with('success', 'Visi & Misi berhasil dihapus.');
     }
+
+    public function showVisiMisi()
+    {
+        $data = VisiMisi::latest()->get();
+        return view('pengguna.profil.visimisi', compact('data'));
+    }
 }

@@ -107,4 +107,13 @@ class PrestasiSiswaController extends Controller
         return redirect()->route('admin.prestasisiswa.index')
             ->with('success', 'Prestasi siswa berhasil dihapus.');
     }
+
+    /**
+     * Tampilkan prestasi siswa ke halaman pengguna (frontend)
+     */
+    public function showPrestasi()
+    {
+        $data = PrestasiSiswa::latest()->get();
+        return view('pengguna.profil.prestasisiswa', compact('data'));
+    }
 }

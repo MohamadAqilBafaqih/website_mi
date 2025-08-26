@@ -99,4 +99,24 @@ class GaleriKegiatanController extends Controller
         return redirect()->route('admin.galerikegiatan.index')
             ->with('success', 'Galeri kegiatan berhasil dihapus.');
     }
+
+    /**
+     * Tampilkan semua galeri kegiatan di halaman frontend (pengguna)
+     */
+    public function showAll()
+    {
+        $galeri = GaleriKegiatan::latest()->paginate(9); // tampilkan 9 per halaman
+        return view('pengguna.galeri.index', compact('galeri'));
+        // View: resources/views/pengguna/galeri/index.blade.php
+    }
+
+    /**
+     * Tampilkan detail galeri kegiatan
+     */
+    public function show($id)
+    {
+        $galeri = GaleriKegiatan::findOrFail($id);
+        return view('pengguna.galeri.detail', compact('galeri'));
+        // View: resources/views/pengguna/galeri/detail.blade.php
+    }
 }

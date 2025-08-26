@@ -59,4 +59,13 @@ class SejarahController extends Controller
 
         return redirect()->route('admin.sejarah.index')->with('success', 'Sejarah berhasil dihapus.');
     }
+
+    /**
+     * Tampilkan sejarah di halaman pengguna
+     */
+    public function showSejarah()
+    {
+        $data = Sejarah::latest()->get();
+        return view('pengguna.profil.sejarah', compact('data'));
+    }
 }
