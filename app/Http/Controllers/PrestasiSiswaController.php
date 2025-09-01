@@ -111,9 +111,19 @@ class PrestasiSiswaController extends Controller
     /**
      * Tampilkan prestasi siswa ke halaman pengguna (frontend)
      */
-    public function showPrestasi()
+    public function showAll()
     {
-        $data = PrestasiSiswa::latest()->get();
-        return view('pengguna.profil.prestasisiswa', compact('data'));
+        $data = PrestasiSiswa::latest()->paginate(6);
+        // paginate biar rapi kalau data banyak
+        return view('pengguna.prestasi.index', compact('data'));
+    }
+
+    /**
+     * Tampilkan detail satu prestasi siswa (frontend).
+     */
+    public function show($id)
+    {
+        $prestasi = PrestasiSiswa::findOrFail($id);
+        return view('pengguna.prestasi.detail', compact('prestasi'));
     }
 }

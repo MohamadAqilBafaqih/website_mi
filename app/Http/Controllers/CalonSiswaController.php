@@ -162,4 +162,69 @@ class CalonSiswaController extends Controller
         return redirect()->route('admin.calonsiswa.index')
             ->with('success', 'Calon siswa berhasil dihapus.');
     }
+
+    public function create()
+    {
+        return view('pengguna.pendaftaran.daftarppdb');
+    }
+
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'nama_lengkap'     => 'required|string|max:150',
+            'nik'              => 'nullable|string|max:20',
+            'jenis_kelamin'    => 'nullable|string|max:10',
+            'tempat_lahir'     => 'nullable|string|max:100',
+            'tanggal_lahir'    => 'nullable|date',
+            'alamat'           => 'nullable|string|max:255',
+            'kelurahan'        => 'nullable|string|max:100',
+            'kecamatan'        => 'nullable|string|max:100',
+            'kabupaten'        => 'nullable|string|max:100',
+            'provinsi'         => 'nullable|string|max:100',
+            'kode_pos'         => 'nullable|string|max:10',
+            'no_hp'            => 'nullable|string|max:20',
+            'email'            => 'nullable|email|max:100',
+            'asal_sekolah'     => 'nullable|string|max:150',
+            'tahun_lulus'      => 'nullable|digits:4',
+
+            // Data Ayah
+            'nama_ayah'        => 'nullable|string|max:100',
+            'pekerjaan_ayah'   => 'nullable|string|max:100',
+            'pendidikan_ayah'  => 'nullable|string|max:50',
+            'penghasilan_ayah' => 'nullable|string|max:50',
+
+            // Data Ibu
+            'nama_ibu'         => 'nullable|string|max:100',
+            'pekerjaan_ibu'    => 'nullable|string|max:100',
+            'pendidikan_ibu'   => 'nullable|string|max:50',
+            'penghasilan_ibu'  => 'nullable|string|max:50',
+
+            // Dokumen
+            'akta_kelahiran'   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'kartu_keluarga'   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+        ]);
+
+        $data = $request->all();
+
+        // Upload file akta kelahiran
+        if ($request->hasFile('akta_kelahiran')) {
+            $fileName = time() . '_akta.' . $request->akta_kelahiran->extension();
+            $request->akta_kelahiran->move(public_path('uploads/calon_siswa'), $fileName);
+            $data['akta_kelahiran'] = $fileName;
+        }
+
+        // Upload file kartu keluarga
+        if ($request->hasFile('kartu_keluarga')) {
+            $fileName = time() . '_kk.' . $request->kartu_keluarga->extension();
+            $request->kartu_keluarga->move(public_path('uploads/calon_siswa'), $fileName);
+            $data['kartu_keluarga'] = $fileName;
+        }
+
+        // Simpan data ke database
+        CalonSiswa::create($data);
+
+        // Arahkan ke halaman sukses
+        return redirect()->route('pendaftaran.success')
+            ->with('success', 'Pendaftaran berhasil disimpan.');
+    }
 }

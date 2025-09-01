@@ -6,6 +6,8 @@ use App\Models\CalonSiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\SiswaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataSiswaController extends Controller
 {
@@ -147,4 +149,5 @@ class DataSiswaController extends Controller
 
         return view('admin.datasiswa', compact('siswa'));
     }
+
 }

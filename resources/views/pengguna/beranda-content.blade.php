@@ -491,7 +491,7 @@
     <!-- Navigasi -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#home">
+            <a class="navbar-brand" href="{{ route('pengguna.beranda-content') }}">
                 <img src="{{ asset('gambar/logobaru.png') }}" alt="Logo" id="logo">
                 MI Diponegoro 03 Karangklesem
             </a>
@@ -501,7 +501,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home"><i class="fas fa-home me-1"></i> Beranda</a>
+                        <a class="nav-link active" href="{{ route('pengguna.beranda-content') }}"><i
+                                class="fas fa-home me-1"></i> Beranda</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="profilDropdown" role="button"
@@ -509,15 +510,20 @@
                             <i class="fas fa-info-circle me-1"></i> Profil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="profilDropdown">
-                            <li><a class="dropdown-item" href="{{ route('pengguna.visimisi') }}"><i class="fas fa-bullseye me-2"></i> Visi &
+                            <li><a class="dropdown-item" href="{{ route('pengguna.visimisi') }}"><i
+                                        class="fas fa-bullseye me-2"></i> Visi &
                                     Misi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pengguna.sejarah') }}"><i class="fas fa-history me-2"></i> Sejarah
+                            <li><a class="dropdown-item" href="{{ route('pengguna.sejarah') }}"><i
+                                        class="fas fa-history me-2"></i> Sejarah
                                     Madrasah</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pengguna.dataguru') }}"><i class="fas fa-chalkboard-teacher me-2"></i>
+                            <li><a class="dropdown-item" href="{{ route('pengguna.dataguru') }}"><i
+                                        class="fas fa-chalkboard-teacher me-2"></i>
                                     Data Guru</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pengguna.prestasisiswa') }}"><i class="fas fa-trophy me-2"></i> Prestasi
+                            <li><a class="dropdown-item" href="{{ route('pengguna.prestasi.index') }}"><i
+                                        class="fas fa-trophy me-2"></i> Prestasi
                                     Siswa</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pengguna.saranaprasarana') }}"><i class="fas fa-building me-2"></i> Sarana
+                            <li><a class="dropdown-item" href="{{ route('pengguna.saranaprasarana') }}"><i
+                                        class="fas fa-building me-2"></i> Sarana
                                     Prasarana</a></li>
                         </ul>
                     </li>
@@ -528,32 +534,78 @@
                             <i class="fas fa-user-graduate me-1"></i> PPDB
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="ppdbDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-alt me-2"></i>
-                                    Jadwal
-                                    Pendaftaran</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-file-alt me-2"></i>
-                                    Persyaratan</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-money-bill-wave me-2"></i>
-                                    Biaya Pendidikan</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle me-2"></i>
-                                    FAQ</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('ppdb.jadwal') }}">
+                                    <i class="fas fa-calendar-alt me-2"></i> Jadwal Pendaftaran
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('ppdb.syarat') }}">
+                                    <i class="fas fa-file-alt me-2"></i> Persyaratan
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('ppdb.biaya') }}">
+                                    <i class="fas fa-money-bill-wave me-2"></i> Biaya Pendidikan
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('ppdb.kalender') }}">
+                                    <i class="fas fa-calendar me-2"></i> Kalender Akademik
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ asset('uploads/brosur/ ') }}"
+                                    target="_blank">
+                                    <i class="fas fa-download me-2"></i> Download Brosur
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('ppdb.faq') }}">
+                                    <i class="fas fa-question-circle me-2"></i> FAQ
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
+
                     <!-- Di bagian navigasi -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('pengguna.pendidikan') }}"> <!-- Pastikan ada section dengan id education -->
+                        <a class="nav-link" href="{{ route('pengguna.pendidikan') }}">
+                            <!-- Pastikan ada section dengan id education -->
                             <i class="fas fa-graduation-cap me-1"></i> Pendidikan
                         </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#news"><i class="fas fa-newspaper me-1"></i>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('pengguna.berita.index') }}"><i
+                                class="fas fa-newspaper me-1"></i>
                             Berita</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery"><i class="fas fa-images me-1"></i>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('pengguna.galeri.index') }}"><i
+                                class="fas fa-images me-1"></i>
                             Galeri</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>
-                            Kontak</a></li>
-
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarKontak" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-envelope me-1"></i> Kontak
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarKontak">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('pengguna.kontak.index') }}">
+                                    <i class="fas fa-school me-1"></i> Informasi Sekolah
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('pengguna.kontak.testimoni.store') }}">
+                                    <i class="fas fa-comment-dots me-1"></i> Beri Testimoni
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-lightbulb me-1"></i> Saran & Masukan
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -582,14 +634,16 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5 class="mb-3 text-white">Tautan Cepat</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none"><i
-                                    class="fas fa-chevron-right me-2"></i> Profil Madrasah</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none"><i
-                                    class="fas fa-chevron-right me-2"></i> Pendaftaran Siswa Baru</a></li>
+                        <li class="mb-2"><a href="{{ route('pendaftaran.create') }}"
+                                class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i>
+                                Pendaftaran Siswa Baru</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none"><i
                                     class="fas fa-chevron-right me-2"></i> Kalender Akademik</a></li>
+                        <li class="mb-2"><a href="https://maps.app.goo.gl/X6Pndur8nr7mMUzCA"
+                                class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i> Peta
+                                Lokasi</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none"><i
-                                    class="fas fa-chevron-right me-2"></i> Prestasi Siswa</a></li>
+                                    class="fas fa-chevron-right me-2"></i> Testimoni</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">

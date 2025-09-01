@@ -4,14 +4,15 @@
     <!-- Hero Banner -->
     <section class="hero-section d-flex align-items-center text-center text-white" id="home"
         style="min-height: 80vh; 
-               background: url('{{ asset('gambar/sekolah.jpg') }}') center/cover no-repeat;">
+               background: url('{{ asset('gambar/profil.jpeg') }}') center/cover no-repeat;">
         <div class="container animate-fade">
             <h1 class="display-4 fw-bold mb-3">Selamat Datang di <br> MI Diponegoro 03 Karangklesem</h1>
             <p class="lead mb-4">Madrasah Unggul dalam Iman, Ilmu, dan Akhlak Mulia</p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="#" class="btn btn-success btn-lg pulse">
+                <a href="{{ route('pendaftaran.create') }}" class="btn btn-success btn-lg pulse">
                     <i class="fas fa-user-plus me-2"></i> Daftar PPDB
                 </a>
+
                 <a href="#info" class="btn btn-outline-light btn-lg">
                     <i class="fas fa-arrow-down me-2"></i> Jelajahi
                 </a>
@@ -49,6 +50,51 @@
             </div>
         </div>
     </section>
+    <!-- Prestasi Siswa -->
+    <!-- Prestasi Siswa -->
+    <section class="py-5 bg-light" id="prestasi">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Prestasi Siswa</h2>
+            <div class="row g-4">
+                @foreach ($prestasiTerbaru as $prestasi)
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            @if ($prestasi->foto)
+                                <img src="{{ asset('uploads/prestasisiswa/' . $prestasi->foto) }}" class="card-img-top"
+                                    alt="{{ $prestasi->nama_prestasi }}">
+                            @endif
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2 small text-muted">
+                                    <span><i class="far fa-calendar-alt me-1"></i>
+                                        {{ $prestasi->created_at->format('d M Y') }}</span>
+                                    <span><i class="fas fa-trophy me-1 text-warning"></i>
+                                        {{ $prestasi->tingkat ?? 'Prestasi' }}</span>
+                                </div>
+                                <h5 class="card-title">{{ $prestasi->nama_prestasi }}</h5>
+                                <p class="card-text text-muted">
+                                    {{ Str::limit($prestasi->keterangan ?? '-', 100) }}
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white border-0 text-end">
+                                <a href="{{ route('pengguna.prestasi.show', $prestasi->id) }}"
+                                    class="btn btn-outline-success btn-sm">
+                                    Lihat Detail <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ route('pengguna.prestasi.index') }}" class="btn btn-success">
+                    Lihat Semua Prestasi <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
 
     <!-- Berita Terbaru -->
     <section class="py-5" id="news">
@@ -97,8 +143,9 @@
                 @foreach ($galeriFoto as $foto)
                     <div class="col-6 col-md-3 col-lg-2">
                         <div class="gallery-card overflow-hidden rounded shadow-sm">
-                            <img src="{{ asset('uploads/galeri_kegiatan/' . $foto->foto) }}" class="gallery-img w-100 h-100"
-                                alt="{{ $foto->judul_kegiatan }}" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                            <img src="{{ asset('uploads/galeri_kegiatan/' . $foto->foto) }}"
+                                class="gallery-img w-100 h-100" alt="{{ $foto->judul_kegiatan }}" data-bs-toggle="modal"
+                                data-bs-target="#galleryModal"
                                 data-bs-img="{{ asset('uploads/galeri_kegiatan/' . $foto->foto) }}"
                                 data-bs-caption="{{ $foto->judul_kegiatan }}">
                         </div>

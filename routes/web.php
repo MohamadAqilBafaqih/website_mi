@@ -26,6 +26,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/calonsiswa/{id}', [CalonSiswaController::class, 'destroy'])->name('calonsiswa.destroy');
 });
 
+// Form daftar PPDB
+Route::get('/pendaftaran', [CalonSiswaController::class, 'create'])->name('pendaftaran.create');
+// Proses daftar
+Route::post('/pendaftaran', [CalonSiswaController::class, 'storeUser'])->name('pendaftaran.store');
+// Halaman sukses
+Route::get('/pendaftaran/success', function () {
+    return view('pengguna.pendaftaran.success');
+})->name('pendaftaran.success');
+
 
 
 
@@ -64,6 +73,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/kritik-saran/{id}', [KritikSaranController::class, 'destroy'])->name('kritiksaran.destroy');
 });
 
+Route::get('/kontak/saran-masukan/create', [KritikSaranController::class, 'createPengguna'])
+    ->name('pengguna.saranmasukan.createPengguna');
+
+Route::post('/kontak/saran-masukan', [KritikSaranController::class, 'storePengguna'])
+    ->name('pengguna.saranmasukan.storePengguna');
 
 use App\Http\Controllers\PendidikanController;
 
@@ -76,6 +90,7 @@ Route::get('/profil/pendidikan', [PendidikanController::class, 'showPendidikan']
     ->name('pengguna.pendidikan');
 
 use App\Http\Controllers\PrestasiSiswaController;
+use App\Models\PrestasiSiswa;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/prestasisiswa', [PrestasiSiswaController::class, 'index'])->name('prestasisiswa.index');
@@ -85,8 +100,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/prestasisiswa/{id}', [PrestasiSiswaController::class, 'destroy'])->name('prestasisiswa.destroy');
 });
 
-// Route untuk pengguna (frontend)
-Route::get('/prestasi-siswa', [PrestasiSiswaController::class, 'showPrestasi'])->name('pengguna.prestasisiswa');
+// routes/web.php
+Route::get('/prestasi', [PrestasiSiswaController::class, 'showAll'])->name('pengguna.prestasi.index');
+Route::get('/prestasi/{id}', [PrestasiSiswaController::class, 'show'])->name('pengguna.prestasi.show');
 
 use App\Http\Controllers\SaranaPrasaranaController;
 
@@ -199,3 +215,95 @@ Route::prefix('pengguna')->group(function () {
 Route::get('/', function () {
     return redirect()->route('pengguna.beranda-content');
 });
+
+use App\Http\Controllers\TestimoniController;
+
+// Route admin testimoni tanpa middleware
+Route::prefix('admin')->group(function () {
+
+    Route::get('/testimoni', [TestimoniController::class, 'index'])->name('admin.testimoni.index');
+    Route::put('/testimoni/{id}', [TestimoniController::class, 'update'])->name('admin.testimoni.update');
+    Route::delete('/testimoni/{id}', [TestimoniController::class, 'destroy'])->name('admin.testimoni.destroy');
+    Route::get('/testimoni/{id}/edit', [TestimoniController::class, 'edit'])->name('admin.testimoni.edit');
+});
+
+Route::get('/testimoni', [TestimoniController::class, 'showAll'])
+    ->name('pengguna.kontak.testimoni');
+
+Route::post('/testimoni', [TestimoniController::class, 'store'])
+    ->name('pengguna.kontak.testimoni.store');
+
+use App\Http\Controllers\InfoPpdbController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/infoppdb', [InfoPpdbController::class, 'index'])->name('infoppdb.index');
+    Route::get('/infoppdb/create', [InfoPpdbController::class, 'create'])->name('infoppdb.create');
+    Route::post('/infoppdb', [InfoPpdbController::class, 'store'])->name('infoppdb.store');
+    Route::get('/infoppdb/{id}/edit', [InfoPpdbController::class, 'edit'])->name('infoppdb.edit');
+    Route::put('/infoppdb/{id}', [InfoPpdbController::class, 'update'])->name('infoppdb.update');
+    Route::delete('/infoppdb/{id}', [InfoPpdbController::class, 'destroy'])->name('infoppdb.destroy');
+});
+
+// Route untuk pengguna (PPDB)
+Route::prefix('ppdb')->name('ppdb.')->group(function () {
+    Route::get('/jadwal', [InfoPpdbController::class, 'jadwal'])->name('jadwal');
+    Route::get('/syarat', [InfoPpdbController::class, 'syarat'])->name('syarat');
+    Route::get('/biaya', [InfoPpdbController::class, 'biaya'])->name('biaya');
+    Route::get('/kalender', [InfoPpdbController::class, 'kalender'])->name('kalender');
+    Route::get('/brosur', [InfoPpdbController::class, 'brosur'])->name('brosur');
+    Route::get('/faq', [InfoPpdbController::class, 'faq'])->name('faq');
+});
+
+use App\Http\Controllers\PengumumanController;
+
+// Route untuk admin pengumuman
+Route::prefix('admin')->group(function () {
+    Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('admin.pengumuman.index');
+    Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
+    Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
+    Route::get('/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
+    Route::put('/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
+    Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
+});
+
+
+use Illuminate\Http\Request;
+
+Route::get('/kk/{filename}', function (Request $request, $filename) {
+    $user = $request->user();
+
+    if (!$user || $user->role !== 'admin') {
+        abort(403, 'Anda tidak memiliki akses ke file ini.');
+    }
+
+    $path = storage_path('app/uploads/kk/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404, 'File KK tidak ditemukan.');
+    }
+
+    return response()->file($path);
+})->middleware('auth')->name('kk.show');
+
+
+Route::get('/akta/{filename}', function (Request $request, $filename) {
+    $user = $request->user();
+
+    if (!$user || $user->role !== 'admin') {
+        abort(403, 'Anda tidak memiliki akses ke file ini.');
+    }
+
+    $path = storage_path('app/uploads/akta/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404, 'File Akta tidak ditemukan.');
+    }
+
+    return response()->file($path);
+})->middleware('auth')->name('akta.show');
+
+
+use App\Http\Controllers\KontakController;
+
+// Halaman Kontak
+Route::get('/kontak', [KontakController::class, 'index'])->name('pengguna.kontak.index');

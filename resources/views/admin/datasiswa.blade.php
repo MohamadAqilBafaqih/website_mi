@@ -12,7 +12,7 @@
                     </h1>
                     <p class="mb-0">Kelola data siswa yang telah diterima di sekolah</p>
                 </div>
-                
+
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
@@ -85,7 +85,8 @@
                         <tbody>
                             @forelse ($siswa as $key => $item)
                                 <tr style="transition: all 0.3s ease;">
-                                    <td style="padding: 12px 15px; vertical-align: middle;">{{ $siswa->firstItem() + $key }}</td>
+                                    <td style="padding: 12px 15px; vertical-align: middle;">{{ $siswa->firstItem() + $key }}
+                                    </td>
                                     <td style="padding: 12px 15px; vertical-align: middle; font-weight: 500;">
                                         {{ $item->nama_lengkap }}</td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">{{ $item->nik }}</td>
@@ -104,14 +105,19 @@
                                                 style="border-radius: 6px; padding: 5px 10px;">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <form action="{{ route('admin.datasiswa.destroy', $item->id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('admin.datasiswa.destroy', $item->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" style="border-radius: 6px; padding: 5px 10px;">
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                                    style="border-radius: 6px; padding: 5px 10px;">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
-                                            <a href="{{ route('admin.datasiswa.export', $item->id) }}" class="btn btn-sm btn-success" style="border-radius: 6px; padding: 5px 10px;">
+                                            <a href="{{ route('admin.datasiswa.export', $item->id) }}"
+                                                class="btn btn-sm btn-success"
+                                                style="border-radius: 6px; padding: 5px 10px;">
                                                 <i class="fas fa-file-pdf"></i>
                                             </a>
                                         </div>
@@ -169,7 +175,8 @@
                             <div class="col-md-6">
                                 <div class="info-card mb-4"
                                     style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-user me-2"></i>Data Pribadi</h6>
+                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-user me-2"></i>Data Pribadi
+                                    </h6>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label fw-bold">Nama Lengkap</label>
@@ -189,12 +196,15 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label fw-bold">Tanggal Lahir</label>
-                                            <p class="mb-0">{{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d F Y') }}</p>
+                                            <p class="mb-0">
+                                                {{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d F Y') }}
+                                            </p>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label fw-bold">Status Pendaftaran</label>
                                             <p class="mb-0">
-                                                <span class="badge bg-{{ $item->status_pendaftaran == 'Diterima' ? 'success' : ($item->status_pendaftaran == 'Ditolak' ? 'danger' : 'warning') }}">
+                                                <span
+                                                    class="badge bg-{{ $item->status_pendaftaran == 'Diterima' ? 'success' : ($item->status_pendaftaran == 'Ditolak' ? 'danger' : 'warning') }}">
                                                     {{ $item->status_pendaftaran }}
                                                 </span>
                                             </p>
@@ -207,7 +217,8 @@
                             <div class="col-md-6">
                                 <div class="info-card mb-4"
                                     style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-address-book me-2"></i>Kontak & Alamat</h6>
+                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-address-book me-2"></i>Kontak &
+                                        Alamat</h6>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label fw-bold">No. HP</label>
@@ -251,7 +262,8 @@
                             <div class="col-md-6">
                                 <div class="info-card mb-4"
                                     style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-school me-2"></i>Data Sekolah</h6>
+                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-school me-2"></i>Data Sekolah
+                                    </h6>
                                     <div class="row">
                                         <div class="col-md-8 mb-2">
                                             <label class="form-label fw-bold">Asal Sekolah</label>
@@ -269,7 +281,8 @@
                             <div class="col-md-6">
                                 <div class="info-card mb-4"
                                     style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-users me-2"></i>Data Orang Tua</h6>
+                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-users me-2"></i>Data Orang Tua
+                                    </h6>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label fw-bold">Nama Ayah</label>
@@ -314,8 +327,8 @@
                             <h6 class="fw-bold mb-3 text-success"><i class="fas fa-file-alt me-2"></i>Dokumen</h6>
                             <div class="d-flex gap-2 flex-wrap">
                                 @if ($item->akta_kelahiran)
-                                    <a href="{{ Storage::url($item->akta_kelahiran) }}" target="_blank"
-                                        class="btn btn-sm btn-primary mb-2">
+                                    <a href="{{ asset('storage/uploads/akta/' . $item->kartu_keluarga) }}"
+                                        target="_blank" class="btn btn-sm btn-primary mb-2">
                                         <i class="fas fa-file-pdf me-1"></i> Lihat Akta Kelahiran
                                     </a>
                                 @else
@@ -323,7 +336,7 @@
                                 @endif
 
                                 @if ($item->kartu_keluarga)
-                                    <a href="{{ Storage::url($item->kartu_keluarga) }}" target="_blank"
+                                    <a href="{{ route('kk.show', $item->kartu_keluarga) }}" target="_blank"
                                         class="btn btn-sm btn-secondary mb-2">
                                         <i class="fas fa-file-pdf me-1"></i> Lihat Kartu Keluarga
                                     </a>

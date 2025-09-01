@@ -694,7 +694,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end mt-4">
-                                    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary me-2">
+                                    <a href="{{ route('admin.dashboard-content') }}" class="btn btn-secondary me-2">
                                         <i class="fas fa-arrow-left me-1"></i> Kembali
                                     </a>
                                     <button type="reset" class="btn btn-warning me-2">

@@ -67,4 +67,33 @@ class KritikSaranController extends Controller
 
         return redirect()->route('admin.kritiksaran.index')->with('success', 'Kritik & Saran berhasil dihapus.');
     }
+
+    public function storePengguna(Request $request)
+    {
+        $request->validate([
+            'nama'   => 'nullable|string|max:100',
+            'email'  => 'nullable|email|max:100',
+            'no_hp'  => 'nullable|string|max:20',
+            'kritik' => 'nullable|string',
+            'saran'  => 'nullable|string',
+        ]);
+
+        KritikSaran::create([
+            'nama'   => $request->nama,
+            'email'  => $request->email,
+            'no_hp'  => $request->no_hp,
+            'kritik' => $request->kritik,
+            'saran'  => $request->saran,
+            'status' => 'Belum Dibaca', // default status
+        ]);
+
+        return redirect()->back()->with('success', 'Kritik & Saran berhasil dikirim. Terima kasih atas partisipasi Anda.');
+    }
+
+
+    public function createPengguna()
+    {
+        return view('pengguna.kontak.saranmasukan'); 
+        // View: resources/views/pengguna/kritiksaran/create.blade.php
+    }
 }

@@ -870,6 +870,14 @@
             </li>
 
             <li class="menu-title">Lainnya</li>
+
+            <li class="menu-item">
+                <a href="{{ route('admin.infoppdb.index') }}" class="menu-link">
+                    <i class="fas fa-info-circle menu-icon"></i>
+                    <span class="menu-text">Info PPDB</span>
+                </a>
+            </li>
+
             <li class="menu-item">
                 <a href="{{ route('admin.kritiksaran.index') }}" class="menu-link">
                     <i class="fas fa-comment-dots menu-icon"></i>
@@ -878,11 +886,20 @@
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link">
-                    <i class="fas fa-info-circle menu-icon"></i>
-                    <span class="menu-text">Info PPDB</span>
+                <a href="{{ route('admin.testimoni.index') }}" class="menu-link">
+                    <i class="fas fa-star menu-icon"></i>
+                    <span class="menu-text">Testimoni</span>
                 </a>
             </li>
+
+            <li class="menu-item">
+                <a href="{{ route('admin.pengumuman.index') }}" class="menu-link">
+                    <i class="fas fa-bullhorn menu-icon"></i>
+                    <span class="menu-text">Pengumuman</span>
+                </a>
+            </li>
+
+
         </ul>
     </aside>
 
