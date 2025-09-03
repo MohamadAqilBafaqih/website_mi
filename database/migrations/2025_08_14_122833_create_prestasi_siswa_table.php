@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('prestasi_siswa', function (Blueprint $table) {
             $table->id();
             $table->string('nama_siswa', 50);
+            $table->enum('kelas', ['1','2','3','4','5','6']);
             $table->string('nama_prestasi', 150);
             $table->string('foto')->nullable();
             $table->enum('tingkat', ['Sekolah','Kecamatan','Kabupaten','Provinsi','Nasional','Internasional']);
             $table->enum('jenis_prestasi', ['Akademik','Non Akademik']);
             $table->string('penyelenggara', 150)->nullable();
-            $table->year('tahun')->nullable();
+            $table->date('tanggal')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
@@ -33,3 +34,5 @@ return new class extends Migration
         Schema::dropIfExists('prestasi_siswa');
     }
 };
+
+

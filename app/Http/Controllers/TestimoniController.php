@@ -13,9 +13,18 @@ class TestimoniController extends Controller
     public function index()
     {
         $data = Testimoni::latest()->get();
-        return view('admin.testimoni', compact('data')); 
-        // gunakan view admin, bukan pengguna
+        return view('admin.testimoni', compact('data'));
     }
+
+    /**
+     * Tampilkan semua testimoni untuk pengguna (frontend)
+     */
+    public function indexPengguna()
+    {
+        $data = Testimoni::where('status', 'diterima')->latest()->paginate(6);
+        return view('pengguna.kontak.testimoni', compact('data'));
+    }
+
 
     /**
      * Simpan testimoni baru (user)
@@ -23,26 +32,26 @@ class TestimoniController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:100',
-            'sebagai' => 'required|in:alumni,wali murid,komite sekolah',
+            'nama' => 'required|string|max:255',
+            'sebagai' => 'required|string',
             'testimoni' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'foto' => 'nullable|image|max:2048',
         ]);
 
-        $data = $request->only(['nama', 'sebagai', 'testimoni']);
-        $data['status'] = 'baru'; // default
-
-        // upload foto jika ada
+        $fotoPath = null;
         if ($request->hasFile('foto')) {
-            $fileName = time() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('uploads/testimoni'), $fileName);
-            $data['foto'] = $fileName;
+            $fotoPath = $request->file('foto')->store('testimoni', 'public');
         }
 
-        Testimoni::create($data);
+        Testimoni::create([
+            'nama' => $request->nama,
+            'sebagai' => $request->sebagai,
+            'testimoni' => $request->testimoni,
+            'foto' => $fotoPath,
+        ]);
 
-        return redirect()->route('pengguna.testimoni.index')
-            ->with('success', 'Testimoni berhasil dikirim. Menunggu verifikasi admin.');
+        return redirect()->route('pengguna.kontak.testimoni.index')
+            ->with('success', 'Testimoni berhasil dikirim!');
     }
 
     /**
@@ -110,6 +119,6 @@ class TestimoniController extends Controller
     public function showAll()
     {
         $data = Testimoni::where('status', 'diterima')->latest()->paginate(6);
-        return view('pengguna.testimoni.index', compact('data'));
+        return view('pengguna.kontak.testimoni', compact('data'));
     }
 }

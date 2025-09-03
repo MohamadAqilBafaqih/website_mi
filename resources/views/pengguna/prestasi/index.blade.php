@@ -1,40 +1,50 @@
-<!-- Prestasi Siswa -->
-<section class="py-5 bg-light" id="prestasi">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Prestasi Siswa</h2>
-        <div class="row g-4">
-            @foreach ($prestasiTerbaru as $prestasi)
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        @if ($prestasi->foto)
-                            <img src="{{ asset('uploads/prestasisiswa/' . $prestasi->foto) }}" class="card-img-top"
-                                alt="{{ $prestasi->nama_prestasi }}">
-                        @endif
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2 small text-muted">
-                                <span><i class="far fa-calendar-alt me-1"></i>
-                                    {{ $prestasi->created_at->format('d M Y') }}</span>
-                                <span><i class="fas fa-trophy me-1 text-warning"></i> {{ $prestasi->tingkat ?? 'Prestasi' }}</span>
-                            </div>
-                            <h5 class="card-title">{{ $prestasi->nama_prestasi }}</h5>
-                            <p class="card-text text-muted">
-                                {{ Str::limit($prestasi->keterangan ?? '-', 100) }}
-                            </p>
-                        </div>
-                        <div class="card-footer bg-white border-0 text-end">
-                            <a href="{{ route('pengguna.prestasi.show', $prestasi->id) }}"
-                                class="btn btn-outline-success btn-sm">
-                                Lihat Detail <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
+@extends('pengguna.beranda-content')
+
+@section('content')
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4">Prestasi Siswa</h2>
+
+    <div class="row g-4">
+        @forelse($data as $prestasi)
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    @if($prestasi->foto)
+                        <img src="{{ asset('uploads/prestasisiswa/'.$prestasi->foto) }}" 
+                             class="card-img-top" 
+                             alt="{{ $prestasi->nama_prestasi }}" 
+                             style="height: 220px; object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/no-image.jpg') }}" 
+                             class="card-img-top" 
+                             alt="Tidak ada gambar" 
+                             style="height: 220px; object-fit: cover;">
+                    @endif
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ $prestasi->nama_prestasi }}</h5>
+                        <p class="text-muted small mb-2">
+                            <i class="fas fa-calendar-alt"></i> 
+                            {{ $prestasi->tanggal ? \Carbon\Carbon::parse($prestasi->tanggal)->format('d M Y') : $prestasi->created_at->format('d M Y') }}
+                        </p>
+                        <p class="card-text text-truncate" style="max-height: 60px;">
+                            {{ Str::limit(strip_tags($prestasi->keterangan), 100, '...') }}
+                        </p>
+                        <a href="{{ route('pengguna.prestasi.show', $prestasi->id) }}" class="btn btn-success mt-auto">
+                            Lihat Detail
+                        </a>
                     </div>
                 </div>
-            @endforeach
-        </div>
-        <div class="text-center mt-4">
-            <a href="{{ route('pengguna.prestasi.index') }}" class="btn btn-success">
-                Lihat Semua Prestasi <i class="fas fa-arrow-right ms-1"></i>
-            </a>
-        </div>
+            </div>
+        @empty
+            <div class="col-12 text-center">
+                <p class="text-muted">Belum ada prestasi yang ditambahkan.</p>
+            </div>
+        @endforelse
     </div>
-</section>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        {{ $data->links('pagination::bootstrap-5') }}
+    </div>
+</div>
+@endsection

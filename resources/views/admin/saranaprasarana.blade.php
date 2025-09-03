@@ -101,11 +101,11 @@
                                         {{ (empty($sarana) ? old('kondisi') : $sarana->kondisi) == 'Baik' ? 'selected' : '' }}>
                                         Baik</option>
                                     <option value="Cukup"
-                                        {{ (empty($sarana) ? old('kondisi') : $sarana->kondisi) == 'Cukup' ? 'selected' : '' }}>
-                                        Cukup</option>
+                                        {{ (empty($sarana) ? old('kondisi') : $sarana->kondisi) == 'Rusak_ringan' ? 'selected' : '' }}>
+                                        Rusak Ringan</option>
                                     <option value="Kurang"
-                                        {{ (empty($sarana) ? old('kondisi') : $sarana->kondisi) == 'Kurang' ? 'selected' : '' }}>
-                                        Kurang</option>
+                                        {{ (empty($sarana) ? old('kondisi') : $sarana->kondisi) == 'Rusak_berat' ? 'selected' : '' }}>
+                                        Rusak Berat</option>
 
                                 </select>
                                 @error('kondisi')
@@ -206,8 +206,6 @@
                                                     <span class="badge bg-warning">{{ $item->kondisi }}</span>
                                                 @elseif($item->kondisi == 'Rusak Berat')
                                                     <span class="badge bg-danger">{{ $item->kondisi }}</span>
-                                                @elseif($item->kondisi == 'Dalam Perbaikan')
-                                                    <span class="badge bg-info">{{ $item->kondisi }}</span>
                                                 @else
                                                     <span class="badge bg-secondary">{{ $item->kondisi ?? '-' }}</span>
                                                 @endif

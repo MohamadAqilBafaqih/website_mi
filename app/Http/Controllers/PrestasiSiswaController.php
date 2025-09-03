@@ -23,14 +23,15 @@ class PrestasiSiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_siswa' => 'required|string|max:150',
+            'nama_siswa'    => 'required|string|max:150',
+            'kelas'         => 'required|string|max:50',
             'nama_prestasi' => 'required|string|max:150',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
-            'tingkat' => 'nullable|string|max:100',
-            'jenis_prestasi' => 'nullable|string|max:100',
+            'foto'          => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tingkat'       => 'nullable|string|max:100',
+            'jenis_prestasi'=> 'nullable|string|max:100',
             'penyelenggara' => 'nullable|string|max:150',
-            'tahun' => 'nullable|integer',
-            'keterangan' => 'nullable|string',
+            'tanggal'       => 'nullable|date',
+            'keterangan'    => 'nullable|string',
         ]);
 
         $data = $request->all();
@@ -53,7 +54,7 @@ class PrestasiSiswaController extends Controller
     public function edit($id)
     {
         $prestasi = PrestasiSiswa::findOrFail($id);
-        $data = PrestasiSiswa::latest()->get(); // Untuk tabel daftar prestasi
+        $data = PrestasiSiswa::latest()->get();
         return view('admin.prestasisiswa', compact('prestasi', 'data'));
     }
 
@@ -63,14 +64,15 @@ class PrestasiSiswaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_siswa' => 'required|string|max:150',
+            'nama_siswa'    => 'required|string|max:150',
+            'kelas'         => 'required|string|max:50',
             'nama_prestasi' => 'required|string|max:150',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
-            'tingkat' => 'nullable|string|max:100',
-            'jenis_prestasi' => 'nullable|string|max:100',
+            'foto'          => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'tingkat'       => 'nullable|string|max:100',
+            'jenis_prestasi'=> 'nullable|string|max:100',
             'penyelenggara' => 'nullable|string|max:150',
-            'tahun' => 'nullable|integer',
-            'keterangan' => 'nullable|string',
+            'tanggal'       => 'nullable|date',
+            'keterangan'    => 'nullable|string',
         ]);
 
         $prestasi = PrestasiSiswa::findOrFail($id);
@@ -114,9 +116,9 @@ class PrestasiSiswaController extends Controller
     public function showAll()
     {
         $data = PrestasiSiswa::latest()->paginate(6);
-        // paginate biar rapi kalau data banyak
         return view('pengguna.prestasi.index', compact('data'));
     }
+    
 
     /**
      * Tampilkan detail satu prestasi siswa (frontend).

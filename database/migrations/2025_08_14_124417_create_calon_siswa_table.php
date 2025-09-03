@@ -11,36 +11,41 @@ return new class extends Migration {
 
             $table->id();
             $table->string('nama_lengkap', 100);
-            $table->string('nik', 20)->nullable();
+            $table->string('nik', 20);
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->string('tempat_lahir', 50)->nullable();
-            $table->date('tanggal_lahir')->nullable();
-            $table->text('alamat')->nullable();
-            $table->string('kelurahan', 50)->nullable();
-            $table->string('kecamatan', 50)->nullable();
-            $table->string('kabupaten', 50)->nullable();
-            $table->string('provinsi', 50)->nullable();
-            $table->string('kode_pos', 10)->nullable();
-            $table->string('no_hp', 20)->nullable();
-            $table->string('email', 100)->nullable();
-            $table->string('asal_sekolah', 100)->nullable();
-            $table->year('tahun_lulus')->nullable();
+            $table->string('tempat_lahir', 50);
+            $table->date('tanggal_lahir');
+            $table->text('alamat');
+            $table->string('kelurahan', 50);
+            $table->string('kecamatan', 50);
+            $table->string('kabupaten', 50);
+            $table->string('provinsi', 50);
+            $table->string('kode_pos', 10);
+            $table->string('no_hp', 20);
+            $table->string('email', 100);
+            $table->string('asal_sekolah', 100);
+            $table->year('tahun_lulus');
 
             // Data Ayah
-            $table->string('nama_ayah', 100)->nullable();
-            $table->string('pekerjaan_ayah', 50)->nullable();
-            $table->string('pendidikan_ayah', 50)->nullable();
-            $table->string('penghasilan_ayah', 50)->nullable();
+            $table->string('nama_ayah', 100);
+            $table->string('pekerjaan_ayah', 50);
+            $table->string('pendidikan_ayah', 50);
+            $table->string('penghasilan_ayah', 50);
 
             // Data Ibu
-            $table->string('nama_ibu', 100)->nullable();
-            $table->string('pekerjaan_ibu', 50)->nullable();
-            $table->string('pendidikan_ibu', 50)->nullable();
-            $table->string('penghasilan_ibu', 50)->nullable();
+            $table->string('nama_ibu', 100);
+            $table->string('pekerjaan_ibu', 50);
+            $table->string('pendidikan_ibu', 50);
+            $table->string('penghasilan_ibu', 50);
 
-            // Upload file
-            $table->string('akta_kelahiran', 255)->nullable();
-            $table->string('kartu_keluarga', 255)->nullable();
+            // Upload file (wajib diisi)
+            $table->string('akta_kelahiran', 255);
+            $table->string('kartu_keluarga', 255);
+            $table->string('foto_siswa', 255);
+
+            // Data KIP (opsional)
+            $table->string('no_kip', 50)->nullable();
+            $table->string('foto_kip', 255)->nullable();
 
             // Status pendaftaran
             $table->enum('status_pendaftaran', ['Baru', 'Diterima', 'Ditolak'])->default('Baru');
@@ -53,5 +58,3 @@ return new class extends Migration {
         Schema::dropIfExists('calon_siswa');
     }
 };
-
-

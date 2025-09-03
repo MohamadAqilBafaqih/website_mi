@@ -16,6 +16,12 @@ class KritikSaranController extends Controller
         return view('admin.kritiksaran', compact('data'));
     }
 
+    public function indexPengguna()
+    {
+        return view('pengguna.kontak.saranmasukan');
+    }
+
+
     /**
      * Simpan kritik & saran baru (biasanya dari halaman publik)
      */
@@ -93,7 +99,7 @@ class KritikSaranController extends Controller
 
     public function createPengguna()
     {
-        return view('pengguna.kontak.saranmasukan'); 
+        return view('pengguna.kontak.saranmasukan');
         // View: resources/views/pengguna/kritiksaran/create.blade.php
     }
 }

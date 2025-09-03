@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Berita;
 use App\Models\GaleriKegiatan;
 use App\Models\PrestasiSiswa;
+use App\Models\Pengumuman;
+use App\Models\Sambutan;
+use App\Models\Testimoni;
 
 class BerandaController extends Controller
 {
@@ -15,24 +18,29 @@ class BerandaController extends Controller
     public function index()
     {
         // Ambil 3 berita terbaru
-        $beritaTerbaru = Berita::orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
+        $beritaTerbaru = Berita::orderBy('created_at', 'desc')->take(3)->get();
 
         // Ambil 8 foto terbaru dari galeri
-        $galeriFoto = GaleriKegiatan::orderBy('created_at', 'desc')
-            ->take(8)
-            ->get();
+        $galeriFoto = GaleriKegiatan::orderBy('created_at', 'desc')->take(8)->get();
 
         // Ambil 6 prestasi terbaru
-        $prestasiTerbaru = PrestasiSiswa::orderBy('created_at', 'desc')
-            ->take(6)
-            ->get();
+        $prestasiTerbaru = PrestasiSiswa::orderBy('created_at', 'desc')->take(6)->get();
+
+        // Ambil pengumuman terbaru (hero banner)
+        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->first();
+
+        // Ambil sambutan kepala sekolah terbaru
+        $kepalaSekolah = Sambutan::orderBy('created_at', 'desc')->first();
+
+        $testimoni = Testimoni::where('status', 'diterima')->latest()->take(6)->get();
 
         return view('pengguna.beranda', compact(
             'beritaTerbaru',
             'galeriFoto',
-            'prestasiTerbaru'
+            'prestasiTerbaru',
+            'pengumuman',
+            'kepalaSekolah',
+            'testimoni'
         ));
     }
 }

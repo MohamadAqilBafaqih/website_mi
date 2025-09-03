@@ -28,8 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Form daftar PPDB
 Route::get('/pendaftaran', [CalonSiswaController::class, 'create'])->name('pendaftaran.create');
-// Proses daftar
-Route::post('/pendaftaran', [CalonSiswaController::class, 'storeUser'])->name('pendaftaran.store');
+Route::post('/pendaftaran', [CalonSiswaController::class, 'storeUser'])->name('pendaftaran.storeUser');
 // Halaman sukses
 Route::get('/pendaftaran/success', function () {
     return view('pengguna.pendaftaran.success');
@@ -63,6 +62,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 use App\Http\Controllers\KritikSaranController;
+use App\Models\KritikSaran;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/kritik-saran', [KritikSaranController::class, 'index'])->name('kritiksaran.index');
@@ -73,11 +73,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/kritik-saran/{id}', [KritikSaranController::class, 'destroy'])->name('kritiksaran.destroy');
 });
 
-Route::get('/kontak/saran-masukan/create', [KritikSaranController::class, 'createPengguna'])
-    ->name('pengguna.saranmasukan.createPengguna');
+Route::get('/saran-masukan', [KritikSaranController::class, 'indexPengguna'])
+    ->name('pengguna.saranmasukan.index');
 
-Route::post('/kontak/saran-masukan', [KritikSaranController::class, 'storePengguna'])
-    ->name('pengguna.saranmasukan.storePengguna');
+// Route untuk simpan data saran & masukan
+Route::post('/saran-masukan', [KritikSaranController::class, 'store'])->name('pengguna.saranmasukan.store');
 
 use App\Http\Controllers\PendidikanController;
 
@@ -218,20 +218,21 @@ Route::get('/', function () {
 
 use App\Http\Controllers\TestimoniController;
 
-// Route admin testimoni tanpa middleware
-Route::prefix('admin')->group(function () {
 
-    Route::get('/testimoni', [TestimoniController::class, 'index'])->name('admin.testimoni.index');
-    Route::put('/testimoni/{id}', [TestimoniController::class, 'update'])->name('admin.testimoni.update');
-    Route::delete('/testimoni/{id}', [TestimoniController::class, 'destroy'])->name('admin.testimoni.destroy');
-    Route::get('/testimoni/{id}/edit', [TestimoniController::class, 'edit'])->name('admin.testimoni.edit');
-});
-
-Route::get('/testimoni', [TestimoniController::class, 'showAll'])
-    ->name('pengguna.kontak.testimoni');
-
+// Untuk pengguna
+Route::get('/testimoni', [TestimoniController::class, 'indexPengguna'])
+    ->name('pengguna.kontak.testimoni.index');
 Route::post('/testimoni', [TestimoniController::class, 'store'])
     ->name('pengguna.kontak.testimoni.store');
+
+// ================== ROUTE UNTUK ADMIN ==================
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
+    Route::get('/testimoni/{id}/edit', [TestimoniController::class, 'edit'])->name('testimoni.edit');
+    Route::put('/testimoni/{id}', [TestimoniController::class, 'update'])->name('testimoni.update');
+    Route::delete('/testimoni/{id}', [TestimoniController::class, 'destroy'])->name('testimoni.destroy');
+});
+
 
 use App\Http\Controllers\InfoPpdbController;
 
@@ -307,3 +308,13 @@ use App\Http\Controllers\KontakController;
 
 // Halaman Kontak
 Route::get('/kontak', [KontakController::class, 'index'])->name('pengguna.kontak.index');
+
+use App\Http\Controllers\SambutanController;
+
+Route::resource('sambutan', SambutanController::class);
+
+Route::get('/', [PengumumanController::class, 'beranda'])->name('home');
+
+Route::get('/admin/datasiswa/export-excel', [App\Http\Controllers\DataSiswaController::class, 'exportExcel'])->name('admin.datasiswa.export.excel');
+
+

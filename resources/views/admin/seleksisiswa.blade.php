@@ -104,12 +104,15 @@
                                     </td>
                                     <td class="text-muted">{{ $siswa->nik }}</td>
                                     <td>
-                                        @if ($siswa->jenis_kelamin == 'Laki-laki')
+                                        @if (strtolower($siswa->jenis_kelamin) === 'laki-laki')
                                             <span class="badge bg-info">Laki-laki</span>
-                                        @else
+                                        @elseif (strtolower($siswa->jenis_kelamin) === 'perempuan')
                                             <span class="badge bg-pink">Perempuan</span>
+                                        @else
+                                            <span class="badge bg-secondary">-</span>
                                         @endif
                                     </td>
+
                                     <td>{{ $siswa->tempat_lahir }}</td>
                                     <td>
                                         <small
@@ -274,8 +277,13 @@
                                                     <label class="fw-bold text-success small">Email</label>
                                                     <p class="mb-0">{{ $siswa->email ?? '-' }}</p>
                                                 </div>
+                                                <div class="col-6 mb-3">
+                                                    <label class="fw-bold text-success small">Nomor KIP</label>
+                                                    <p class="mb-0">{{ $siswa->no_kip ?? '-' }}</p>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
 
                                     <!-- Data Asal Sekolah -->
@@ -396,28 +404,81 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
+                                                <!-- Akta Kelahiran -->
                                                 <div class="col-6 mb-3">
                                                     <label class="fw-bold text-success small">Akta Kelahiran</label>
                                                     <p class="mb-0">
                                                         @if ($siswa->akta_kelahiran)
-                                                            <span class="badge bg-success">Tersedia</span>
+                                                            <a href="{{ asset('uploads/akta/' . $siswa->akta_kelahiran) }}"
+                                                                target="_blank" class="btn btn-sm btn-info text-white">
+                                                                <i class="fas fa-eye"></i> Lihat
+                                                            </a>
+                                                            <a href="{{ asset('uploads/akta/' . $siswa->akta_kelahiran) }}"
+                                                                download class="btn btn-sm btn-success">
+                                                                <i class="fas fa-download"></i> Download
+                                                            </a>
                                                         @else
                                                             <span class="badge bg-danger">Tidak Tersedia</span>
                                                         @endif
                                                     </p>
                                                 </div>
+                                                <!-- Kartu Keluarga -->
                                                 <div class="col-6 mb-3">
                                                     <label class="fw-bold text-success small">Kartu Keluarga</label>
                                                     <p class="mb-0">
                                                         @if ($siswa->kartu_keluarga)
-                                                            <span class="badge bg-success">Tersedia</span>
+                                                            <a href="{{ asset('uploads/kk/' . $siswa->kartu_keluarga) }}"
+                                                                target="_blank" class="btn btn-sm btn-info text-white">
+                                                                <i class="fas fa-eye"></i> Lihat
+                                                            </a>
+                                                            <a href="{{ asset('uploads/kk/' . $siswa->kartu_keluarga) }}"
+                                                                download class="btn btn-sm btn-success">
+                                                                <i class="fas fa-download"></i> Download
+                                                            </a>
                                                         @else
-                                                            <span class="badge bg-danger">Tersedia</span>
+                                                            <span class="badge bg-danger">Tidak Tersedia</span>
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                                <!-- Foto Siswa -->
+                                                <div class="col-6 mb-3">
+                                                    <label class="fw-bold text-success small">Foto Siswa</label>
+                                                    <p class="mb-0">
+                                                        @if ($siswa->foto_siswa)
+                                                            <a href="{{ asset('uploads/foto_siswa/' . $siswa->foto_siswa) }}"
+                                                                target="_blank" class="btn btn-sm btn-info text-white">
+                                                                <i class="fas fa-eye"></i> Lihat
+                                                            </a>
+                                                            <a href="{{ asset('uploads/foto_siswa/' . $siswa->foto_siswa) }}"
+                                                                download class="btn btn-sm btn-success">
+                                                                <i class="fas fa-download"></i> Download
+                                                            </a>
+                                                        @else
+                                                            <span class="badge bg-danger">Tidak Tersedia</span>
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                                <!-- Foto KIP -->
+                                                <div class="col-6 mb-3">
+                                                    <label class="fw-bold text-success small">Foto KIP</label>
+                                                    <p class="mb-0">
+                                                        @if ($siswa->foto_kip)
+                                                            <a href="{{ asset('uploads/foto_kip/' . $siswa->foto_kip) }}"
+                                                                target="_blank" class="btn btn-sm btn-info text-white">
+                                                                <i class="fas fa-eye"></i> Lihat
+                                                            </a>
+                                                            <a href="{{ asset('uploads/foto_kip/' . $siswa->foto_kip) }}"
+                                                                download class="btn btn-sm btn-success">
+                                                                <i class="fas fa-download"></i> Download
+                                                            </a>
+                                                        @else
+                                                            <span class="badge bg-danger">Tidak Tersedia</span>
                                                         @endif
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -503,12 +564,15 @@
                                         <select class="form-select" id="jenis_kelamin{{ $siswa->id }}"
                                             name="jenis_kelamin" required>
                                             <option value="Laki-laki"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
-                                                Laki-laki</option>
+                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) === 'Laki-laki' ? 'selected' : '' }}>
+                                                Laki-laki
+                                            </option>
                                             <option value="Perempuan"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
-                                                Perempuan</option>
+                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) === 'Perempuan' ? 'selected' : '' }}>
+                                                Perempuan
+                                            </option>
                                         </select>
+
                                         @error('jenis_kelamin')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror

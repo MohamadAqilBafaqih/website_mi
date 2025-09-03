@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_fasilitas', 100);
             $table->enum('jenis_fasilitas', ['Sarana', 'Prasarana']);
             $table->text('deskripsi')->nullable();
-            $table->enum('kondisi', ['Baik', 'Cukup', 'Kurang'])->default('Baik');
+            $table->enum('kondisi', ['Baik', 'Rusak_ringan', 'Rusak_berat'])->default('Baik');
             $table->string('foto')->nullable();
             $table->year('tahun_pengadaan')->nullable();
             $table->timestamps();

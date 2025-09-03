@@ -555,8 +555,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ asset('uploads/brosur/ ') }}"
-                                    target="_blank">
+                                <a class="dropdown-item" href="{{ asset('uploads/brosur/ ') }}" target="_blank">
                                     <i class="fas fa-download me-2"></i> Download Brosur
                                 </a>
                             </li>
@@ -600,7 +599,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('pengguna.saranmasukan.index') }}">
                                     <i class="fas fa-lightbulb me-1"></i> Saran & Masukan
                                 </a>
                             </li>

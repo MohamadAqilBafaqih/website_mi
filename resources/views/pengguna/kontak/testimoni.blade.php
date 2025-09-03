@@ -1,9 +1,8 @@
-@extends('pengguna.beranda-content') 
-{{-- Sesuaikan dengan layout utama Anda --}}
+@extends('pengguna.beranda-content')
 
 @section('content')
 <div class="container py-5">
-    <h2 class="mb-4 text-center fw-bold">Tambah Testimoni</h2>
+    <h2 class="mb-4 text-center fw-bold">Testimoni</h2>
 
     {{-- Pesan sukses --}}
     @if(session('success'))
@@ -11,12 +10,12 @@
     @endif
 
     {{-- Form tambah testimoni --}}
-    <div class="card shadow">
+    <div class="card shadow mb-5">
         <div class="card-header bg-success text-white">
-            <h5 class="mb-0">Form Testimoni</h5>
+            <h5 class="mb-0">Tambah Testimoni</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('pengguna.testimoni.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('pengguna.kontak.testimoni.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -54,6 +53,33 @@
                 <button type="submit" class="btn btn-success">Kirim Testimoni</button>
             </form>
         </div>
+    </div>
+
+    {{-- Daftar testimoni yang sudah diterima --}}
+    <div class="row">
+        @forelse($data as $item)
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if($item->foto)
+                        <img src="{{ asset('storage/'.$item->foto) }}" class="card-img-top" alt="Foto {{ $item->nama }}">
+                    @else
+                        <img src="{{ asset('images/default-user.png') }}" class="card-img-top" alt="Default Foto">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $item->nama }}</h5>
+                        <h6 class="card-subtitle text-muted">{{ ucfirst($item->sebagai) }}</h6>
+                        <p class="mt-2">{{ $item->testimoni }}</p>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center">Belum ada testimoni yang ditampilkan.</p>
+        @endforelse
+    </div>
+
+    {{-- Pagination --}}
+    <div class="d-flex justify-content-center mt-4">
+        {{ $data->links() }}
     </div>
 </div>
 @endsection

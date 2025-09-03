@@ -150,4 +150,8 @@ class DataSiswaController extends Controller
         return view('admin.datasiswa', compact('siswa'));
     }
 
+    public function exportExcel()
+    {
+        return Excel::download(new SiswaExport, 'data_siswa.xlsx');
+    }
 }

@@ -35,8 +35,11 @@ class CalonSiswa extends Model
         'pekerjaan_ibu',
         'pendidikan_ibu',
         'penghasilan_ibu',
+        'foto_siswa',
         'akta_kelahiran',
         'kartu_keluarga',
+        'no_kip',
+        'foto_kip',
         'status_pendaftaran'
     ];
 
@@ -44,5 +47,3 @@ class CalonSiswa extends Model
         'status_pendaftaran' => 'Baru',
     ];
 }
-
-

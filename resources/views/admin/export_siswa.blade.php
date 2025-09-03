@@ -112,6 +112,10 @@
                 <td>: {{ $siswa->nik }}</td>
             </tr>
             <tr>
+                <td class="label">Nomor KIP</td>
+                <td colspan="3">: {{ $siswa->no_kip ?? '-' }}</td>
+            </tr>
+            <tr>
                 <td class="label">Jenis Kelamin</td>
                 <td>: {{ $siswa->jenis_kelamin }}</td>
                 <td class="label">Tempat, Tanggal Lahir</td>
@@ -128,6 +132,7 @@
                 </td>
             </tr>
         </table>
+
     </div>
 
     <!-- Kontak & Alamat -->
@@ -229,8 +234,17 @@
                 <td class="label">Kartu Keluarga</td>
                 <td>: {{ $siswa->kartu_keluarga ? 'Tersedia' : 'Tidak Tersedia' }}</td>
             </tr>
+            <tr>
+                <td class="label">Foto Siswa</td>
+                <td>: {{ $siswa->foto_siswa ? 'Tersedia' : 'Tidak Tersedia' }}</td>
+            </tr>
+            <tr>
+                <td class="label">Foto KIP</td>
+                <td>: {{ $siswa->foto_kip ? 'Tersedia' : 'Tidak Tersedia' }}</td>
+            </tr>
         </table>
     </div>
+
 
     <div class="footer">
         <p>Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y H:i:s') }}</p>

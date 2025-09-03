@@ -4,7 +4,7 @@
     <div class="container py-5">
         <h2 class="mb-4 text-center fw-bold">Formulir Pendaftaran Peserta Didik Baru</h2>
 
-        <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('pendaftaran.storeUser') }}" method="POST" enctype="multipart/form-data"
             class="card shadow p-4 rounded-4">
             @csrf
 
@@ -16,53 +16,53 @@
                     <input type="text" name="nama_lengkap" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">NIK</label>
-                    <input type="text" name="nik" class="form-control">
+                    <label class="form-label">NIK *</label>
+                    <input type="text" name="nik" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Jenis Kelamin</label>
-                    <select name="jenis_kelamin" class="form-select">
+                    <label class="form-label">Jenis Kelamin *</label>
+                    <select name="jenis_kelamin" class="form-select" required>
                         <option value="">-- Pilih --</option>
                         <option value="Laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" class="form-control">
+                    <label class="form-label">Tempat Lahir *</label>
+                    <input type="text" name="tempat_lahir" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" class="form-control">
+                    <label class="form-label">Tanggal Lahir *</label>
+                    <input type="date" name="tanggal_lahir" class="form-control" required>
                 </div>
             </div>
 
             {{-- Alamat --}}
-            <h5 class="fw-bold mt-4 mb-3">Alamat</h5>
+            <h5 class="fw-bold mt-4 mb-3">Alamat Domisili</h5>
             <div class="row g-3">
                 <div class="col-md-12">
-                    <label class="form-label">Alamat Lengkap</label>
-                    <textarea name="alamat" class="form-control" rows="2"></textarea>
+                    <label class="form-label">Alamat Lengkap *</label>
+                    <textarea name="alamat" class="form-control" rows="2" required></textarea>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Kelurahan</label>
-                    <input type="text" name="kelurahan" class="form-control">
+                    <label class="form-label">Kelurahan *</label>
+                    <input type="text" name="kelurahan" class="form-control" required>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Kecamatan</label>
-                    <input type="text" name="kecamatan" class="form-control">
+                    <label class="form-label">Kecamatan *</label>
+                    <input type="text" name="kecamatan" class="form-control" required>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Kabupaten</label>
-                    <input type="text" name="kabupaten" class="form-control">
+                    <label class="form-label">Kabupaten *</label>
+                    <input type="text" name="kabupaten" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Provinsi</label>
-                    <input type="text" name="provinsi" class="form-control">
+                    <label class="form-label">Provinsi *</label>
+                    <input type="text" name="provinsi" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Kode Pos</label>
-                    <input type="text" name="kode_pos" class="form-control">
+                    <label class="form-label">Kode Pos *</label>
+                    <input type="text" name="kode_pos" class="form-control" required>
                 </div>
             </div>
 
@@ -70,12 +70,12 @@
             <h5 class="fw-bold mt-4 mb-3">Kontak</h5>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label">No HP</label>
-                    <input type="text" name="no_hp" class="form-control">
+                    <label class="form-label">No HP *</label>
+                    <input type="text" name="no_hp" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control">
+                    <label class="form-label">Email *</label>
+                    <input type="email" name="email" class="form-control" required>
                 </div>
             </div>
 
@@ -83,21 +83,21 @@
             <h5 class="fw-bold mt-4 mb-3">Riwayat Pendidikan</h5>
             <div class="row g-3">
                 <div class="col-md-8">
-                    <label class="form-label">Asal Sekolah</label>
-                    <input type="text" name="asal_sekolah" class="form-control">
+                    <label class="form-label">Asal Sekolah *</label>
+                    <input type="text" name="asal_sekolah" class="form-control" required>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Tahun Lulus</label>
-                    <input type="text" name="tahun_lulus" class="form-control">
+                    <label class="form-label">Tahun Lulus *</label>
+                    <input type="text" name="tahun_lulus" class="form-control" required>
                 </div>
             </div>
 
-            {{-- Data Orang Tua --}}
-            <h5 class="fw-bold mt-4 mb-3">Data Ayah</h5>
+            {{-- Data Ayah --}}
+            <h5 class="fw-bold mt-4 mb-3">Data Ayah *</h5>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label">Nama Ayah</label>
-                    <input type="text" name="nama_ayah" class="form-control">
+                    <label class="form-label">Nama Ayah *</label>
+                    <input type="text" name="nama_ayah" class="form-control" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Pekerjaan Ayah</label>
@@ -173,14 +173,14 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
             </div>
 
-            <h5 class="fw-bold mt-4 mb-3">Data Ibu</h5>
+            {{-- Data Ibu --}}
+            <h5 class="fw-bold mt-4 mb-3">Data Ibu *</h5>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label">Nama Ibu</label>
-                    <input type="text" name="nama_ibu" class="form-control">
+                    <label class="form-label">Nama Ibu *</label>
+                    <input type="text" name="nama_ibu" class="form-control" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Pekerjaan Ibu</label>
@@ -256,19 +256,30 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
             </div>
 
             {{-- Upload Dokumen --}}
             <h5 class="fw-bold mt-4 mb-3">Upload Dokumen</h5>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label">Akta Kelahiran</label>
-                    <input type="file" name="akta_kelahiran" class="form-control">
+                    <label class="form-label">Akta Kelahiran *</label>
+                    <input type="file" name="akta_kelahiran" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Kartu Keluarga</label>
-                    <input type="file" name="kartu_keluarga" class="form-control">
+                    <label class="form-label">Kartu Keluarga *</label>
+                    <input type="file" name="kartu_keluarga" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Foto Siswa (3x4) *</label>
+                    <input type="file" name="foto_siswa" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Nomor KIP (opsional)</label>
+                    <input type="text" name="no_kip" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Foto KIP (opsional)</label>
+                    <input type="file" name="foto_kip" class="form-control">
                 </div>
             </div>
 

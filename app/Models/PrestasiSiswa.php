@@ -12,12 +12,13 @@ class PrestasiSiswa extends Model
     protected $table = 'prestasi_siswa';
     protected $fillable = [
         'nama_siswa',
+        'kelas',
         'nama_prestasi',
         'foto',
         'tingkat',
         'jenis_prestasi',
         'penyelenggara',
-        'tahun',
+        'tanggal',
         'keterangan'
     ];
 }

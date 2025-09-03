@@ -18,13 +18,18 @@
                             Berlokasi di Karangklesem, Purwokerto Timur, Banyumas, Jawa Tengah.
                         </p>
                         <h5 class="mt-3">Alamat</h5>
-                        <p><i class="fas fa-map-marker-alt me-2"></i>Jl. Karangklesem No.12, Kec. Purwokerto Timur, Kab.
-                            Banyumas, Jawa Tengah</p>
+                        <p>
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Jl. Karangklesem No.12, Kec. Purwokerto Timur, Kab. Banyumas, Jawa Tengah
+                        </p>
+
+                        <h5>NPSN</h5>
+                        <p><i class="fas fa-id-card me-2"></i> 60710449</p>
+
                         <h5>Kontak</h5>
-                        <p><i class="fas fa-phone me-2"></i>Telepon: (0281) 123456</p>
+                        <p><i class="fas fa-phone me-2"></i>Telepon: (0281) 641382</p>
                         <p><i class="fas fa-envelope me-2"></i>Email: info@midiponegoro03.sch.id</p>
-                        <p><i class="fas fa-clock me-2"></i>Jam Operasional: Senin – Jumat 07.00 – 14.00 WIB, Sabtu 07.00 –
-                            12.00 WIB</p>
+                        <p><i class="fas fa-clock me-2"></i>Jam Operasional: Senin – Kamis 07.00 – 14.30 WIB, Jumat 07.00 - 11.00, Sabtu 07.00 – 14.30 WIB</p>
 
                         <h5 class="mt-4">Media Sosial</h5>
                         <p>

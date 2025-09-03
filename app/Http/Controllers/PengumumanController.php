@@ -117,4 +117,6 @@ class PengumumanController extends Controller
         return redirect()->route('admin.pengumuman.index')
             ->with('success', 'Pengumuman berhasil dihapus.');
     }
+
+
 }

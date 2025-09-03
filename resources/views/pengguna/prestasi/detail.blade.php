@@ -22,10 +22,14 @@
                         <h3 class="card-title mb-3">{{ $prestasi->nama_prestasi }}</h3>
                         <ul class="list-unstyled mb-3">
                             <li><strong>Nama Siswa:</strong> {{ $prestasi->nama_siswa }}</li>
+                            <li><strong>Kelas:</strong> {{ $prestasi->kelas }}</li>
                             <li><strong>Tingkat:</strong> {{ $prestasi->tingkat ?? '-' }}</li>
                             <li><strong>Jenis Prestasi:</strong> {{ $prestasi->jenis_prestasi ?? '-' }}</li>
                             <li><strong>Penyelenggara:</strong> {{ $prestasi->penyelenggara ?? '-' }}</li>
-                            <li><strong>Tahun:</strong> {{ $prestasi->tahun ?? '-' }}</li>
+                            <li>
+                                <strong>Tanggal:</strong> 
+                                {{ $prestasi->tanggal ? \Carbon\Carbon::parse($prestasi->tanggal)->format('d M Y') : '-' }}
+                            </li>
                         </ul>
                         <p class="card-text">
                             {!! nl2br(e($prestasi->keterangan)) !!}

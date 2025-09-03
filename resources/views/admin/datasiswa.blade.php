@@ -55,9 +55,13 @@
                         <a href="{{ route('admin.datasiswa.export.all') }}" class="btn btn-sm btn-success me-2">
                             <i class="fas fa-file-pdf me-1"></i> Ekspor PDF
                         </a>
+                        <a href="{{ route('admin.datasiswa.export.excel') }}" class="btn btn-sm btn-success me-2">
+                            <i class="fas fa-file-excel me-1"></i> Ekspor Excel
+                        </a>
                         <a href="{{ route('admin.datasiswa.cetak') }}" class="btn btn-sm btn-primary">
                             <i class="fas fa-print me-1"></i> Cetak
                         </a>
+
                     </div>
                     <form id="deleteForm" method="POST" style="display: none;">
                         @csrf
@@ -326,8 +330,9 @@
                             style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
                             <h6 class="fw-bold mb-3 text-success"><i class="fas fa-file-alt me-2"></i>Dokumen</h6>
                             <div class="d-flex gap-2 flex-wrap">
+                                {{-- Akta Kelahiran --}}
                                 @if ($item->akta_kelahiran)
-                                    <a href="{{ asset('storage/uploads/akta/' . $item->kartu_keluarga) }}"
+                                    <a href="{{ asset('storage/uploads/akta/' . $item->akta_kelahiran) }}"
                                         target="_blank" class="btn btn-sm btn-primary mb-2">
                                         <i class="fas fa-file-pdf me-1"></i> Lihat Akta Kelahiran
                                     </a>
@@ -335,16 +340,47 @@
                                     <span class="text-muted mb-2">Akta Kelahiran tidak tersedia</span>
                                 @endif
 
+                                {{-- Kartu Keluarga --}}
                                 @if ($item->kartu_keluarga)
-                                    <a href="{{ route('kk.show', $item->kartu_keluarga) }}" target="_blank"
+                                    <a href="{{ asset('storage/uploads/kk/' . $item->kartu_keluarga) }}" target="_blank"
                                         class="btn btn-sm btn-secondary mb-2">
                                         <i class="fas fa-file-pdf me-1"></i> Lihat Kartu Keluarga
                                     </a>
                                 @else
                                     <span class="text-muted mb-2">Kartu Keluarga tidak tersedia</span>
                                 @endif
+
+                                {{-- Foto Siswa --}}
+                                @if ($item->foto_siswa)
+                                    <a href="{{ asset('storage/uploads/foto_siswa/' . $item->foto_siswa) }}"
+                                        target="_blank" class="btn btn-sm btn-success mb-2">
+                                        <i class="fas fa-image me-1"></i> Lihat Foto Siswa
+                                    </a>
+                                @else
+                                    <span class="text-muted mb-2">Foto siswa tidak tersedia</span>
+                                @endif
+
+                                {{-- Nomor KIP --}}
+                                @if ($item->nomor_kip)
+                                    <span class="badge bg-info mb-2">
+                                        <i class="fas fa-id-card me-1"></i> Nomor KIP: {{ $item->nomor_kip }}
+                                    </span>
+                                @else
+                                    <span class="text-muted mb-2">Nomor KIP tidak tersedia</span>
+                                @endif
+
+                                {{-- Foto KIP --}}
+                                @if ($item->foto_kip)
+                                    <a href="{{ asset('storage/uploads/foto_kip/' . $item->foto_kip) }}" target="_blank"
+                                        class="btn btn-sm btn-warning mb-2">
+                                        <i class="fas fa-image me-1"></i> Lihat Foto KIP
+                                    </a>
+                                @else
+                                    <span class="text-muted mb-2">Foto KIP tidak tersedia</span>
+                                @endif
                             </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
