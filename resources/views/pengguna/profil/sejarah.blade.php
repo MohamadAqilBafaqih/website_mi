@@ -36,12 +36,7 @@
                         {!! nl2br(e($item->isi_sejarah)) !!}
                     </div>
                 </div>
-                <div class="card-footer bg-light text-muted text-end d-flex justify-content-between align-items-center" style="font-size: 0.9rem;">
-                    <div class="history-badge">
-                        <span class="badge bg-accent text-dark">Warisan Pendidikan</span>
-                    </div>
-                    <small>Terakhir diperbarui: {{ \Carbon\Carbon::parse($item->updated_at)->format('d F Y') }}</small>
-                </div>
+                
             </div>
             @empty
             <!-- Empty State -->

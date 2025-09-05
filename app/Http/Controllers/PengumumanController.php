@@ -12,7 +12,7 @@ class PengumumanController extends Controller
      */
     public function index()
     {
-        $data = Pengumuman::latest()->get();
+        $data = Pengumuman::latest()->get(); 
         return view('admin.pengumuman', compact('data'));
     }
 
@@ -117,6 +117,4 @@ class PengumumanController extends Controller
         return redirect()->route('admin.pengumuman.index')
             ->with('success', 'Pengumuman berhasil dihapus.');
     }
-
-
 }

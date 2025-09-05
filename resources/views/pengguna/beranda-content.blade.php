@@ -554,16 +554,7 @@
                                     <i class="fas fa-calendar me-2"></i> Kalender Akademik
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ asset('uploads/brosur/ ') }}" target="_blank">
-                                    <i class="fas fa-download me-2"></i> Download Brosur
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('ppdb.faq') }}">
-                                    <i class="fas fa-question-circle me-2"></i> FAQ
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -651,11 +642,17 @@
                         <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-white"></i> Jl. Karangklesem
                             No.
                             03, Purwokerto</li>
-                        <li class="mb-2"><i class="fas fa-phone me-2 text-white"></i> (0281) 1234567</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2 text-white"></i> (0281) 641382</li>
                         <li class="mb-2"><i class="fas fa-envelope me-2 text-white"></i>
                             info@midiponegoro03.sch.id
                         </li>
-                        <li class="mb-2"><i class="fas fa-clock me-2 text-white"></i> Senin-Jumat: 07.00 - 15.00
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2 text-white"></i>
+                            Senin - Kamis: 07.00 - 14.30 <br>
+                            Jumat: 07.00 - 11.30 <br>
+                            Sabtu: 07.00 - 14.30
+                        </li>
+
                         </li>
                     </ul>
                 </div>

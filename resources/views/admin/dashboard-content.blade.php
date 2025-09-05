@@ -70,13 +70,13 @@
                             <div class="quick-link-icon"><i class="fas fa-user-plus"></i></div>
                             <div class="quick-link-text">Tambah Siswa</div>
                         </a>
-                        <a href="#" class="quick-link text-center">
-                            <div class="quick-link-icon"><i class="fas fa-file-invoice"></i></div>
-                            <div class="quick-link-text">Laporan Bulanan</div>
+                        <a href="{{ route('admin.seleksisiswa.index') }}" class="quick-link text-center">
+                            <div class="quick-link-icon"><i class="fas fa-user-check"></i></div>
+                            <div class="quick-link-text">Seleksi Siswa</div>
                         </a>
-                        <a href="#" class="quick-link text-center">
-                            <div class="quick-link-icon"><i class="fas fa-calendar-plus"></i></div>
-                            <div class="quick-link-text">Jadwal Baru</div>
+                        <a href="{{ route('admin.sesipendaftaran.index') }}" class="quick-link text-center">
+                            <div class="quick-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="quick-link-text">Sesi Pendaftaran</div>
                         </a>
                         <a href="{{ route('admin.pengumuman.index') }}" class="quick-link text-center">
                             <div class="quick-link-icon"><i class="fas fa-bullhorn"></i></div>

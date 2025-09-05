@@ -313,8 +313,12 @@ use App\Http\Controllers\SambutanController;
 
 Route::resource('sambutan', SambutanController::class);
 
-Route::get('/', [PengumumanController::class, 'beranda'])->name('home');
-
 Route::get('/admin/datasiswa/export-excel', [App\Http\Controllers\DataSiswaController::class, 'exportExcel'])->name('admin.datasiswa.export.excel');
 
+use App\Http\Controllers\SesiPendaftaranController;
 
+Route::get('/admin/sesipendaftaran', [SesiPendaftaranController::class, 'index'])->name('admin.sesipendaftaran.index');
+Route::post('/admin/sesipendaftaran', [SesiPendaftaranController::class, 'store'])->name('admin.sesipendaftaran.store');
+Route::put('/admin/sesipendaftaran/{id}', [SesiPendaftaranController::class, 'update'])->name('admin.sesipendaftaran.update');
+Route::delete('/admin/sesipendaftaran/{id}', [SesiPendaftaranController::class, 'destroy'])->name('admin.sesipendaftaran.destroy');
+Route::get('/admin/sesipendaftaran/{id}/edit', [SesiPendaftaranController::class, 'edit'])->name('admin.sesipendaftaran.edit');

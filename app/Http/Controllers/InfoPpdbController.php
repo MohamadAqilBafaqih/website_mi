@@ -21,6 +21,7 @@ class InfoPpdbController extends Controller
      */
     public function create()
     {
+        // kalau view butuh $data, kirim; kalau tidak, hapus aja baris ini
         return view('admin.infoppdb.create');
     }
 
@@ -30,24 +31,22 @@ class InfoPpdbController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jadwal' => 'required|string',
-            'syarat' => 'required|string',
-            'biaya'  => 'required|string',
-            'faq'    => 'nullable|string',
-            'kalender_akademik' => 'nullable|mimes:pdf|max:2048',
-            'brosur' => 'nullable|mimes:pdf|max:2048',
+            'jadwal'             => 'required|string',
+            'syarat'             => 'required|string',
+            'biaya'              => 'required|string',
+            'faq'                => 'nullable|string',
+            'kalender_akademik'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'brosur'             => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
 
         $data = $request->only(['jadwal', 'syarat', 'biaya', 'faq']);
 
-        // Upload kalender akademik
         if ($request->hasFile('kalender_akademik')) {
             $fileName = time() . '_kalender.' . $request->kalender_akademik->extension();
             $request->kalender_akademik->move(public_path('uploads/ppdb'), $fileName);
             $data['kalender_akademik'] = $fileName;
         }
 
-        // Upload brosur
         if ($request->hasFile('brosur')) {
             $fileName = time() . '_brosur.' . $request->brosur->extension();
             $request->brosur->move(public_path('uploads/ppdb'), $fileName);
@@ -65,12 +64,11 @@ class InfoPpdbController extends Controller
      */
     public function edit($id)
     {
-        $data = InfoPpdb::latest()->get();   // semua data
-        $edit = InfoPpdb::findOrFail($id);   // data yang mau diedit
+        $data = InfoPpdb::latest()->get();
+        $edit = InfoPpdb::findOrFail($id);
 
         return view('admin.infoppdb', compact('data', 'edit'));
     }
-
 
     /**
      * Update data.
@@ -78,25 +76,23 @@ class InfoPpdbController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jadwal' => 'required|string',
-            'syarat' => 'required|string',
-            'biaya'  => 'required|string',
-            'faq'    => 'nullable|string',
-            'kalender_akademik' => 'nullable|mimes:pdf|max:2048',
-            'brosur' => 'nullable|mimes:pdf|max:2048',
+            'jadwal'             => 'required|string',
+            'syarat'             => 'required|string',
+            'biaya'              => 'required|string',
+            'faq'                => 'nullable|string',
+            'kalender_akademik'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'brosur'             => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
 
         $item = InfoPpdb::findOrFail($id);
         $data = $request->only(['jadwal', 'syarat', 'biaya', 'faq']);
 
-        // Upload kalender akademik baru
         if ($request->hasFile('kalender_akademik')) {
             $fileName = time() . '_kalender.' . $request->kalender_akademik->extension();
             $request->kalender_akademik->move(public_path('uploads/ppdb'), $fileName);
             $data['kalender_akademik'] = $fileName;
         }
 
-        // Upload brosur baru
         if ($request->hasFile('brosur')) {
             $fileName = time() . '_brosur.' . $request->brosur->extension();
             $request->brosur->move(public_path('uploads/ppdb'), $fileName);
@@ -121,51 +117,39 @@ class InfoPpdbController extends Controller
             ->with('success', 'Informasi PPDB berhasil dihapus.');
     }
 
+    // =================== Bagian untuk pengguna ===================
+
     public function jadwal()
     {
         $data = InfoPpdb::latest()->first();
         return view('pengguna.ppdb.jadwal', compact('data'));
     }
 
-    /**
-     * Menampilkan Persyaratan PPDB
-     */
     public function syarat()
     {
         $data = InfoPpdb::latest()->first();
         return view('pengguna.ppdb.syarat', compact('data'));
     }
 
-    /**
-     * Menampilkan Biaya PPDB
-     */
     public function biaya()
     {
         $data = InfoPpdb::latest()->first();
         return view('pengguna.ppdb.biaya', compact('data'));
     }
 
-    /**
-     * Menampilkan Kalender Akademik
-     */
     public function kalender()
     {
         $data = InfoPpdb::latest()->first();
         return view('pengguna.ppdb.kalender', compact('data'));
     }
 
-    /**
-     * Download Brosur
-     */
     public function brosur()
     {
-        $data = InfoPpdb::latest()->first();
-        return view('pengguna.ppdb.brosur', compact('data'));
+        $data = InfoPpdb::latest()->get();
+        return view('pengguna.brosur', compact('data'));
     }
 
-    /**
-     * Menampilkan FAQ
-     */
+
     public function faq()
     {
         $data = InfoPpdb::latest()->first();

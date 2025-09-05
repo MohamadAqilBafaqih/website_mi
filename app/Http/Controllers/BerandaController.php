@@ -9,6 +9,7 @@ use App\Models\PrestasiSiswa;
 use App\Models\Pengumuman;
 use App\Models\Sambutan;
 use App\Models\Testimoni;
+use App\Models\InfoPpdb;
 
 class BerandaController extends Controller
 {
@@ -33,6 +34,7 @@ class BerandaController extends Controller
         $kepalaSekolah = Sambutan::orderBy('created_at', 'desc')->first();
 
         $testimoni = Testimoni::where('status', 'diterima')->latest()->take(6)->get();
+        $data = InfoPpdb::latest()->get();
 
         return view('pengguna.beranda', compact(
             'beritaTerbaru',
@@ -40,7 +42,8 @@ class BerandaController extends Controller
             'prestasiTerbaru',
             'pengumuman',
             'kepalaSekolah',
-            'testimoni'
+            'testimoni',
+            'data'
         ));
     }
 }

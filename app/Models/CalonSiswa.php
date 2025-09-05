@@ -12,6 +12,7 @@ class CalonSiswa extends Model
     protected $table = 'calon_siswa';
 
     protected $fillable = [
+        'sesi_id',
         'nama_lengkap',
         'nik',
         'jenis_kelamin',
@@ -46,4 +47,9 @@ class CalonSiswa extends Model
     protected $attributes = [
         'status_pendaftaran' => 'Baru',
     ];
+
+    public function sesi()
+    {
+        return $this->belongsTo(SesiPendaftaran::class, 'sesi_id');
+    }
 }

@@ -5,7 +5,7 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1 class="page-title">
-            <i class="fas fa-bullseye"></i> Kelola Visi & Misi
+            <i class="fas fa-bullseye"></i> Kelola Visi & Misi Madrasah
         </h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -46,7 +46,7 @@
                             <label for="visi" class="form-label fw-bold text-success">
                                 <i class="fas fa-eye me-1"></i> Visi Madrasah
                             </label>
-                            <textarea name="visi" id="visi" rows="4" class="form-control border-success" 
+                            <textarea name="visi" id="visi" rows="5" class="form-control border-success" 
                                 placeholder="Masukkan visi madrasah" required>{{ $data->isEmpty() ? old('visi') : $data->first()->visi }}</textarea>
                             @error('visi')
                                 <div class="text-danger small mt-2">
@@ -59,7 +59,7 @@
                             <label for="misi" class="form-label fw-bold text-success">
                                 <i class="fas fa-bullseye me-1"></i> Misi Madrasah
                             </label>
-                            <textarea name="misi" id="misi" rows="6" class="form-control border-success" 
+                            <textarea name="misi" id="misi" rows="7" class="form-control border-success" 
                                 placeholder="Masukkan misi madrasah" required>{{ $data->isEmpty() ? old('misi') : $data->first()->misi }}</textarea>
                             @error('misi')
                                 <div class="text-danger small mt-2">
@@ -94,11 +94,10 @@
 </form>
 
 <script>
-    // Confirm delete function
     function confirmDelete(id) {
         Swal.fire({
             title: 'Apakah Anda yakin?',
-            text: "Anda tidak akan dapat mengembalikan data ini!",
+            text: "Data ini akan dihapus permanen!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#2e7d32',
@@ -114,14 +113,23 @@
         });
     }
 
-    // Add animation to form elements
-    document.querySelectorAll('.form-control').forEach((element, index) => {
-        element.style.animationDelay = `${index * 0.1}s`;
+    // CKEditor untuk Visi & Misi
+    document.addEventListener('DOMContentLoaded', function() {
+        ['visi', 'misi'].forEach(field => {
+            if (document.getElementById(field)) {
+                ClassicEditor
+                    .create(document.getElementById(field), {
+                        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo']
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
     });
 </script>
 
 <style>
-    /* Custom styles for this page */
     .card {
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -150,7 +158,7 @@
     }
     
     textarea.form-control {
-        min-height: 120px;
+        min-height: 200px;
     }
     
     .btn-icon {
@@ -187,6 +195,15 @@
             transform: translateY(0);
         }
     }
+
+    /* CKEditor styling */
+    .ck-editor__editable {
+        min-height: 200px;
+        border-radius: 0 0 8px 8px !important;
+    }
+    
+    .ck.ck-toolbar {
+        border-radius: 8px 8px 0 0 !important;
+    }
 </style>
 @endsection
-

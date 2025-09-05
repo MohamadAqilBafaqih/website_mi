@@ -785,6 +785,12 @@
 
             <li class="menu-title">Manajemen Data</li>
             <li class="menu-item">
+                <a href="{{ route('admin.sesipendaftaran.index') }}" class="menu-link">
+                    <i class="fas fa-calendar-alt menu-icon"></i>
+                    <span class="menu-text">Sesi Pendaftaran</span>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="#pendaftaranSubmenu" class="menu-link" data-bs-toggle="collapse">
                     <i class="fas fa-user-graduate menu-icon"></i>
                     <span class="menu-text">Pendaftaran Siswa</span>
