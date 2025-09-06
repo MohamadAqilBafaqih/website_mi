@@ -27,35 +27,52 @@
 
         <!-- Filter Section -->
         <div class="filter-section animate-fade-in mb-3">
-            <div class="row g-2 align-items-end">
-                <!-- Filter Status -->
-                <div class="col-md-4 col-lg-3">
-                    <label for="statusFilter" class="form-label">Filter Status</label>
-                    <select class="form-select" id="statusFilter">
-                        <option value="">Semua Status</option>
-                        <option value="Baru">Baru</option>
-                        <option value="Diterima">Diterima</option>
-                        <option value="Ditolak">Ditolak</option>
-                    </select>
-                </div>
+            <form method="GET" action="{{ route('admin.seleksisiswa.index') }}">
+                <div class="row g-2 align-items-end">
+                    <!-- Filter Status -->
+                    <div class="col-md-4 col-lg-3">
+                        <label for="statusFilter" class="form-label">Filter Status</label>
+                        <select class="form-select" id="statusFilter" name="status">
+                            <option value="">Semua Status</option>
+                            <option value="Baru" {{ request('status') == 'Baru' ? 'selected' : '' }}>Baru</option>
+                            <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>Diterima
+                            </option>
+                            <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                        </select>
+                    </div>
 
-                <!-- Filter Tahun Ajaran -->
-                <div class="col-md-4 col-lg-3">
-                    <label for="tahunAjaranFilter" class="form-label">Filter Tahun Ajaran</label>
-                    <select class="form-select" id="tahunAjaranFilter">
-                        <option value="">Semua Tahun</option>
-                    </select>
-                </div>
-                <!-- Search Input -->
-                <div class="col-md-5 col-lg-5">
-                    <label for="searchInput" class="form-label">Cari Calon Siswa</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        <input type="text" class="form-control" id="searchInput"
-                            placeholder="Cari berdasarkan nama atau NIK...">
+                    <!-- Filter Tahun Ajaran -->
+                    <div class="col-md-4 col-lg-3">
+                        <label for="tahunAjaranFilter" class="form-label">Filter Tahun Ajaran</label>
+                        <select class="form-select" id="tahunAjaranFilter" name="tahun_ajaran">
+                            <option value="">Semua Tahun</option>
+                            @foreach ($tahunAjaranList as $tahun)
+                                <option value="{{ $tahun }}"
+                                    {{ request('tahun_ajaran') == $tahun ? 'selected' : '' }}>
+                                    {{ $tahun }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="col-md-4 col-lg-4">
+                        <label for="searchInput" class="form-label">Cari Calon Siswa</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" name="search" class="form-control" id="searchInput"
+                                placeholder="Cari berdasarkan nama atau NIK..." value="{{ request('search') }}">
+                        </div>
+                    </div>
+
+                    <!-- Tombol Tampilkan -->
+                    <div class="col-md-12 col-lg-2 d-grid">
+                        <button type="submit" class="btn btn-success mt-3 mt-lg-0">
+                            <i class="fas fa-filter me-1"></i> Tampilkan
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
 
@@ -107,7 +124,7 @@
                                         @if (strtolower($siswa->jenis_kelamin) === 'laki-laki')
                                             <span class="badge bg-info">Laki-laki</span>
                                         @elseif (strtolower($siswa->jenis_kelamin) === 'perempuan')
-                                            <span class="badge bg-pink">Perempuan</span>
+                                            <span class="badge bg-success">Perempuan</span>
                                         @else
                                             <span class="badge bg-secondary">-</span>
                                         @endif
@@ -206,19 +223,6 @@
                         Menampilkan <span class="fw-bold" id="totalDisplay">0</span> dari
                         <span class="fw-bold">{{ count($data) }}</span> data calon siswa
                     </div>
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination mb-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">Previous</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             @endif
         </div>
@@ -525,7 +529,7 @@
             <div class="modal fade" id="editModal{{ $siswa->id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header bg-primary text-white">
+                        <div class="modal-header bg-success text-white">
                             <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Edit Data Calon Siswa</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
@@ -564,13 +568,14 @@
                                         <select class="form-select" id="jenis_kelamin{{ $siswa->id }}"
                                             name="jenis_kelamin" required>
                                             <option value="Laki-laki"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) === 'Laki-laki' ? 'selected' : '' }}>
+                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
                                                 Laki-laki
                                             </option>
                                             <option value="Perempuan"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) === 'Perempuan' ? 'selected' : '' }}>
+                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
                                                 Perempuan
                                             </option>
+
                                         </select>
 
                                         @error('jenis_kelamin')
@@ -943,6 +948,27 @@
 
 @section('styles')
     <style>
+        .badge.bg-pink {
+            background-color: #e83e8c !important;
+            color: white !important;
+        }
+
+        /* Atau alternatif warna lain */
+        .badge.bg-purple {
+            background-color: #6f42c1 !important;
+            color: white !important;
+        }
+
+        .badge.bg-rose {
+            background-color: #ff66a3 !important;
+            color: white !important;
+        }
+
+        .badge.bg-coral {
+            background-color: #ff6b6b !important;
+            color: white !important;
+        }
+
         /* Edit modal specific styles */
         .modal-lg {
             max-width: 800px;

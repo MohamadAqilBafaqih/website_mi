@@ -17,6 +17,7 @@ class PrestasiSiswa extends Model
         'foto',
         'tingkat',
         'jenis_prestasi',
+        'juara',
         'penyelenggara',
         'tanggal',
         'keterangan'

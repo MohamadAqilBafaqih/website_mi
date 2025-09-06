@@ -69,6 +69,17 @@ class TestimoniController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $testimoni = Testimoni::findOrFail($id);
+
+        // Cek apakah request ini hanya update status dari tombol
+        if ($request->has('status') && !$request->has('nama')) {
+            $testimoni->status = $request->status; // diterima atau ditolak
+            $testimoni->save();
+
+            return redirect()->back()->with('success', 'Status testimoni berhasil diupdate.');
+        }
+
+        // Jika update full (form edit)
         $request->validate([
             'nama' => 'required|string|max:100',
             'sebagai' => 'required|in:alumni,wali murid,komite sekolah',
@@ -77,7 +88,6 @@ class TestimoniController extends Controller
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
         ]);
 
-        $testimoni = Testimoni::findOrFail($id);
         $updateData = $request->only(['nama', 'sebagai', 'testimoni', 'status']);
 
         // update foto jika ada
@@ -95,6 +105,7 @@ class TestimoniController extends Controller
         return redirect()->route('admin.testimoni.index')
             ->with('success', 'Testimoni berhasil diperbarui.');
     }
+
 
     /**
      * Hapus testimoni (admin)

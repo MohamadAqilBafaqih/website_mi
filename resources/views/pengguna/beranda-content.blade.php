@@ -24,12 +24,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            background-color: #f8f9fa;
         }
 
+        /* Improved navbar with better mobile responsiveness */
         .navbar {
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
             transition: all var(--transition-speed) ease;
+            padding: 0.5rem 1rem;
         }
 
         .navbar.scrolled {
@@ -42,6 +45,7 @@
             display: flex;
             align-items: center;
             transition: transform var(--transition-speed);
+            font-size: 1.1rem;
         }
 
         .navbar-brand:hover {
@@ -63,6 +67,7 @@
             padding: 8px 15px;
             transition: all var(--transition-speed);
             border-radius: 4px;
+            font-weight: 500;
         }
 
         .nav-link:hover,
@@ -99,6 +104,7 @@
             border-radius: 8px;
             overflow: hidden;
             background-color: white;
+            margin-top: 5px;
         }
 
         .dropdown-item {
@@ -112,15 +118,27 @@
             color: var(--dark-color);
         }
 
+        /* Improved hero section with better responsiveness */
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: white;
-            padding: 120px 0;
+            padding: 100px 0;
             position: relative;
             transition: all 0.5s ease;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0;
+                background-attachment: scroll;
+                min-height: 60vh;
+            }
         }
 
         .hero-section:hover {
@@ -130,6 +148,7 @@
             background-attachment: fixed;
         }
 
+        /* Improved info cards with better responsiveness */
         .info-card {
             background: white;
             border-radius: 10px;
@@ -140,6 +159,7 @@
             margin-bottom: 20px;
             border-bottom: 4px solid var(--primary-color);
             cursor: pointer;
+            height: 100%;
         }
 
         .info-card:hover {
@@ -150,6 +170,9 @@
 
         .info-card i {
             transition: all var(--transition-speed);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
         .info-card:hover i {
@@ -162,12 +185,19 @@
             font-size: 2.5rem;
             font-weight: 700;
             transition: color var(--transition-speed);
+            margin-bottom: 0;
         }
 
         .info-card:hover h3 {
             color: var(--dark-color);
         }
 
+        .info-card p {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Improved card styling */
         .card {
             border: none;
             border-radius: 10px;
@@ -175,6 +205,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all var(--transition-speed);
             margin-bottom: 20px;
+            height: 100%;
         }
 
         .card:hover {
@@ -192,6 +223,11 @@
             transform: scale(1.05);
         }
 
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Improved buttons */
         .btn-success {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
@@ -200,6 +236,7 @@
             transition: all var(--transition-speed);
             position: relative;
             overflow: hidden;
+            border-radius: 50px;
         }
 
         .btn-success:hover {
@@ -217,6 +254,7 @@
             color: var(--primary-color);
             border-color: var(--primary-color);
             transition: all var(--transition-speed);
+            border-radius: 50px;
         }
 
         .btn-outline-success:hover {
@@ -230,6 +268,7 @@
             color: var(--dark-color);
         }
 
+        /* Improved gallery */
         .gallery-img {
             border-radius: 10px;
             transition: all var(--transition-speed);
@@ -237,6 +276,7 @@
             height: 150px;
             object-fit: cover;
             filter: brightness(0.95);
+            width: 100%;
         }
 
         .gallery-img:hover {
@@ -245,12 +285,15 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
+        /* Improved section titles */
         .section-title {
             position: relative;
             display: inline-block;
             margin-bottom: 30px;
             color: var(--dark-color);
             transition: all var(--transition-speed);
+            font-weight: 700;
+            font-size: 2rem;
         }
 
         .section-title:hover {
@@ -273,6 +316,7 @@
             width: 100%;
         }
 
+        /* Improved footer */
         footer {
             background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
             padding: 40px 0 20px;
@@ -302,6 +346,7 @@
             transform: translateY(-5px) scale(1.2);
         }
 
+        /* Improved floating buttons */
         .floating-btn {
             position: fixed;
             bottom: 30px;
@@ -358,6 +403,7 @@
             transform: translateY(-3px);
         }
 
+        /* Improved counters */
         .counter {
             font-size: 2.5rem;
             font-weight: 700;
@@ -369,6 +415,7 @@
             color: var(--dark-color);
         }
 
+        /* Improved testimonials */
         .testimonial-img {
             width: 80px;
             height: 80px;
@@ -400,6 +447,7 @@
             transform: translateY(-50%) scale(1.1);
         }
 
+        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -484,6 +532,185 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* New improvements for better responsiveness */
+        @media (max-width: 992px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            
+            .navbar-brand img {
+                height: 35px;
+            }
+            
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .info-card h3 {
+                font-size: 2rem;
+            }
+            
+            .counter {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .info-card {
+                padding: 15px;
+            }
+            
+            .info-card h3 {
+                font-size: 1.8rem;
+            }
+            
+            .info-card i {
+                font-size: 2rem;
+            }
+            
+            .card-img-top {
+                height: 180px;
+            }
+            
+            .gallery-img {
+                height: 120px;
+            }
+            
+            footer .col-md-4 {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 0.9rem;
+            }
+            
+            .navbar-brand img {
+                height: 30px;
+            }
+            
+            .hero-section {
+                padding: 60px 0;
+                text-align: center;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-card h3 {
+                font-size: 1.6rem;
+            }
+            
+            .counter {
+                font-size: 1.6rem;
+            }
+            
+            .btn-success, .btn-outline-success {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                bottom: 80px;
+                right: 20px;
+            }
+        }
+
+        /* Custom spacing for sections */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+        }
+
+        /* Improved form controls */
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.25);
+        }
+
+        /* Custom background colors */
+        .bg-light-green {
+            background-color: var(--light-color);
+        }
+
+        .bg-primary-green {
+            background-color: var(--primary-color);
+        }
+
+        /* Text colors */
+        .text-primary-green {
+            color: var(--primary-color);
+        }
+
+        .text-dark-green {
+            color: var(--dark-color);
+        }
+
+        /* Custom shadows */
+        .shadow-soft {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .shadow-medium {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -554,15 +781,11 @@
                                     <i class="fas fa-calendar me-2"></i> Kalender Akademik
                                 </a>
                             </li>
-
                         </ul>
                     </li>
 
-
-                    <!-- Di bagian navigasi -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('pengguna.pendidikan') }}">
-                            <!-- Pastikan ada section dengan id education -->
                             <i class="fas fa-graduation-cap me-1"></i> Pendidikan
                         </a>
                     </li>
@@ -627,12 +850,12 @@
                         <li class="mb-2"><a href="{{ route('pendaftaran.create') }}"
                                 class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i>
                                 Pendaftaran Siswa Baru</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none"><i
+                        <li class="mb-2"><a href="{{ route('ppdb.kalender') }}" class="text-white text-decoration-none"><i
                                     class="fas fa-chevron-right me-2"></i> Kalender Akademik</a></li>
                         <li class="mb-2"><a href="https://maps.app.goo.gl/X6Pndur8nr7mMUzCA"
                                 class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i> Peta
                                 Lokasi</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none"><i
+                        <li class="mb-2"><a href="{{ route('pengguna.kontak.testimoni.store') }}" class="text-white text-decoration-none"><i
                                     class="fas fa-chevron-right me-2"></i> Testimoni</a></li>
                     </ul>
                 </div>
@@ -651,8 +874,6 @@
                             Senin - Kamis: 07.00 - 14.30 <br>
                             Jumat: 07.00 - 11.30 <br>
                             Sabtu: 07.00 - 14.30
-                        </li>
-
                         </li>
                     </ul>
                 </div>
@@ -823,6 +1044,7 @@
                 }
             });
         });
+        
         // Auto close navbar when clicking on mobile
         const navbarToggler = document.querySelector('.navbar-toggler');
         const navbarCollapse = document.querySelector('.navbar-collapse');
@@ -840,6 +1062,41 @@
         tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
+
+        // Improved mobile menu handling
+        function handleMobileMenu() {
+            if (window.innerWidth < 992) {
+                document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                    toggle.setAttribute('data-bs-toggle', 'dropdown');
+                });
+            } else {
+                document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                    toggle.removeAttribute('data-bs-toggle');
+                });
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', handleMobileMenu);
+        window.addEventListener('resize', handleMobileMenu);
+
+        // Lazy loading for images
+        if ('IntersectionObserver' in window) {
+            const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove('lazy');
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img.lazy').forEach(lazyImage => {
+                lazyImageObserver.observe(lazyImage);
+            });
+        }
     </script>
     {{-- @stack('scripts') --}}
 </body>

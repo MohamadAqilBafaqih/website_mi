@@ -13,6 +13,7 @@ class CalonSiswa extends Model
 
     protected $fillable = [
         'sesi_id',
+        'tahun_ajaran',
         'nama_lengkap',
         'nik',
         'jenis_kelamin',
@@ -52,4 +53,6 @@ class CalonSiswa extends Model
     {
         return $this->belongsTo(SesiPendaftaran::class, 'sesi_id');
     }
+
+
 }

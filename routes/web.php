@@ -34,6 +34,13 @@ Route::get('/pendaftaran/success', function () {
     return view('pengguna.pendaftaran.success');
 })->name('pendaftaran.success');
 
+Route::get('/testimoni/success', function () {
+    return view('pengguna.kontak.testisuccess');
+})->name('pendaftaran.success');
+
+Route::get('/kritiksaran/success', function () {
+    return view('pengguna.kontak.kritiksuccess');
+})->name('pendaftaran.success');
 
 
 
@@ -322,3 +329,14 @@ Route::post('/admin/sesipendaftaran', [SesiPendaftaranController::class, 'store'
 Route::put('/admin/sesipendaftaran/{id}', [SesiPendaftaranController::class, 'update'])->name('admin.sesipendaftaran.update');
 Route::delete('/admin/sesipendaftaran/{id}', [SesiPendaftaranController::class, 'destroy'])->name('admin.sesipendaftaran.destroy');
 Route::get('/admin/sesipendaftaran/{id}/edit', [SesiPendaftaranController::class, 'edit'])->name('admin.sesipendaftaran.edit');
+
+use App\Http\Controllers\AdminFileController;
+// Lihat file (preview di browser)
+Route::get('admin/seleksisiswa/file/{type}/{filename}', 
+    [AdminFileController::class, 'getFile'])
+    ->name('admin.seleksisiswa.getfile');
+
+// Download file
+Route::get('admin/seleksisiswa/file/{type}/{filename}/download', 
+    [AdminFileController::class, 'downloadFile'])
+    ->name('admin.seleksisiswa.downloadfile');

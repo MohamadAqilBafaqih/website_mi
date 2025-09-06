@@ -43,15 +43,32 @@
                         <i class="fas fa-list me-2"></i> Daftar Siswa
                     </h5>
                     <div class="d-flex">
-                        <!-- Form Pencarian -->
-                        <form method="GET" action="{{ route('admin.datasiswa.index') }}" class="d-flex me-2">
+                        <form method="GET" action="{{ route('admin.datasiswa.index') }}"
+                            class="d-flex align-items-center me-2">
+                            {{-- Input pencarian --}}
                             <input type="text" name="search" class="form-control form-control-sm me-2"
                                 placeholder="Cari siswa..." style="border-radius: 8px; min-width: 200px;"
                                 value="{{ request('search') }}">
+
+                            {{-- Filter tahun ajaran --}}
+                            <select name="tahun_ajaran" class="form-select form-select-sm me-2"
+                                style="border-radius: 8px; min-width: 150px;">
+                                <option value="">Semua Tahun</option>
+                                @foreach ($tahunAjaranList as $tahun)
+                                    <option value="{{ $tahun }}"
+                                        {{ request('tahun_ajaran') == $tahun ? 'selected' : '' }}>
+                                        {{ $tahun }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            {{-- Tombol cari --}}
                             <button type="submit" class="btn btn-sm btn-success me-2">
-                                <i class="fas fa-search me-1"></i> Cari
+                                <i class="fas fa-search me-1"></i> Tampilkan
                             </button>
                         </form>
+
+                        {{-- Tombol Ekspor & Cetak --}}
                         <a href="{{ route('admin.datasiswa.export.all') }}" class="btn btn-sm btn-success me-2">
                             <i class="fas fa-file-pdf me-1"></i> Ekspor PDF
                         </a>
@@ -61,6 +78,7 @@
                         <a href="{{ route('admin.datasiswa.cetak') }}" class="btn btn-sm btn-primary">
                             <i class="fas fa-print me-1"></i> Cetak
                         </a>
+
 
                     </div>
                     <form id="deleteForm" method="POST" style="display: none;">
@@ -89,7 +107,8 @@
                         <tbody>
                             @forelse ($siswa as $key => $item)
                                 <tr style="transition: all 0.3s ease;">
-                                    <td style="padding: 12px 15px; vertical-align: middle;">{{ $siswa->firstItem() + $key }}
+                                    <td style="padding: 12px 15px; vertical-align: middle;">
+                                        {{ $siswa->firstItem() + $key }}
                                     </td>
                                     <td style="padding: 12px 15px; vertical-align: middle; font-weight: 500;">
                                         {{ $item->nama_lengkap }}</td>
@@ -212,6 +231,14 @@
                                                     {{ $item->status_pendaftaran }}
                                                 </span>
                                             </p>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label class="form-label fw-bold">Nomor KIP</label>
+                                            @if ($item->no_kip)
+                                                <p class="mb-0">{{ $item->no_kip }}</p>
+                                            @else
+                                                <p class="mb-0 text-muted">Tidak tersedia</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -358,15 +385,6 @@
                                     </a>
                                 @else
                                     <span class="text-muted mb-2">Foto siswa tidak tersedia</span>
-                                @endif
-
-                                {{-- Nomor KIP --}}
-                                @if ($item->nomor_kip)
-                                    <span class="badge bg-info mb-2">
-                                        <i class="fas fa-id-card me-1"></i> Nomor KIP: {{ $item->nomor_kip }}
-                                    </span>
-                                @else
-                                    <span class="text-muted mb-2">Nomor KIP tidak tersedia</span>
                                 @endif
 
                                 {{-- Foto KIP --}}

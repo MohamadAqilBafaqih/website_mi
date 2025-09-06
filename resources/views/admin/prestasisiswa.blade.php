@@ -155,6 +155,40 @@
 
                                 <div class="col-md-4">
                                     <div class="mb-4">
+                                        <label for="juara" class="form-label fw-bold text-success">
+                                            <i class="fas fa-crown me-1"></i> Juara
+                                        </label>
+                                        <select name="juara" id="juara" class="form-control border-success">
+                                            <option value="">Pilih Juara</option>
+                                            <option value="Juara 1"
+                                                {{ (empty($prestasi) ? old('juara') : $prestasi->juara) == 'Juara 1' ? 'selected' : '' }}>
+                                                Juara 1</option>
+                                            <option value="Juara 2"
+                                                {{ (empty($prestasi) ? old('juara') : $prestasi->juara) == 'Juara 2' ? 'selected' : '' }}>
+                                                Juara 2</option>
+                                            <option value="Juara 3"
+                                                {{ (empty($prestasi) ? old('juara') : $prestasi->juara) == 'Juara 3' ? 'selected' : '' }}>
+                                                Juara 3</option>
+                                            <option value="Harapan 1"
+                                                {{ (empty($prestasi) ? old('juara') : $prestasi->juara) == 'Harapan 1' ? 'selected' : '' }}>
+                                                Harapan 1</option>
+                                            <option value="Harapan 2"
+                                                {{ (empty($prestasi) ? old('juara') : $prestasi->juara) == 'Harapan 2' ? 'selected' : '' }}>
+                                                Harapan 2</option>
+                                            <option value="Harapan 3"
+                                                {{ (empty($prestasi) ? old('juara') : $prestasi->juara) == 'Harapan 3' ? 'selected' : '' }}>
+                                                Harapan 3</option>
+                                        </select>
+                                        @error('juara')
+                                            <div class="text-danger small mt-2">
+                                                <i class="fas fa-exclamation-circle me-1"></i> {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-4">
                                         <label for="tanggal" class="form-label fw-bold text-success">
                                             <i class="fas fa-calendar me-1"></i> Tanggal
                                         </label>
@@ -255,6 +289,7 @@
                                         <th>Prestasi</th>
                                         <th>Tingkat</th>
                                         <th>Jenis</th>
+                                        <th>Juara</th>
                                         <th>Tanggal</th>
                                         <th>Foto</th>
                                         <th>Aksi</th>
@@ -297,10 +332,20 @@
                                                     -
                                                 @endif
                                             </td>
-                                            <td>{{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') : '-' }}</td>
+                                            <td>
+                                                @if ($item->juara)
+                                                    <span class="badge bg-purple">{{ $item->juara }}</span>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+
+                                            <td>{{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') : '-' }}
+                                            </td>
                                             <td>
                                                 @if ($item->foto)
-                                                    <img src="{{ asset('uploads/prestasisiswa/'.$item->foto) }}" width="80" class="img-thumbnail">
+                                                    <img src="{{ asset('uploads/prestasisiswa/' . $item->foto) }}"
+                                                        width="80" class="img-thumbnail">
                                                 @else
                                                     -
                                                 @endif

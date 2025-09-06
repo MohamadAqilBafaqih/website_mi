@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalonSiswa;
+use App\Models\SesiPendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -16,19 +17,28 @@ class DataSiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $query = CalonSiswa::where('status_pendaftaran', 'Diterima');
+        $search = $request->input('search');
+        $tahunFilter = $request->input('tahun_ajaran');
 
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->where('nama_lengkap', 'like', "%{$search}%")
-                ->orWhere('nik', 'like', "%{$search}%")
-                ->orWhere('asal_sekolah', 'like', "%{$search}%");
+        $query = CalonSiswa::query();
+
+        if ($search) {
+            $query->where('nama_lengkap', 'like', "%{$search}%");
         }
 
-        $siswa = $query->paginate(10);
+        if ($tahunFilter) {
+            $query->whereHas('sesi', function ($q) use ($tahunFilter) {
+                $q->where('tahun_ajaran', $tahunFilter);
+            });
+        }
 
-        return view('admin.datasiswa', compact('siswa'));
+        $siswa = $query->latest()->paginate(10);
+
+        $tahunAjaranList = SesiPendaftaran::select('tahun_ajaran')->distinct()->pluck('tahun_ajaran');
+
+        return view('admin.datasiswa', compact('siswa', 'tahunAjaranList', 'search', 'tahunFilter'));
     }
+
 
     /**
      * Tampilkan form edit data siswa

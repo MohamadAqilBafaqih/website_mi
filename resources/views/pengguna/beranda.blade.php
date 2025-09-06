@@ -10,11 +10,13 @@
                         <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
                             <img src="{{ asset('uploads/pengumuman/' . $pengumuman->$fotoField) }}" class="d-block w-100"
                                 alt="Slide {{ $i }}"
-                                style="object-fit: cover; height: 85vh; filter: brightness(70%);">
+                                style="object-fit: cover; width: 100%; height: 85vh; filter: brightness(70%);">
                             <div class="carousel-caption d-flex flex-column justify-content-center h-100">
                                 <div class="container animate-fade">
-                                    <h1 class="hero-title">Selamat Datang di <br>
-                                        <span class="highlight">MI Diponegoro 03 Karangklesem</span>
+                                    <h1 class="hero-title">
+                                        <span class="line">Selamat Datang di</span>
+                                        <span class="line">MI Diponegoro 03</span>
+                                        <span class="line highlight">Karangklesem</span>
                                     </h1>
                                     <p class="hero-subtitle">Madrasah Unggul dalam Iman, Ilmu, dan Akhlak Mulia</p>
                                     <div class="hero-buttons">
@@ -81,15 +83,25 @@
 
         .hero-title {
             font-size: 3.2rem;
+            /* default untuk desktop */
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.2;
             color: #fff;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
             margin-bottom: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            /* opsional */
+        }
+
+        .hero-title .line {
+            display: block;
+            /* bikin tiap span selalu baris baru */
         }
 
         .hero-title .highlight {
             color: #FFD700;
+            /* warna kuning emas */
         }
 
         .hero-subtitle {
@@ -212,7 +224,49 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ✅ Tablet */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+        }
+
+        /* ✅ Mobile */
+        @media (max-width: 768px) {
+            #heroCarousel {
+                min-height: 65vh !important;
+            }
+
+            #heroCarousel img {
+                height: 65vh !important;
+                object-fit: cover !important;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+                line-height: 1.1;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-navy,
+            .btn-outline-navy {
+                font-size: 0.9rem;
+                padding: 8px 20px;
+            }
+        }
     </style>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -222,33 +276,6 @@
             });
         });
     </script>
-
-    <!-- Sambutan Kepala Sekolah -->
-    @if ($kepalaSekolah)
-        <section class="py-5 bg-light" id="sambutan">
-            <div class="container">
-                <h2 class="section-title text-center mb-5">Sambutan Kepala Sekolah</h2>
-                <div class="row align-items-center">
-                    <!-- Foto Kepala Sekolah -->
-                    <div class="col-md-4 text-center mb-4 mb-md-0">
-                        @if ($kepalaSekolah->foto)
-                            <img src="{{ asset('uploads/sambutan/' . $kepalaSekolah->foto) }}"
-                                class="img-fluid rounded shadow-sm" alt="{{ $kepalaSekolah->nama }}">
-                        @else
-                            <img src="{{ asset('gambar/default-user.png') }}" class="img-fluid rounded shadow-sm"
-                                alt="Foto Kepala Sekolah">
-                        @endif
-                    </div>
-
-                    <!-- Nama & Sambutan -->
-                    <div class="col-md-8">
-                        <h3 class="fw-bold text-success mb-3">{{ $kepalaSekolah->nama }}</h3>
-                        <p class="text-muted">{{ $kepalaSekolah->sambutan }}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
 
 
     <section class="py-5 bg-light" id="akreditasi">
@@ -477,26 +504,29 @@
                                 <img src="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}" alt="Brosur PPDB"
                                     class="img-fluid rounded shadow-sm" style="max-height:250px;">
                             @endif
-
                         </div>
 
                         <h4 class="fw-bold text-dark">Brosur PPDB MI Diponegoro 03</h4>
                         <p class="text-muted mt-2 px-3">
                             Brosur resmi yang dirilis oleh MI Diponegoro 03 Karangklesem ini memuat seluruh informasi
-                            penting
-                            mengenai Pendaftaran Peserta Didik Baru.
+                            penting mengenai Pendaftaran Peserta Didik Baru.
                         </p>
 
                         @if (isset($data) && $data->isNotEmpty() && $data->first()->brosur)
-                            <a href="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}"
-                                class="btn btn-success mt-4 px-4 py-2" download>
-                                <i class="fas fa-download me-2"></i> Download Brosur
-                            </a>
+                            <div class="d-flex justify-content-center gap-2 mt-4">
+                                <a href="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}"
+                                    class="btn btn-success px-4 py-2">
+                                    <i class="fas fa-download me-2"></i> Download Brosur
+                                </a>
+                                <a href="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}"
+                                    class="btn btn-success px-4 py-2" target="_blank">
+                                    <i class="fas fa-eye me-2"></i> Lihat Brosur
+                                </a>
+                            </div>
                         @endif
                     </div>
                 </div>
             </div>
-
         </div>
 
         <style>
@@ -590,8 +620,9 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title display-5 fw-bold text-navy mb-3 animate-fade">Prestasi Siswa</h2>
-                <p class="lead text-muted animate-fade" style="animation-delay: 0.2s;">Menghargai setiap usaha dan
-                    pencapaian luar biasa siswa kami</p>
+                <p class="lead text-muted animate-fade" style="animation-delay: 0.2s;">
+                    Menghargai setiap usaha dan pencapaian luar biasa siswa kami
+                </p>
             </div>
 
             <div class="row g-4">
@@ -604,23 +635,49 @@
                                         class="card-img-top img-hover" alt="{{ $prestasi->nama_prestasi }}"
                                         style="height: 250px; object-fit: cover;">
                                     <div class="position-absolute top-0 start-0 m-3">
-                                        <span class="badge bg-warning text-dark px-3 py-2">
+                                        <span class="badge bg-navy text-light px-3 py-2">
                                             <i class="fas fa-trophy me-1"></i>{{ $prestasi->tingkat ?? 'Prestasi' }}
                                         </span>
                                     </div>
                                 </div>
                             @endif
+
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3 small text-muted">
-                                    <span><i
-                                            class="far fa-calendar-alt me-1"></i>{{ $prestasi->created_at->format('d M Y') }}</span>
-                                    <span><i class="fas fa-user-graduate me-1"></i> Siswa</span>
+                                    <!-- Tanggal -->
+                                    <span>
+                                        <i class="far fa-calendar-alt me-1"></i>
+                                        {{ $prestasi->tanggal ? \Carbon\Carbon::parse($prestasi->tanggal)->format('d M Y') : $prestasi->created_at->format('d M Y') }}
+                                    </span>
+
+                                    <span>
+                                        @if ($prestasi->jenis_prestasi)
+                                            <span class="badge bg-navy text-light px-3 py-2">
+                                                <i class="fas fa-user-graduate me-1"></i>
+                                                {{ $prestasi->jenis_prestasi }}
+                                            </span>
+                                        @endif
+
+                                        @if ($prestasi->juara)
+                                            <span class="badge bg-navy text-light px-3 py-2">
+                                                <i class="fas fa-crown me-1"></i>
+                                                {{ $prestasi->juara }}
+                                            </span>
+                                        @endif
+                                    </span>
                                 </div>
-                                <h5 class="card-title fw-bold text-navy mb-3">{{ $prestasi->nama_prestasi }}</h5>
+
+                                <!-- Judul Prestasi -->
+                                <h5 class="card-title fw-bold text-navy mb-3">
+                                    {{ $prestasi->nama_prestasi }}
+                                </h5>
+
+                                <!-- Deskripsi Singkat -->
                                 <p class="card-text text-muted mb-4">
-                                    {{ Str::limit($prestasi->keterangan ?? '-', 120) }}
+                                    {{ Str::limit(strip_tags($prestasi->keterangan ?? '-'), 120) }}
                                 </p>
                             </div>
+
                             <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
                                 <a href="{{ route('pengguna.prestasi.show', $prestasi->id) }}"
                                     class="btn btn-navy btn-sm rounded-pill px-4 py-2 d-inline-flex align-items-center">
@@ -721,6 +778,52 @@
                 font-weight: 500;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
+
+            /* ✅ Responsive */
+            @media (max-width: 1024px) {
+                .section-title {
+                    font-size: 1.8rem;
+                }
+
+                .lead {
+                    font-size: 1.05rem;
+                }
+
+                .card-title {
+                    font-size: 1.1rem;
+                }
+
+                .card-text {
+                    font-size: 0.95rem;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .section-title {
+                    font-size: 1.5rem;
+                }
+
+                .lead {
+                    font-size: 0.95rem;
+                }
+
+                .card-title {
+                    font-size: 1rem;
+                }
+
+                .card-text {
+                    font-size: 0.85rem;
+                }
+
+                .card img {
+                    height: 180px !important;
+                }
+
+                .btn-navy {
+                    font-size: 0.9rem;
+                    padding: 8px 16px;
+                }
+            }
         </style>
 
         <script>
@@ -745,6 +848,7 @@
         </script>
     </section>
 
+
     <section class="py-5 bg-light" id="news">
         <div class="container">
             <div class="text-center mb-5">
@@ -763,7 +867,7 @@
                                         class="card-img-top img-hover" alt="{{ $berita->judul }}"
                                         style="height: 250px; object-fit: cover;">
                                     <div class="position-absolute top-0 start-0 m-3">
-                                        <span class="badge bg-info text-dark px-3 py-2">
+                                        <span class="badge bg-navy text-light px-3 py-2">
                                             <i class="far fa-newspaper me-1"></i> Berita
                                         </span>
                                     </div>
@@ -773,7 +877,7 @@
                                 <div class="d-flex justify-content-between mb-3 small text-muted">
                                     <span><i
                                             class="far fa-calendar-alt me-1"></i>{{ $berita->created_at->format('d M Y') }}</span>
-                                    <span><i class="far fa-eye me-1"></i> {{ $berita->views ?? 245 }}</span>
+                                    <span>
                                 </div>
                                 <h5 class="card-title fw-bold text-navy mb-3">{{ $berita->judul }}</h5>
                                 <p class="card-text text-muted mb-4">
@@ -933,8 +1037,11 @@
                                 <small class="text-light opacity-75">{{ $foto->created_at->format('d M Y') }}</small>
                             </div>
                             <div class="zoom-icon position-absolute top-50 start-50 translate-middle">
-                                <i class="fas fa-search-plus fa-2x text-white bg-navy rounded-circle p-3"></i>
+                                <a href="{{ route('pengguna.galeri.show', $foto->id) }}" class="text-decoration-none">
+                                    <i class="fas fa-search-plus fa-2x text-white bg-navy rounded-circle p-3"></i>
+                                </a>
                             </div>
+
                         </div>
                     </div>
                 @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalonSiswa;
+use App\Models\SesiPendaftaran;
 use Illuminate\Http\Request;
 
 class SeleksiSiswaController extends Controller
@@ -10,11 +11,39 @@ class SeleksiSiswaController extends Controller
     /**
      * Menampilkan semua data calon siswa untuk seleksi
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = CalonSiswa::latest()->get();
-        return view('admin.seleksisiswa', compact('data'));
+        $search = $request->input('search');
+        $tahunFilter = $request->input('tahun_ajaran');
+        $statusFilter = $request->input('status');
+
+        $query = CalonSiswa::query();
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('nik', 'like', "%{$search}%");
+            });
+        }
+
+        if ($tahunFilter) {
+            $query->whereHas('sesi', function ($q) use ($tahunFilter) {
+                $q->where('tahun_ajaran', $tahunFilter);
+            });
+        }
+
+        if ($statusFilter) {
+            $query->where('status_pendaftaran', $statusFilter);
+        }
+
+        $data = $query->latest()->paginate(10);
+
+        $tahunAjaranList = SesiPendaftaran::select('tahun_ajaran')->distinct()->pluck('tahun_ajaran');
+
+        return view('admin.seleksisiswa', compact('data', 'tahunAjaranList', 'search', 'tahunFilter', 'statusFilter'));
     }
+
+
 
     /**
      * Menampilkan form edit status seleksi siswa

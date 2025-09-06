@@ -57,36 +57,86 @@
             </div>
         </div>
     </div>
-    {{-- Quick Links --}}
-    <div class="row mt-4 animate-fade-in" style="animation-delay: 0.2s;">
+    <div class="row mt-4">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><i class="fas fa-bolt"></i> Akses Cepat</h5>
+            <div class="card animate-fade-in shadow-sm" style="animation-delay: 0.2s;">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title"><i class="fas fa-bolt me-2"></i> Akses Cepat</h5>
                 </div>
                 <div class="card-body">
-                    <div class="quick-links d-flex flex-wrap gap-3">
-                        <a href="{{ route('admin.calonsiswa.index') }}" class="quick-link text-center">
-                            <div class="quick-link-icon"><i class="fas fa-user-plus"></i></div>
-                            <div class="quick-link-text">Tambah Siswa</div>
-                        </a>
-                        <a href="{{ route('admin.seleksisiswa.index') }}" class="quick-link text-center">
-                            <div class="quick-link-icon"><i class="fas fa-user-check"></i></div>
-                            <div class="quick-link-text">Seleksi Siswa</div>
-                        </a>
-                        <a href="{{ route('admin.sesipendaftaran.index') }}" class="quick-link text-center">
-                            <div class="quick-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                            <div class="quick-link-text">Sesi Pendaftaran</div>
-                        </a>
-                        <a href="{{ route('admin.pengumuman.index') }}" class="quick-link text-center">
-                            <div class="quick-link-icon"><i class="fas fa-bullhorn"></i></div>
-                            <div class="quick-link-text">Pengumuman</div>
-                        </a>
+                    <div class="row g-3 text-center">
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('admin.calonsiswa.index') }}"
+                                class="quick-link-card d-block p-3 rounded shadow-sm">
+                                <div class="mb-2 fs-2 text-success"><i class="fas fa-user-plus"></i></div>
+                                <div class="fw-semibold text-success">Tambah Siswa</div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('admin.seleksisiswa.index') }}"
+                                class="quick-link-card d-block p-3 rounded shadow-sm">
+                                <div class="mb-2 fs-2 text-success"><i class="fas fa-user-check"></i></div>
+                                <div class="fw-semibold text-success">Seleksi Siswa</div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('admin.sesipendaftaran.index') }}"
+                                class="quick-link-card d-block p-3 rounded shadow-sm">
+                                <div class="mb-2 fs-2 text-success"><i class="fas fa-calendar-alt"></i></div>
+                                <div class="fw-semibold text-success">Sesi Pendaftaran</div>
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('admin.pengumuman.index') }}"
+                                class="quick-link-card d-block p-3 rounded shadow-sm">
+                                <div class="mb-2 fs-2 text-success"><i class="fas fa-bullhorn"></i></div>
+                                <div class="fw-semibold text-success">Pengumuman</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        .quick-link-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .quick-link-card:hover {
+            background-color: #e2f3e9;
+            /* hijau muda subtle */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .quick-link-card .fs-2 {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .quick-link-card:hover .fs-2 {
+            transform: scale(1.2);
+            color: #0f5132;
+            /* hijau gelap */
+        }
+
+        .quick-link-card .fw-semibold {
+            transition: color 0.3s ease;
+        }
+
+        .quick-link-card:hover .fw-semibold {
+            color: #0f5132;
+        }
+    </style>
+
+
 
     {{-- Statistik & Aktivitas --}}
     <div class="row mt-4">

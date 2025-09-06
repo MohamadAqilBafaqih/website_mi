@@ -22,6 +22,8 @@ class CalonSiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $sesi = SesiPendaftaran::where('status', 'aktif')->first();
+
         $request->validate([
             'nama_lengkap'     => 'required|string|max:100',
             'nik'              => 'required|string|max:20',
@@ -54,7 +56,7 @@ class CalonSiswaController extends Controller
             // Dokumen wajib
             'akta_kelahiran'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'kartu_keluarga'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
-            'foto_siswa'       => 'required|file|mimes:jpg,jpeg,png|max:5120', // foto 3x4 wajib
+            'foto_siswa'       => 'required|file|mimes:jpg,jpeg,png|max:5120',
 
             // Data KIP opsional
             'no_kip'           => 'nullable|string|max:50',
@@ -62,8 +64,8 @@ class CalonSiswaController extends Controller
         ]);
 
         $data = $request->all();
-        $data['status_pendaftaran'] = 'Baru'; // default saat pendaftaran
-
+        $data['status_pendaftaran'] = 'Baru';
+        $data['tahun_ajaran'] = $sesi ? $sesi->tahun_ajaran : null; // <── isi otomatis
 
         // Upload file wajib
         foreach (['akta_kelahiran', 'kartu_keluarga', 'foto_siswa'] as $field) {
@@ -86,6 +88,7 @@ class CalonSiswaController extends Controller
         return redirect()->route('admin.calonsiswa.index')
             ->with('success', 'Calon siswa berhasil ditambahkan.');
     }
+
 
     /**
      * Form edit calon siswa
@@ -216,82 +219,82 @@ class CalonSiswaController extends Controller
      * Simpan data calon siswa dari user
      */
     public function storeUser(Request $request)
-{
-    $sesi = SesiPendaftaran::sesiAktif();
+    {
+        $sesi = SesiPendaftaran::sesiAktif();
 
-    if (!$sesi) {
-        return back()->withErrors(['error' => 'Pendaftaran tidak tersedia saat ini.']);
-    }
-
-    $request->validate([
-        'nama_lengkap'     => 'required|string|max:100',
-        'nik'              => 'required|string|max:20',
-        'jenis_kelamin'    => 'required|in:Laki-laki,Perempuan',
-        'tempat_lahir'     => 'required|string|max:50',
-        'tanggal_lahir'    => 'required|date',
-        'alamat'           => 'required|string',
-        'kelurahan'        => 'required|string|max:50',
-        'kecamatan'        => 'required|string|max:50',
-        'kabupaten'        => 'required|string|max:50',
-        'provinsi'         => 'required|string|max:50',
-        'kode_pos'         => 'required|string|max:10',
-        'no_hp'            => 'required|string|max:20',
-        'email'            => 'required|email|max:100',
-        'asal_sekolah'     => 'required|string|max:100',
-        'tahun_lulus'      => 'required|digits:4|integer|min:2000|max:' . date('Y'),
-
-        // Data Ayah
-        'nama_ayah'        => 'required|string|max:100',
-        'pekerjaan_ayah'   => 'required|string|max:50',
-        'pendidikan_ayah'  => 'required|string|max:50',
-        'penghasilan_ayah' => 'required|string|max:50',
-
-        // Data Ibu
-        'nama_ibu'         => 'required|string|max:100',
-        'pekerjaan_ibu'    => 'required|string|max:50',
-        'pendidikan_ibu'   => 'required|string|max:50',
-        'penghasilan_ibu'  => 'required|string|max:50',
-
-        // Dokumen wajib
-        'akta_kelahiran'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
-        'kartu_keluarga'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
-        'foto_siswa'       => 'required|file|mimes:jpg,jpeg,png|max:5120',
-
-        // Data KIP opsional
-        'no_kip'           => 'nullable|string|max:50',
-        'foto_kip'         => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
-    ]);
-
-    // Ambil hanya data yang diperlukan
-    $data = $request->except(['_token', '_method', 'akta_kelahiran', 'kartu_keluarga', 'foto_siswa', 'foto_kip']);
-    $data['status_pendaftaran'] = 'Baru';
-    $data['sesi_id'] = $sesi->id;
-
-    // Buat folder kalau belum ada
-    if (!file_exists(public_path('uploads/calon_siswa'))) {
-        mkdir(public_path('uploads/calon_siswa'), 0777, true);
-    }
-
-    // Upload file wajib
-    foreach (['akta_kelahiran', 'kartu_keluarga', 'foto_siswa'] as $field) {
-        if ($request->hasFile($field)) {
-            $fileName = time() . "_{$field}." . $request->file($field)->getClientOriginalExtension();
-            $request->file($field)->move(public_path('uploads/calon_siswa'), $fileName);
-            $data[$field] = $fileName;
+        if (!$sesi) {
+            return back()->withErrors(['error' => 'Pendaftaran tidak tersedia saat ini.']);
         }
+
+        $request->validate([
+            'nama_lengkap'     => 'required|string|max:100',
+            'nik'              => 'required|string|max:20',
+            'jenis_kelamin'    => 'required|in:Laki-laki,Perempuan',
+            'tempat_lahir'     => 'required|string|max:50',
+            'tanggal_lahir'    => 'required|date',
+            'alamat'           => 'required|string',
+            'kelurahan'        => 'required|string|max:50',
+            'kecamatan'        => 'required|string|max:50',
+            'kabupaten'        => 'required|string|max:50',
+            'provinsi'         => 'required|string|max:50',
+            'kode_pos'         => 'required|string|max:10',
+            'no_hp'            => 'required|string|max:20',
+            'email'            => 'required|email|max:100',
+            'asal_sekolah'     => 'required|string|max:100',
+            'tahun_lulus'      => 'required|digits:4|integer|min:2000|max:' . date('Y'),
+
+            // Data Ayah
+            'nama_ayah'        => 'required|string|max:100',
+            'pekerjaan_ayah'   => 'required|string|max:50',
+            'pendidikan_ayah'  => 'required|string|max:50',
+            'penghasilan_ayah' => 'required|string|max:50',
+
+            // Data Ibu
+            'nama_ibu'         => 'required|string|max:100',
+            'pekerjaan_ibu'    => 'required|string|max:50',
+            'pendidikan_ibu'   => 'required|string|max:50',
+            'penghasilan_ibu'  => 'required|string|max:50',
+
+            // Dokumen wajib
+            'akta_kelahiran'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'kartu_keluarga'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'foto_siswa'       => 'required|file|mimes:jpg,jpeg,png|max:5120',
+
+            // Data KIP opsional
+            'no_kip'           => 'nullable|string|max:50',
+            'foto_kip'         => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+        ]);
+
+        // Ambil hanya data yang diperlukan
+        $data = $request->except(['_token', '_method', 'akta_kelahiran', 'kartu_keluarga', 'foto_siswa', 'foto_kip']);
+        $data['status_pendaftaran'] = 'Baru';
+        $data['sesi_id'] = $sesi->id;
+        $data['tahun_ajaran'] = $sesi->tahun_ajaran;
+
+        // Buat folder kalau belum ada
+        if (!file_exists(public_path('uploads/calon_siswa'))) {
+            mkdir(public_path('uploads/calon_siswa'), 0777, true);
+        }
+
+        // Upload file wajib
+        foreach (['akta_kelahiran', 'kartu_keluarga', 'foto_siswa'] as $field) {
+            if ($request->hasFile($field)) {
+                $fileName = time() . "_{$field}." . $request->file($field)->getClientOriginalExtension();
+                $request->file($field)->move(public_path('uploads/calon_siswa'), $fileName);
+                $data[$field] = $fileName;
+            }
+        }
+
+        // Upload file opsional KIP
+        if ($request->hasFile('foto_kip')) {
+            $fileName = time() . '_kip.' . $request->file('foto_kip')->getClientOriginalExtension();
+            $request->file('foto_kip')->move(public_path('uploads/calon_siswa'), $fileName);
+            $data['foto_kip'] = $fileName;
+        }
+
+        CalonSiswa::create($data);
+
+        return redirect()->route('pendaftaran.success')
+            ->with('success', 'Pendaftaran berhasil disimpan.');
     }
-
-    // Upload file opsional KIP
-    if ($request->hasFile('foto_kip')) {
-        $fileName = time() . '_kip.' . $request->file('foto_kip')->getClientOriginalExtension();
-        $request->file('foto_kip')->move(public_path('uploads/calon_siswa'), $fileName);
-        $data['foto_kip'] = $fileName;
-    }
-
-    CalonSiswa::create($data);
-
-    return redirect()->route('pendaftaran.success')
-        ->with('success', 'Pendaftaran berhasil disimpan.');
-}
-
 }
