@@ -798,9 +798,9 @@
                 </a>
                 <ul class="submenu collapse show" id="pendaftaranSubmenu">
                     <li class="submenu-item">
-                        <a href="{{ route('admin.datasiswa.index') }}" class="menu-link">
+                        <a href="{{ route('admin.calonsiswa.index') }}" class="menu-link">
                             <i class="fas fa-circle-notch me-1" style="font-size: 8px;"></i>
-                            <span class="menu-text">Data Calon Siswa</span>
+                            <span class="menu-text">Form Pendaftaran</span>
                         </a>
                     </li>
                     <li class="submenu-item">
@@ -810,9 +810,9 @@
                         </a>
                     </li>
                     <li class="submenu-item">
-                        <a href="{{ route('admin.calonsiswa.index') }}" class="menu-link">
+                        <a href="{{ route('admin.datasiswa.index') }}" class="menu-link">
                             <i class="fas fa-circle-notch me-1" style="font-size: 8px;"></i>
-                            <span class="menu-text">Form Pendaftaran</span>
+                            <span class="menu-text">Data Siswa Diterima</span>
                         </a>
                     </li>
                 </ul>

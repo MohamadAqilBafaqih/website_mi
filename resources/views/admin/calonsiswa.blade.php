@@ -192,17 +192,28 @@
     @section('content')
         <div class="container-fluid">
             <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title" style="color: #f9f9f9;">
-                    <i class="fas fa-user-graduate"></i> Kelola Calon Siswa
-                </h1>
+            <div class="page-header mb-4"
+                style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); 
+            color: white; padding: 20px; border-radius: 10px; 
+            margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="page-title" style="color: #ffffff; font-weight: 700;">
+                            <i class="fas fa-user-graduate me-2"></i> Kelola Calon Siswa
+                        </h1>
+                        <p class="mb-0">Tambah data calon siswa baru ke sistem</p>
+                    </div>
+                </div>
 
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.calonsiswa.index') }}">Pendaftaran Siswa</a>
+                    <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.dashboard-content') }}" style="color: #e0e0e0;">Home</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Tambah Calon Siswa</li>
+                        <li class="breadcrumb-item active" aria-current="page" style="color: #ffffff;">
+                            Tambah Calon Siswa
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -306,7 +317,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-section">
-                                            <h6 class="fw-bold mb-3"><i class="fas fa-address-book me-2"></i>Kontak & Alamat
+                                            <h6 class="fw-bold mb-3"><i class="fas fa-address-book me-2"></i>Kontak &
+                                                Alamat
                                             </h6>
                                             <div class="mb-3">
                                                 <label class="form-label">Alamat</label>
@@ -320,7 +332,8 @@
                                                     <label class="form-label">Kelurahan</label>
                                                     <input type="text"
                                                         class="form-control @error('kelurahan') is-invalid @enderror"
-                                                        name="kelurahan" value="{{ old('kelurahan') }}" maxlength="50" required>
+                                                        name="kelurahan" value="{{ old('kelurahan') }}" maxlength="50"
+                                                        required>
                                                     @error('kelurahan')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -329,7 +342,8 @@
                                                     <label class="form-label">Kecamatan</label>
                                                     <input type="text"
                                                         class="form-control @error('kecamatan') is-invalid @enderror"
-                                                        name="kecamatan" value="{{ old('kecamatan') }}" maxlength="50" required>
+                                                        name="kecamatan" value="{{ old('kecamatan') }}" maxlength="50"
+                                                        required>
                                                     @error('kecamatan')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -338,7 +352,8 @@
                                                     <label class="form-label">Kabupaten</label>
                                                     <input type="text"
                                                         class="form-control @error('kabupaten') is-invalid @enderror"
-                                                        name="kabupaten" value="{{ old('kabupaten') }}" maxlength="50" required>
+                                                        name="kabupaten" value="{{ old('kabupaten') }}" maxlength="50"
+                                                        required>
                                                     @error('kabupaten')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -349,7 +364,8 @@
                                                     <label class="form-label">Provinsi</label>
                                                     <input type="text"
                                                         class="form-control @error('provinsi') is-invalid @enderror"
-                                                        name="provinsi" value="{{ old('provinsi') }}" maxlength="50" required>
+                                                        name="provinsi" value="{{ old('provinsi') }}" maxlength="50"
+                                                        required>
                                                     @error('provinsi')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -358,7 +374,8 @@
                                                     <label class="form-label">Kode Pos</label>
                                                     <input type="text"
                                                         class="form-control @error('kode_pos') is-invalid @enderror"
-                                                        name="kode_pos" value="{{ old('kode_pos') }}" maxlength="10" required>
+                                                        name="kode_pos" value="{{ old('kode_pos') }}" maxlength="10"
+                                                        required>
                                                     @error('kode_pos')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -369,7 +386,8 @@
                                                     <label class="form-label">No. HP</label>
                                                     <input type="text"
                                                         class="form-control @error('no_hp') is-invalid @enderror"
-                                                        name="no_hp" value="{{ old('no_hp') }}" maxlength="20" required>
+                                                        name="no_hp" value="{{ old('no_hp') }}" maxlength="20"
+                                                        required>
                                                     @error('no_hp')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -378,7 +396,8 @@
                                                     <label class="form-label">Email</label>
                                                     <input type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" value="{{ old('email') }}" maxlength="100" required>
+                                                        name="email" value="{{ old('email') }}" maxlength="100"
+                                                        required>
                                                     @error('email')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -426,7 +445,8 @@
                                                 <label class="form-label">Nama Ayah</label>
                                                 <input type="text"
                                                     class="form-control @error('nama_ayah') is-invalid @enderror"
-                                                    name="nama_ayah" value="{{ old('nama_ayah') }}" maxlength="100" required>
+                                                    name="nama_ayah" value="{{ old('nama_ayah') }}" maxlength="100"
+                                                    required>
                                                 @error('nama_ayah')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -435,7 +455,8 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Pekerjaan Ayah</label>
                                                     <select name="pekerjaan_ayah"
-                                                        class="form-control @error('pekerjaan_ayah') is-invalid @enderror" required>
+                                                        class="form-control @error('pekerjaan_ayah') is-invalid @enderror"
+                                                        required>
                                                         <option value="">Pilih Pekerjaan Ayah</option>
                                                         <option value="PNS"
                                                             {{ old('pekerjaan_ayah') == 'PNS' ? 'selected' : '' }}>PNS
@@ -473,7 +494,8 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Pendidikan Ayah</label>
                                                     <select name="pendidikan_ayah"
-                                                        class="form-control @error('pendidikan_ayah') is-invalid @enderror" required>
+                                                        class="form-control @error('pendidikan_ayah') is-invalid @enderror"
+                                                        required>
                                                         <option value="">Pilih Pendidikan Ayah</option>
                                                         <option value="Tidak Sekolah"
                                                             {{ old('pendidikan_ayah') == 'Tidak Sekolah' ? 'selected' : '' }}>
@@ -510,7 +532,8 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Penghasilan Ayah</label>
                                                 <select name="penghasilan_ayah"
-                                                    class="form-control @error('penghasilan_ayah') is-invalid @enderror" required>
+                                                    class="form-control @error('penghasilan_ayah') is-invalid @enderror"
+                                                    required>
                                                     <option value="">Pilih Penghasilan Ayah</option>
                                                     <option value="< Rp. 500.000"
                                                         {{ old('penghasilan_ayah') == '< Rp. 500.000' ? 'selected' : '' }}>
@@ -545,7 +568,8 @@
                                                 <label class="form-label">Nama Ibu</label>
                                                 <input type="text"
                                                     class="form-control @error('nama_ibu') is-invalid @enderror"
-                                                    name="nama_ibu" value="{{ old('nama_ibu') }}" maxlength="100" required>
+                                                    name="nama_ibu" value="{{ old('nama_ibu') }}" maxlength="100"
+                                                    required>
                                                 @error('nama_ibu')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -554,7 +578,8 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Pekerjaan Ibu</label>
                                                     <select name="pekerjaan_ibu"
-                                                        class="form-control @error('pekerjaan_ibu') is-invalid @enderror" required>
+                                                        class="form-control @error('pekerjaan_ibu') is-invalid @enderror"
+                                                        required>
                                                         <option value="">Pilih Pekerjaan Ibu</option>
                                                         <option value="PNS"
                                                             {{ old('pekerjaan_ibu') == 'PNS' ? 'selected' : '' }}>PNS
@@ -595,7 +620,8 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Pendidikan Ibu</label>
                                                     <select name="pendidikan_ibu"
-                                                        class="form-control @error('pendidikan_ibu') is-invalid @enderror" required>
+                                                        class="form-control @error('pendidikan_ibu') is-invalid @enderror"
+                                                        required>
                                                         <option value="">Pilih Pendidikan Ibu</option>
                                                         <option value="Tidak Sekolah"
                                                             {{ old('pendidikan_ibu') == 'Tidak Sekolah' ? 'selected' : '' }}>
@@ -632,7 +658,8 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Penghasilan Ibu</label>
                                                 <select name="penghasilan_ibu"
-                                                    class="form-control @error('penghasilan_ibu') is-invalid @enderror" required>
+                                                    class="form-control @error('penghasilan_ibu') is-invalid @enderror"
+                                                    required>
                                                     <option value="">Pilih Penghasilan Ibu</option>
                                                     <option value="< Rp. 500.000"
                                                         {{ old('penghasilan_ibu') == '< Rp. 500.000' ? 'selected' : '' }}>

@@ -29,18 +29,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // Form daftar PPDB
 Route::get('/pendaftaran', [CalonSiswaController::class, 'create'])->name('pendaftaran.create');
 Route::post('/pendaftaran', [CalonSiswaController::class, 'storeUser'])->name('pendaftaran.storeUser');
-// Halaman sukses
+
 Route::get('/pendaftaran/success', function () {
-    return view('pengguna.pendaftaran.success');
+    $info = \App\Models\InfoPpdb::latest()->first();
+    return view('pengguna.pendaftaran.success', [
+        'link' => $info ? $info->link : null,
+        'success' => 'Pendaftaran berhasil disimpan.'
+    ]);
 })->name('pendaftaran.success');
 
-Route::get('/testimoni/success', function () {
-    return view('pengguna.kontak.testisuccess');
-})->name('pendaftaran.success');
+// Route::get('/testimoni/success', function () {
+//     return view('pengguna.kontak.testisuccess');
+// })->name('pendaftaran.success');
 
-Route::get('/kritiksaran/success', function () {
-    return view('pengguna.kontak.kritiksuccess');
-})->name('pendaftaran.success');
+// Route::get('/kritiksaran/success', function () {
+//     return view('pengguna.kontak.kritiksuccess');
+// })->name('pendaftaran.success');
 
 
 

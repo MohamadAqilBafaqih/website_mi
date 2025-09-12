@@ -29,8 +29,8 @@
                             class="btn btn-outline-navy {{ request('kategori') == 'akademik' ? 'active' : '' }}">
                             Lomba Akademik
                         </a>
-                        <a href="{{ route('pengguna.prestasi.index', ['kategori' => 'non-akademik']) }}"
-                            class="btn btn-outline-navy {{ request('kategori') == 'non-akademik' ? 'active' : '' }}">
+                        <a href="{{ route('pengguna.prestasi.index', ['kategori' => 'non akademik']) }}"
+                            class="btn btn-outline-navy {{ request('kategori') == 'non akademik' ? 'active' : '' }}">
                             Lomba Non Akademik
                         </a>
                     </div>

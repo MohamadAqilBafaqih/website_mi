@@ -29,35 +29,37 @@ class InfoPpdbController extends Controller
      * Simpan data baru ke database.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'jadwal'             => 'required|string',
-            'syarat'             => 'required|string',
-            'biaya'              => 'required|string',
-            'faq'                => 'nullable|string',
-            'kalender_akademik'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
-            'brosur'             => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
-        ]);
+{
+    $request->validate([
+        'jadwal'             => 'required|string',
+        'syarat'             => 'required|string',
+        'biaya'              => 'required|string',
+        'link'               => 'nullable|string',
+        'kalender_akademik'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        'brosur'             => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+    ]);
 
-        $data = $request->only(['jadwal', 'syarat', 'biaya', 'faq']);
+    // FIXED → ganti faq jadi link
+    $data = $request->only(['jadwal', 'syarat', 'biaya', 'link']);
 
-        if ($request->hasFile('kalender_akademik')) {
-            $fileName = time() . '_kalender.' . $request->kalender_akademik->extension();
-            $request->kalender_akademik->move(public_path('uploads/ppdb'), $fileName);
-            $data['kalender_akademik'] = $fileName;
-        }
-
-        if ($request->hasFile('brosur')) {
-            $fileName = time() . '_brosur.' . $request->brosur->extension();
-            $request->brosur->move(public_path('uploads/ppdb'), $fileName);
-            $data['brosur'] = $fileName;
-        }
-
-        InfoPpdb::create($data);
-
-        return redirect()->route('admin.infoppdb.index')
-            ->with('success', 'Informasi PPDB berhasil ditambahkan.');
+    if ($request->hasFile('kalender_akademik')) {
+        $fileName = time() . '_kalender.' . $request->kalender_akademik->extension();
+        $request->kalender_akademik->move(public_path('uploads/ppdb'), $fileName);
+        $data['kalender_akademik'] = $fileName;
     }
+
+    if ($request->hasFile('brosur')) {
+        $fileName = time() . '_brosur.' . $request->brosur->extension();
+        $request->brosur->move(public_path('uploads/ppdb'), $fileName);
+        $data['brosur'] = $fileName;
+    }
+
+    InfoPpdb::create($data);
+
+    return redirect()->route('admin.infoppdb.index')
+        ->with('success', 'Informasi PPDB berhasil ditambahkan.');
+}
+
 
     /**
      * Form edit data.
@@ -79,13 +81,13 @@ class InfoPpdbController extends Controller
             'jadwal'             => 'required|string',
             'syarat'             => 'required|string',
             'biaya'              => 'required|string',
-            'faq'                => 'nullable|string',
+            'link'               => 'nullable|string',
             'kalender_akademik'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'brosur'             => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
 
         $item = InfoPpdb::findOrFail($id);
-        $data = $request->only(['jadwal', 'syarat', 'biaya', 'faq']);
+        $data = $request->only(['jadwal', 'syarat', 'biaya', 'link']);
 
         if ($request->hasFile('kalender_akademik')) {
             $fileName = time() . '_kalender.' . $request->kalender_akademik->extension();
@@ -117,8 +119,6 @@ class InfoPpdbController extends Controller
             ->with('success', 'Informasi PPDB berhasil dihapus.');
     }
 
-    // =================== Bagian untuk pengguna ===================
-
     public function jadwal()
     {
         $data = InfoPpdb::latest()->first();
@@ -147,12 +147,5 @@ class InfoPpdbController extends Controller
     {
         $data = InfoPpdb::latest()->get();
         return view('pengguna.brosur', compact('data'));
-    }
-
-
-    public function faq()
-    {
-        $data = InfoPpdb::latest()->first();
-        return view('pengguna.ppdb.faq', compact('data'));
     }
 }

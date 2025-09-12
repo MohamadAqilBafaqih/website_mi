@@ -2,18 +2,35 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">
-                <i class="fas fa-info-circle"></i> Kelola Informasi PPDB
-            </h1>
+        <div class="page-header mb-4"
+            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title" style="color: #ffffff; font-weight: 700;">
+                        <i class="fas fa-info-circle me-2"></i> Kelola Informasi PPDB
+                    </h1>
+                    <p class="mb-0">Atur dan kelola informasi PPDB madrasah</p>
+                </div>
+            </div>
+
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Informasi PPDB</li>
+                <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.dashboard') }}" style="color: #e0e0e0;">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page" style="color: #ffffff;">
+                        Informasi PPDB
+                    </li>
                 </ol>
             </nav>
         </div>
+
 
         <!-- Alert -->
         @if (session('success'))
@@ -79,15 +96,16 @@
                                 @enderror
                             </div>
 
-                            <!-- FAQ -->
                             <div class="mb-4">
                                 <label class="form-label fw-bold text-success">
-                                    <i class="fas fa-question-circle me-1"></i> FAQ (Opsional)
+                                    <i class="fas fa-link me-1"></i> Link Grup Calon Siswa
                                 </label>
-                                <textarea name="faq" rows="3" class="form-control border-success">{{ $data->isEmpty() ? old('faq') : $data->first()->faq }}</textarea>
-                                @error('faq')
-                                    <div class="text-danger small mt-2"><i
-                                            class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
+                                <input type="url" name="link" class="form-control border-success"
+                                    value="{{ $data->isEmpty() ? old('link') : $data->first()->link }}">
+                                @error('link')
+                                    <div class="text-danger small mt-2">
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 

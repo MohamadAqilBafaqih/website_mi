@@ -40,8 +40,22 @@ class TestimoniController extends Controller
 
         $fotoPath = null;
         if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('testimoni', 'public');
+            // Buat folder jika belum ada
+            $destinationPath = public_path('uploads/testimoni');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+
+            // Nama file unik
+            $fileName = time() . '_' . $request->file('foto')->getClientOriginalName();
+
+            // Pindahkan file ke folder public/uploads/testimoni
+            $request->file('foto')->move($destinationPath, $fileName);
+
+            // Simpan path relatif agar mudah dipanggil di blade
+            $fotoPath = 'uploads/testimoni/' . $fileName;
         }
+
 
         Testimoni::create([
             'nama' => $request->nama,

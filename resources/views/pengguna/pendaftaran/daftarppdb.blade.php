@@ -43,8 +43,6 @@
                         <form action="{{ route('pendaftaran.storeUser') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <!-- Data Pribadi -->
-                            <!-- Data Pribadi -->
                             <div class="section-header mb-4 mt-4">
                                 <h5 class="fw-bold text-navy d-flex align-items-center">
                                     <span

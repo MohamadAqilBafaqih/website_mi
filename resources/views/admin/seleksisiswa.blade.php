@@ -3,15 +3,22 @@
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">
-                <i class="fas fa-user-graduate"></i> Seleksi Calon Siswa
-            </h1>
+        <div class="page-header mb-4"
+            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title" style="color: #ffffff; font-weight: 700;">
+                        <i class="fas fa-user-graduate me-2"></i> Seleksi Calon Siswa
+                    </h1>
+                    <p class="mb-0">Kelola seleksi calon siswa baru yang mendaftar</p>
+                </div>
+            </div>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Penerimaan Siswa</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Seleksi Calon Siswa</li>
+                <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.dashboard-content') }}" style="color: #e0e0e0;">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page" style="color: #ffffff;">Seleksi Calon Siswa</li>
                 </ol>
             </nav>
         </div>
@@ -64,13 +71,17 @@
                                 placeholder="Cari berdasarkan nama atau NIK..." value="{{ request('search') }}">
                         </div>
                     </div>
-
-                    <!-- Tombol Tampilkan -->
-                    <div class="col-md-12 col-lg-2 d-grid">
-                        <button type="submit" class="btn btn-success mt-3 mt-lg-0">
-                            <i class="fas fa-filter me-1"></i> Tampilkan
+                    <!-- Tombol Filter + Refresh (icon-only, sama tinggi dengan input/select) -->
+                    <div class="col-md-12 col-lg-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-success me-1" title="Tampilkan">
+                            <i class="fas fa-search"></i>
                         </button>
+
+                        <a href="{{ route('admin.seleksisiswa.index') }}" class="btn btn-secondary" title="Refresh">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
                     </div>
+
                 </div>
             </form>
         </div>
@@ -137,7 +148,8 @@
                                     </td>
                                     <td>
                                         @if ($siswa->status_pendaftaran == 'Baru')
-                                            <span class="badge bg-warning text-dark mb-2"><i class="fas fa-clock me-1"></i>
+                                            <span class="badge bg-warning text-dark mb-2"><i
+                                                    class="fas fa-clock me-1"></i>
                                                 Baru</span>
                                             <div class="d-flex flex-wrap gap-1">
                                                 <form action="{{ route('admin.seleksisiswa.updateStatus', $siswa->id) }}"
@@ -227,7 +239,6 @@
             @endif
         </div>
 
-        <!-- Modal Detail untuk setiap siswa -->
         @foreach ($data as $siswa)
             <div class="modal fade" id="detailModal{{ $siswa->id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl">

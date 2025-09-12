@@ -1,7 +1,8 @@
 @extends('pengguna.beranda-content')
 
 @section('content')
-<div class="container py-4 mt-3">
+<main class="flex-fill"><!-- supaya konten dorong footer ke bawah -->
+<div class="container py-4 mt-3 mb-3"><!-- ada jarak bawah tapi tidak kepanjangan -->
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-12">
             <!-- Header Section -->
@@ -24,7 +25,7 @@
             @endif
 
             <!-- Form Saran & Masukan -->
-            <div class="card mb-5 border-0 shadow-lg animate-fade" data-delay="100">
+            <div class="card mb-4 border-0 shadow-lg animate-fade" data-delay="100"><!-- dikurangi jadi mb-4 -->
                 <div class="card-header bg-navy text-white py-3 d-flex align-items-center">
                     <div class="icon-container bg-white text-navy rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 36px; height: 36px;">
                         <i class="fas fa-envelope"></i>
@@ -62,17 +63,32 @@
         </div>
     </div>
 </div>
+</main>
 
 <style>
 :root {
     --navy-color: #1b5e20;
 }
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1; /* isi konten fleksibel agar footer tetap di bawah */
+}
+
 .bg-navy { background-color: var(--navy-color) !important; }
 .text-navy { color: var(--navy-color) !important; }
 .btn-navy { background-color: var(--navy-color); color: #fff; border: none; transition: 0.3s; }
 .btn-navy:hover { background-color: #145214; color: #fff; }
 
-.card { border-radius: 12px; overflow: hidden; transition: 0.3s; }
+.card { border-radius: 12px; overflow: hidden; transition: 0.3s;             transition: 0.3s;
+            height: auto;
+            /* otomatis menyesuaikan isi */
+            min-height: unset;}
 .card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15) !important; }
 
 .icon-container { transition: all 0.3s ease; }

@@ -129,18 +129,29 @@
             padding-left: 40px;
         }
 
-        .btn-login {
-            background-color: var(--primary-color);
-            border: none;
-            height: 45px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
+       .btn-login {
+    background-color: var(--primary-color) !important;
+    border: none !important;
+    height: 45px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: #fff !important; /* pastikan teks tetap putih */
+    transition: var(--transition);
+}
 
-        .btn-login:hover {
-            background-color: var(--primary-dark);
-        }
+.btn-login:hover {
+    background-color: var(--primary-light) !important;
+    color: #fff !important;
+}
+
+.btn-login:active,
+.btn-login:focus:active,
+.btn-login.active {
+    background-color: var(--primary-dark) !important;
+    color: #fff !important;
+    box-shadow: none !important; /* hilangkan efek outline biru Bootstrap */
+}
+
 
         .forgot-password {
             color: var(--primary-color);

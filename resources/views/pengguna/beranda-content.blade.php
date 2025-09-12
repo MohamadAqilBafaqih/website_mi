@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-
+ <div class="page-wrapper">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +25,10 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* layar penuh */
         }
 
         /* Improved navbar with better mobile responsiveness */
@@ -319,8 +323,8 @@
         /* Improved footer */
         footer {
             background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
-            padding: 40px 0 20px;
-            position: relative;
+    padding: 40px 0 20px;
+    margin-top: auto;  
         }
 
         footer:before {
@@ -413,6 +417,7 @@
 
         .info-card:hover .counter {
             color: var(--dark-color);
+            margin: 20px;
         }
 
         /* Improved testimonials */
@@ -528,34 +533,56 @@
         .account-dropdown .dropdown-item:hover i {
             color: var(--dark-color);
         }
-
+/* 
         html {
             scroll-behavior: smooth;
-        }
+        } */
+
+        html, body {
+    height: 100%;              /* biar body full tinggi */
+    margin: 0;                 /* reset margin */
+    display: flex;
+    flex-direction: column;    /* susun vertikal */
+    scroll-behavior: smooth;
+}
+
+main {
+    flex: 1;                   /* isi utama akan mengisi ruang */
+}
+
+.page-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;   /* susun header, main, footer vertikal */
+}
+
+main.flex-fill {
+    flex: 1;                  /* isi utama fleksibel dorong footer */
+}
 
         /* New improvements for better responsiveness */
         @media (max-width: 992px) {
             .navbar-brand {
                 font-size: 1rem;
             }
-            
+
             .navbar-brand img {
                 height: 35px;
             }
-            
+
             .nav-link {
                 padding: 8px 10px;
                 font-size: 0.9rem;
             }
-            
+
             .section-title {
                 font-size: 1.8rem;
             }
-            
+
             .info-card h3 {
                 font-size: 2rem;
             }
-            
+
             .counter {
                 font-size: 2rem;
             }
@@ -565,35 +592,35 @@
             .hero-section h1 {
                 font-size: 2rem;
             }
-            
+
             .hero-section p {
                 font-size: 1rem;
             }
-            
+
             .section-title {
                 font-size: 1.6rem;
             }
-            
+
             .info-card {
                 padding: 15px;
             }
-            
+
             .info-card h3 {
                 font-size: 1.8rem;
             }
-            
+
             .info-card i {
                 font-size: 2rem;
             }
-            
+
             .card-img-top {
                 height: 180px;
             }
-            
+
             .gallery-img {
                 height: 120px;
             }
-            
+
             footer .col-md-4 {
                 margin-bottom: 30px;
             }
@@ -603,37 +630,38 @@
             .navbar-brand {
                 font-size: 0.9rem;
             }
-            
+
             .navbar-brand img {
                 height: 30px;
             }
-            
+
             .hero-section {
                 padding: 60px 0;
                 text-align: center;
             }
-            
+
             .hero-section h1 {
                 font-size: 1.8rem;
             }
-            
+
             .section-title {
                 font-size: 1.5rem;
             }
-            
+
             .info-card h3 {
                 font-size: 1.6rem;
             }
-            
+
             .counter {
                 font-size: 1.6rem;
             }
-            
-            .btn-success, .btn-outline-success {
+
+            .btn-success,
+            .btn-outline-success {
                 padding: 8px 20px;
                 font-size: 0.9rem;
             }
-            
+
             .floating-btn {
                 width: 50px;
                 height: 50px;
@@ -641,7 +669,7 @@
                 bottom: 20px;
                 right: 20px;
             }
-            
+
             .back-to-top {
                 width: 40px;
                 height: 40px;
@@ -710,6 +738,19 @@
             to {
                 transform: rotate(360deg);
             }
+        }
+
+        main {
+            flex: 1;
+            /* isi ruang kosong supaya footer turun */
+        }
+
+        /* PERBAIKAN: Container untuk konten dengan padding yang cukup */
+        .content-container {
+            min-height: calc(100vh - 250px);
+            /* tinggi minimum agar tidak menabrak footer */
+            padding-bottom: 2rem;
+            /* beri ruang ekstra */
         }
     </style>
 </head>
@@ -824,8 +865,10 @@
         </div>
     </nav>
 
-    <main>
-        @yield('content')
+    <main class="flex-fill">
+        <div class="content-container"> <!-- Container tambahan untuk memastikan layout yang tepat -->
+            @yield('content')
+        </div>
     </main>
 
     <footer id="contact">
@@ -850,13 +893,15 @@
                         <li class="mb-2"><a href="{{ route('pendaftaran.create') }}"
                                 class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i>
                                 Pendaftaran Siswa Baru</a></li>
-                        <li class="mb-2"><a href="{{ route('ppdb.kalender') }}" class="text-white text-decoration-none"><i
-                                    class="fas fa-chevron-right me-2"></i> Kalender Akademik</a></li>
+                        <li class="mb-2"><a href="{{ route('ppdb.kalender') }}"
+                                class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i>
+                                Kalender Akademik</a></li>
                         <li class="mb-2"><a href="https://maps.app.goo.gl/X6Pndur8nr7mMUzCA"
                                 class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i> Peta
                                 Lokasi</a></li>
-                        <li class="mb-2"><a href="{{ route('pengguna.kontak.testimoni.store') }}" class="text-white text-decoration-none"><i
-                                    class="fas fa-chevron-right me-2"></i> Testimoni</a></li>
+                        <li class="mb-2"><a href="{{ route('pengguna.kontak.testimoni.store') }}"
+                                class="text-white text-decoration-none"><i class="fas fa-chevron-right me-2"></i>
+                                Testimoni</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -885,17 +930,17 @@
             </div>
         </div>
     </footer>
+</div>
 
-    <!-- Floating Buttons -->
     <a href="#" class="floating-btn">
         <i class="fab fa-whatsapp"></i>
     </a>
-    <a href="#home" class="back-to-top">
+    <a href="#heroCarousel" class="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </a>
 
     <!-- Gallery Modal -->
-    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+    {{-- <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -911,7 +956,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1044,7 +1089,7 @@
                 }
             });
         });
-        
+
         // Auto close navbar when clicking on mobile
         const navbarToggler = document.querySelector('.navbar-toggler');
         const navbarCollapse = document.querySelector('.navbar-collapse');

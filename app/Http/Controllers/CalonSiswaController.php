@@ -276,25 +276,46 @@ class CalonSiswaController extends Controller
             mkdir(public_path('uploads/calon_siswa'), 0777, true);
         }
 
-        // Upload file wajib
-        foreach (['akta_kelahiran', 'kartu_keluarga', 'foto_siswa'] as $field) {
-            if ($request->hasFile($field)) {
-                $fileName = time() . "_{$field}." . $request->file($field)->getClientOriginalExtension();
-                $request->file($field)->move(public_path('uploads/calon_siswa'), $fileName);
-                $data[$field] = $fileName;
-            }
+        // Akta Kelahiran
+        if ($request->hasFile('akta_kelahiran')) {
+            $file = $request->file('akta_kelahiran');
+            $fileName = time() . '_akta_kelahiran.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/akta'), $fileName); // folder khusus akta
+            $data['akta_kelahiran'] = $fileName;
         }
 
-        // Upload file opsional KIP
+        // Kartu Keluarga
+        if ($request->hasFile('kartu_keluarga')) {
+            $file = $request->file('kartu_keluarga');
+            $fileName = time() . '_kartu_keluarga.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/kk'), $fileName); // folder khusus KK
+            $data['kartu_keluarga'] = $fileName;
+        }
+
+        // Foto Siswa
+        if ($request->hasFile('foto_siswa')) {
+            $file = $request->file('foto_siswa');
+            $fileName = time() . '_foto_siswa.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/foto_siswa'), $fileName); // folder khusus foto siswa
+            $data['foto_siswa'] = $fileName;
+        }
+
+        // Foto KIP (jika ada)
         if ($request->hasFile('foto_kip')) {
-            $fileName = time() . '_kip.' . $request->file('foto_kip')->getClientOriginalExtension();
-            $request->file('foto_kip')->move(public_path('uploads/calon_siswa'), $fileName);
+            $file = $request->file('foto_kip');
+            $fileName = time() . '_foto_kip.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/foto_kip'), $fileName); // folder khusus foto KIP
             $data['foto_kip'] = $fileName;
         }
 
         CalonSiswa::create($data);
+        // Ambil link grup dari InfoPpdb
+        $info = \App\Models\InfoPpdb::latest()->first();
 
         return redirect()->route('pendaftaran.success')
-            ->with('success', 'Pendaftaran berhasil disimpan.');
+            ->with([
+                'success' => 'Pendaftaran berhasil disimpan.',
+                'link' => $info ? $info->link : null,
+            ]);
     }
 }

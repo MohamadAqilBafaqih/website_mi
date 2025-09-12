@@ -28,7 +28,7 @@ class PrestasiSiswaController extends Controller
             'nama_prestasi' => 'required|string|max:150',
             'foto'          => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
             'tingkat'       => 'nullable|string|max:100',
-            'jenis_prestasi'=> 'nullable|string|max:100',
+            'jenis_prestasi' => 'nullable|string|max:100',
             'juara'         => 'nullable|string|max:50',
             'penyelenggara' => 'nullable|string|max:150',
             'tanggal'       => 'nullable|date',
@@ -70,7 +70,7 @@ class PrestasiSiswaController extends Controller
             'nama_prestasi' => 'required|string|max:150',
             'foto'          => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
             'tingkat'       => 'nullable|string|max:100',
-            'jenis_prestasi'=> 'nullable|string|max:100',
+            'jenis_prestasi' => 'nullable|string|max:100',
             'juara'         => 'nullable|string|max:50',
             'penyelenggara' => 'nullable|string|max:150',
             'tanggal'       => 'nullable|date',
@@ -115,12 +115,29 @@ class PrestasiSiswaController extends Controller
     /**
      * Tampilkan prestasi siswa ke halaman pengguna (frontend)
      */
-    public function showAll()
+    /**
+     * Tampilkan prestasi siswa ke halaman pengguna (frontend)
+     */
+    public function showAll(Request $request)
     {
-        $data = PrestasiSiswa::latest()->paginate(6);
+        $query = PrestasiSiswa::query();
+
+        // Filter berdasarkan kategori
+        if ($request->has('kategori')) {
+            if ($request->kategori === 'akademik') {
+                $query->where('jenis_prestasi', 'akademik');
+            } elseif ($request->kategori === 'non akademik') {
+                $query->where('jenis_prestasi', 'non akademik');
+            }
+        }
+
+        // Ambil data terbaru dengan pagination
+        $data = $query->latest()->paginate(6);
+
         return view('pengguna.prestasi.index', compact('data'));
     }
-    
+
+
 
     /**
      * Tampilkan detail satu prestasi siswa (frontend).

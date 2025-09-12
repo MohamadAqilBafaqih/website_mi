@@ -12,7 +12,6 @@
                     </h1>
                     <p class="mb-0">Kelola data siswa yang telah diterima di sekolah</p>
                 </div>
-
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
@@ -63,22 +62,24 @@
                             </select>
 
                             {{-- Tombol cari --}}
-                            <button type="submit" class="btn btn-sm btn-success me-2">
-                                <i class="fas fa-search me-1"></i> Tampilkan
+                            <button type="submit" class="btn btn-sm btn-primary me-1 p-2" title="Tampilkan">
+                                <i class="fas fa-search"></i>
                             </button>
+
+                            {{-- Tombol refresh --}}
+                            <a href="{{ route('admin.datasiswa.index') }}" class="btn btn-sm btn-primary p-2"
+                                title="Refresh">
+                                <i class="fas fa-sync-alt"></i>
+                            </a>
                         </form>
 
                         {{-- Tombol Ekspor & Cetak --}}
-                        <a href="{{ route('admin.datasiswa.export.all') }}" class="btn btn-sm btn-success me-2">
+                        <a href="{{ route('admin.datasiswa.export.all') }}" class="btn btn-sm btn-primary me-2">
                             <i class="fas fa-file-pdf me-1"></i> Ekspor PDF
                         </a>
-                        <a href="{{ route('admin.datasiswa.export.excel') }}" class="btn btn-sm btn-success me-2">
+                        <a href="{{ route('admin.datasiswa.export.excel') }}" class="btn btn-sm btn-primary me-2">
                             <i class="fas fa-file-excel me-1"></i> Ekspor Excel
                         </a>
-                        <a href="{{ route('admin.datasiswa.cetak') }}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-print me-1"></i> Cetak
-                        </a>
-
 
                     </div>
                     <form id="deleteForm" method="POST" style="display: none;">
@@ -128,8 +129,8 @@
                                                 style="border-radius: 6px; padding: 5px 10px;">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <form action="{{ route('admin.datasiswa.destroy', $item->id) }}" method="POST"
-                                                class="d-inline">
+                                            <form action="{{ route('admin.datasiswa.destroy', $item->id) }}"
+                                                method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger"
@@ -162,19 +163,7 @@
                     </table>
                 </div>
             </div>
-            @if ($siswa->hasPages())
-                <div class="card-footer bg-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="text-muted">
-                            Menampilkan {{ $siswa->firstItem() }} - {{ $siswa->lastItem() }} dari {{ $siswa->total() }}
-                            hasil
-                        </div>
-                        <div>
-                            {{ $siswa->appends(['search' => request('search')])->links() }}
-                        </div>
-                    </div>
-                </div>
-            @endif
+
         </div>
     </div>
 
@@ -359,8 +348,8 @@
                             <div class="d-flex gap-2 flex-wrap">
                                 {{-- Akta Kelahiran --}}
                                 @if ($item->akta_kelahiran)
-                                    <a href="{{ asset('storage/uploads/akta/' . $item->akta_kelahiran) }}"
-                                        target="_blank" class="btn btn-sm btn-primary mb-2">
+                                    <a href="{{ asset('uploads/akta/' . $item->akta_kelahiran) }}" target="_blank"
+                                        class="btn btn-sm btn-primary mb-2">
                                         <i class="fas fa-file-pdf me-1"></i> Lihat Akta Kelahiran
                                     </a>
                                 @else
@@ -369,7 +358,7 @@
 
                                 {{-- Kartu Keluarga --}}
                                 @if ($item->kartu_keluarga)
-                                    <a href="{{ asset('storage/uploads/kk/' . $item->kartu_keluarga) }}" target="_blank"
+                                    <a href="{{ asset('uploads/kk/' . $item->kartu_keluarga) }}" target="_blank"
                                         class="btn btn-sm btn-secondary mb-2">
                                         <i class="fas fa-file-pdf me-1"></i> Lihat Kartu Keluarga
                                     </a>
@@ -379,8 +368,8 @@
 
                                 {{-- Foto Siswa --}}
                                 @if ($item->foto_siswa)
-                                    <a href="{{ asset('storage/uploads/foto_siswa/' . $item->foto_siswa) }}"
-                                        target="_blank" class="btn btn-sm btn-success mb-2">
+                                    <a href="{{ asset('uploads/foto_siswa/' . $item->foto_siswa) }}" target="_blank"
+                                        class="btn btn-sm btn-success mb-2">
                                         <i class="fas fa-image me-1"></i> Lihat Foto Siswa
                                     </a>
                                 @else
@@ -389,7 +378,7 @@
 
                                 {{-- Foto KIP --}}
                                 @if ($item->foto_kip)
-                                    <a href="{{ asset('storage/uploads/foto_kip/' . $item->foto_kip) }}" target="_blank"
+                                    <a href="{{ asset('uploads/foto_kip/' . $item->foto_kip) }}" target="_blank"
                                         class="btn btn-sm btn-warning mb-2">
                                         <i class="fas fa-image me-1"></i> Lihat Foto KIP
                                     </a>

@@ -280,6 +280,7 @@
 
     <section class="py-5 bg-light" id="akreditasi">
         <div class="container">
+            <!-- Header Section -->
             <div class="text-center mb-5">
                 <h2 class="section-title display-5 fw-bold text-navy mb-3">
                     <i class="fas fa-certificate text-warning me-2"></i> Akreditasi Madrasah
@@ -289,26 +290,29 @@
                 </p>
             </div>
 
+            <!-- Card Akreditasi -->
             <div class="row justify-content-center">
                 <div class="col-lg-10 animate-fade" style="animation-delay: 0.3s;">
                     <div
                         class="card shadow-lg border-0 rounded-4 bg-gradient-navy text-white position-relative overflow-hidden card-hover">
                         <div class="row g-0 align-items-center">
-                            <div class="col-md-8 p-5">
+
+                            <!-- Text Content -->
+                            <div class="col-md-8 p-3">
                                 <div class="card-body p-0">
-                                    <div class="d-flex align-items-center mb-4">
-                                        <div class="bg-warning p-3 rounded-circle me-3">
-                                            <i class="fas fa-certificate fa-2x text-navy"></i>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-warning p-2 rounded-circle me-3">
+                                            <i class="fas fa-certificate fa-lg text-navy"></i>
                                         </div>
-                                        <h3 class="fw-bold mb-0">Akreditasi A (Unggul)</h3>
+                                        <h3 class="fw-bold mb-0 akreditasi-title">Akreditasi A (Unggul)</h3>
                                     </div>
-                                    <p class="lead mb-4">
+                                    <p class="lead mb-3 akreditasi-desc">
                                         MI Diponegoro 03 Karangklesem telah resmi terakreditasi dengan predikat
                                         <span class="fw-bold text-uppercase text-warning">A (Unggul)</span>
                                         dari Badan Akreditasi Nasional, sebagai bukti komitmen kami dalam
                                         menyelenggarakan pendidikan berkualitas tinggi.
                                     </p>
-                                    <div class="d-flex flex-wrap gap-3">
+                                    <div class="d-flex flex-wrap gap-2 akreditasi-points">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-check-circle text-warning me-2"></i>
                                             <span>Standar Nasional Pendidikan</span>
@@ -324,33 +328,36 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 text-center p-4">
+
+                            <!-- Image Content -->
+                            <div class="col-md-4 text-center p-3">
                                 <div class="position-relative">
                                     <img src="{{ asset('gambar/akreditasia.png') }}" alt="Akreditasi A"
-                                        class="img-fluid rounded-4 img-hover shadow"
-                                        style="max-width: 220px; border: 4px solid rgba(255,255,255,0.3);">
-                                    <div class="mt-4">
+                                        class="img-fluid rounded-4 img-hover shadow akreditasia-img">
+                                    <div class="mt-3">
                                         <a href="{{ asset('gambar/akreditasia.png') }}"
-                                            class="btn btn-light btn-sm rounded-pill px-3 py-2" data-fancybox="gallery"
+                                            class="btn btn-light btn-sm rounded-pill px-2 py-1" data-fancybox="gallery"
                                             data-caption="Sertifikat Akreditasi A (Unggul)">
-                                            <i class="fas fa-expand me-2 text-navy"></i> Lihat Detail
+                                            <i class="fas fa-expand me-1 text-navy"></i> Lihat Detail
                                         </a>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
-                        <!-- Decorative elements -->
-                        <div class="position-absolute top-0 end-0 mt-4 me-4 opacity-25">
-                            <i class="fas fa-star fa-3x text-warning"></i>
+                        <!-- Decorative Elements -->
+                        <div class="position-absolute top-0 end-0 mt-3 me-3 opacity-25">
+                            <i class="fas fa-star fa-2x text-warning"></i>
                         </div>
-                        <div class="position-absolute bottom-0 start-0 mb-4 ms-4 opacity-25">
-                            <i class="fas fa-award fa-3x text-warning"></i>
+                        <div class="position-absolute bottom-0 start-0 mb-3 ms-3 opacity-25">
+                            <i class="fas fa-award fa-2x text-warning"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Feature Cards -->
             <div class="row mt-5">
                 <div class="col-md-4 animate-fade" style="animation-delay: 0.4s;">
                     <div class="card h-100 border-0 shadow-sm card-hover">
@@ -360,8 +367,7 @@
                                 <i class="fas fa-graduation-cap fa-2x text-navy"></i>
                             </div>
                             <h5 class="fw-bold text-navy">Kurikulum Unggul</h5>
-                            <p class="text-muted mb-0">Kurikulum terstandar nasional dengan pengembangan karakter Islami
-                            </p>
+                            <p class="text-muted mb-0">Kurikulum terstandar nasional dengan pengembangan karakter Islami</p>
                         </div>
                     </div>
                 </div>
@@ -392,6 +398,7 @@
             </div>
         </div>
 
+        <!-- Styles -->
         <style>
             :root {
                 --navy-color: #1b5e20;
@@ -459,8 +466,97 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+
+            /* Akreditasi Card Desktop */
+            .akreditasi-title {
+                font-size: 1.5rem;
+            }
+
+            .akreditasi-desc {
+                font-size: 1rem;
+            }
+
+            .akreditasi-points span {
+                font-size: 0.9rem;
+            }
+
+            .akreditasia-img {
+                max-width: 180px;
+                /* Desktop normal */
+                width: 100%;
+                height: auto;
+                /* Jaga rasio */
+                object-fit: contain;
+                /* Gambar tidak gepeng */
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                transition: transform 0.6s ease;
+            }
+
+            /* Mobile Styles */
+            @media (max-width: 768px) {
+
+                /* Card utama akreditasi */
+                .card.shadow-lg {
+                    padding: 1rem !important;
+                    margin-bottom: 1rem;
+                }
+
+                /* Judul Section */
+                h2.section-title {
+                    font-size: 1.5rem;
+                }
+
+                /* Judul Akreditasi Card */
+                .akreditasi-title {
+                    font-size: 1rem;
+                }
+
+                /* Deskripsi akreditasi */
+                .akreditasi-desc {
+                    font-size: 0.8rem;
+                }
+
+                /* Points list */
+                .akreditasi-points span {
+                    font-size: 0.75rem;
+                }
+
+                /* Image Akreditasi */
+                .akreditasia-img {
+                    max-width: 130px;
+                    /* diperbesar dari 100px sebelumnya */
+                    height: auto;
+                    object-fit: contain;
+                }
+
+                /* Feature cards */
+                .row.mt-5 .card-body {
+                    padding: 1rem;
+                }
+
+                h5.fw-bold {
+                    font-size: 0.9rem;
+                }
+
+                p.text-muted {
+                    font-size: 0.75rem;
+                }
+
+                /* Icons in feature cards */
+                .bg-navy-light i,
+                .bg-warning i {
+                    font-size: 1.2rem;
+                }
+
+                /* Buttons */
+                .btn.btn-light {
+                    font-size: 0.75rem;
+                    padding: 0.3rem 0.6rem;
+                }
+            }
         </style>
 
+        <!-- Scripts -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const animatedElements = document.querySelectorAll('.animate-fade');
@@ -469,22 +565,17 @@
                         if (entry.isIntersecting) {
                             setTimeout(() => {
                                 entry.target.classList.add('visible');
-                            }, parseInt(entry.target.style.animationDelay || '0') * 1000);
+                            }, parseFloat(entry.target.style.animationDelay || 0) * 1000);
                             observer.unobserve(entry.target);
                         }
                     });
                 }, {
                     threshold: 0.1
                 });
-                animatedElements.forEach(element => {
-                    observer.observe(element);
-                });
+                animatedElements.forEach(el => observer.observe(el));
 
-                // Inisialisasi fancybox jika diperlukan
                 if (typeof Fancybox !== 'undefined') {
-                    Fancybox.bind("[data-fancybox]", {
-                        // Options here
-                    });
+                    Fancybox.bind("[data-fancybox]", {});
                 }
             });
         </script>
@@ -494,33 +585,39 @@
 
     <section class="py-5 bg-light" id="brosur">
         <div class="container">
-
             <!-- Konten Brosur -->
             <div class="row justify-content-center">
                 <div class="col-md-8 animate-fade">
                     <div class="info-card shadow-lg rounded-4 p-4 bg-white h-100 card-hover text-center">
+
+                        <!-- Gambar Brosur -->
                         <div class="brosur-img mb-4">
                             @if ($data->isNotEmpty() && $data->first()->brosur)
                                 <img src="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}" alt="Brosur PPDB"
-                                    class="img-fluid rounded shadow-sm" style="max-height:250px;">
+                                    class="img-fluid rounded shadow-sm">
                             @endif
                         </div>
 
+                        <!-- Judul dan Deskripsi -->
                         <h4 class="fw-bold text-dark">Brosur PPDB MI Diponegoro 03</h4>
                         <p class="text-muted mt-2 px-3">
                             Brosur resmi yang dirilis oleh MI Diponegoro 03 Karangklesem ini memuat seluruh informasi
                             penting mengenai Pendaftaran Peserta Didik Baru.
                         </p>
 
+                        <!-- Tombol Download & Lihat -->
                         @if (isset($data) && $data->isNotEmpty() && $data->first()->brosur)
                             <div class="d-flex justify-content-center gap-2 mt-4">
-                                <a href="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}"
-                                    class="btn btn-success px-4 py-2">
-                                    <i class="fas fa-download me-2"></i> Download Brosur
+                                <a href="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}" download
+                                    class="btn btn-success btn-sm d-flex align-items-center justify-content-center">
+                                    <span>Download Brosur</span>
                                 </a>
+
+
                                 <a href="{{ asset('uploads/ppdb/' . $data->first()->brosur) }}"
-                                    class="btn btn-success px-4 py-2" target="_blank">
-                                    <i class="fas fa-eye me-2"></i> Lihat Brosur
+                                    class="btn btn-success btn-sm d-flex align-items-center justify-content-center"
+                                    target="_blank">
+                                    <span>Lihat Brosur</span>
                                 </a>
                             </div>
                         @endif
@@ -529,22 +626,8 @@
             </div>
         </div>
 
+        <!-- CSS -->
         <style>
-            /* Section Title */
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .title-underline {
-                display: block;
-                width: 80px;
-                height: 4px;
-                background: #28a745;
-                margin: 10px auto 0;
-                border-radius: 50px;
-            }
-
-            /* Card hover & animasi */
             .info-card {
                 transition: all 0.4s ease;
                 min-height: 520px;
@@ -555,7 +638,6 @@
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             }
 
-            /* Gambar brosur */
             .brosur-img img {
                 max-height: 350px;
                 object-fit: cover;
@@ -568,15 +650,24 @@
                 transform: scale(1.05);
             }
 
-            /* Tombol download */
             .btn-success {
                 background: linear-gradient(135deg, #28a745 0%, #218838 100%);
                 border: none;
                 border-radius: 50px;
-                padding: 12px 30px;
+                padding: 10px 20px;
                 font-weight: 600;
                 color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
                 transition: all 0.3s ease;
+            }
+
+            .btn-success i {
+                font-size: 0.9rem;
+                line-height: 1;
+                vertical-align: middle;
             }
 
             .btn-success:hover {
@@ -584,7 +675,6 @@
                 box-shadow: 0 5px 15px rgba(40, 167, 69, 0.6);
             }
 
-            /* Animasi fade-in */
             .animate-fade {
                 opacity: 0;
                 transform: translateY(20px);
@@ -597,6 +687,7 @@
             }
         </style>
 
+        <!-- JS untuk animasi fade -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const animatedElements = document.querySelectorAll('.animate-fade');
@@ -615,7 +706,6 @@
         </script>
     </section>
 
-
     <section class="py-5 bg-light" id="prestasi">
         <div class="container">
             <div class="text-center mb-5">
@@ -626,8 +716,8 @@
             </div>
 
             <div class="row g-4">
-                @foreach ($prestasiTerbaru as $prestasi)
-                    <div class="col-md-4 animate-fade" style="animation-delay: {{ $loop->index * 0.1 }}s;">
+                @foreach ($prestasiTerbaru as $index => $prestasi)
+                    <div class="col-md-4 animate-fade prestasi-item" style="animation-delay: {{ $index * 0.1 }}s;">
                         <div class="card h-100 shadow-sm border-0 position-relative card-hover">
                             @if ($prestasi->foto)
                                 <div class="overflow-hidden position-relative">
@@ -644,38 +734,27 @@
 
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3 small text-muted">
-                                    <!-- Tanggal -->
                                     <span>
                                         <i class="far fa-calendar-alt me-1"></i>
                                         {{ $prestasi->tanggal ? \Carbon\Carbon::parse($prestasi->tanggal)->format('d M Y') : $prestasi->created_at->format('d M Y') }}
                                     </span>
-
                                     <span>
                                         @if ($prestasi->jenis_prestasi)
                                             <span class="badge bg-navy text-light px-3 py-2">
-                                                <i class="fas fa-user-graduate me-1"></i>
-                                                {{ $prestasi->jenis_prestasi }}
+                                                <i class="fas fa-user-graduate me-1"></i>{{ $prestasi->jenis_prestasi }}
                                             </span>
                                         @endif
-
                                         @if ($prestasi->juara)
                                             <span class="badge bg-navy text-light px-3 py-2">
-                                                <i class="fas fa-crown me-1"></i>
-                                                {{ $prestasi->juara }}
+                                                <i class="fas fa-crown me-1"></i>{{ $prestasi->juara }}
                                             </span>
                                         @endif
                                     </span>
                                 </div>
 
-                                <!-- Judul Prestasi -->
-                                <h5 class="card-title fw-bold text-navy mb-3">
-                                    {{ $prestasi->nama_prestasi }}
-                                </h5>
-
-                                <!-- Deskripsi Singkat -->
+                                <h5 class="card-title fw-bold text-navy mb-3">{{ $prestasi->nama_prestasi }}</h5>
                                 <p class="card-text text-muted mb-4">
-                                    {{ Str::limit(strip_tags($prestasi->keterangan ?? '-'), 120) }}
-                                </p>
+                                    {{ Str::limit(strip_tags($prestasi->keterangan ?? '-'), 120) }}</p>
                             </div>
 
                             <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
@@ -779,26 +858,14 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
-            /* ✅ Responsive */
-            @media (max-width: 1024px) {
-                .section-title {
-                    font-size: 1.8rem;
-                }
-
-                .lead {
-                    font-size: 1.05rem;
-                }
-
-                .card-title {
-                    font-size: 1.1rem;
-                }
-
-                .card-text {
-                    font-size: 0.95rem;
-                }
-            }
-
+            /* Responsive */
             @media (max-width: 768px) {
+
+                /* hanya tampilkan 2 data pertama */
+                .prestasi-item:nth-child(n+3) {
+                    display: none;
+                }
+
                 .section-title {
                     font-size: 1.5rem;
                 }
@@ -817,6 +884,7 @@
 
                 .card img {
                     height: 180px !important;
+                    object-fit: cover;
                 }
 
                 .btn-navy {
@@ -834,32 +902,30 @@
                         if (entry.isIntersecting) {
                             setTimeout(() => {
                                 entry.target.classList.add('visible');
-                            }, parseInt(entry.target.style.animationDelay || '0') * 1000);
+                            }, parseFloat(entry.target.style.animationDelay || '0') * 1000);
                             observer.unobserve(entry.target);
                         }
                     });
                 }, {
                     threshold: 0.1
                 });
-                animatedElements.forEach(element => {
-                    observer.observe(element);
-                });
+                animatedElements.forEach(element => observer.observe(element));
             });
         </script>
     </section>
-
 
     <section class="py-5 bg-light" id="news">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title display-5 fw-bold text-navy mb-3 animate-fade">Berita Terbaru</h2>
-                <p class="lead text-muted animate-fade" style="animation-delay: 0.2s;">Ikuti informasi terbaru dan
-                    kegiatan terkini dari sekolah kami</p>
+                <p class="lead text-muted animate-fade" style="animation-delay: 0.2s;">
+                    Ikuti informasi terbaru dan kegiatan terkini dari sekolah kami
+                </p>
             </div>
 
             <div class="row g-4">
-                @foreach ($beritaTerbaru as $berita)
-                    <div class="col-md-4 animate-fade" style="animation-delay: {{ $loop->index * 0.1 }}s;">
+                @foreach ($beritaTerbaru as $index => $berita)
+                    <div class="col-md-4 animate-fade berita-item" style="animation-delay: {{ $index * 0.1 }}s;">
                         <div class="card h-100 shadow-sm border-0 position-relative card-hover">
                             @if ($berita->foto)
                                 <div class="overflow-hidden position-relative">
@@ -877,7 +943,6 @@
                                 <div class="d-flex justify-content-between mb-3 small text-muted">
                                     <span><i
                                             class="far fa-calendar-alt me-1"></i>{{ $berita->created_at->format('d M Y') }}</span>
-                                    <span>
                                 </div>
                                 <h5 class="card-title fw-bold text-navy mb-3">{{ $berita->judul }}</h5>
                                 <p class="card-text text-muted mb-4">
@@ -985,8 +1050,16 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
-            .badge.bg-info {
-                background: linear-gradient(135deg, #17a2b8, #138496) !important;
+            /* Mobile: tampilkan hanya 2 berita pertama */
+            @media (max-width: 768px) {
+                .berita-item:nth-child(n+3) {
+                    display: none;
+                }
+
+                .card img {
+                    height: 180px !important;
+                    object-fit: cover;
+                }
             }
         </style>
 
@@ -998,19 +1071,18 @@
                         if (entry.isIntersecting) {
                             setTimeout(() => {
                                 entry.target.classList.add('visible');
-                            }, parseInt(entry.target.style.animationDelay || '0') * 1000);
+                            }, parseFloat(entry.target.style.animationDelay || '0') * 1000);
                             observer.unobserve(entry.target);
                         }
                     });
                 }, {
                     threshold: 0.1
                 });
-                animatedElements.forEach(element => {
-                    observer.observe(element);
-                });
+                animatedElements.forEach(element => observer.observe(element));
             });
         </script>
     </section>
+
 
     <!-- Galeri Foto -->
     <section class="py-5 bg-light" id="gallery">
@@ -1234,7 +1306,8 @@
             <!-- Judul -->
             <div class="text-center mb-5 animate-fade">
                 <h2 class="fw-bold text-navy mb-3 section-title">Apa Kata Mereka</h2>
-                <p class="text-muted fs-5">Testimoni dari orang tua, siswa, dan alumni tentang pengalaman mereka di
+                <p class="text-muted fs-5">
+                    Testimoni dari orang tua, siswa, dan alumni tentang pengalaman mereka di
                     <span class="fw-bold text-navy">MI Diponegoro 03 Karangklesem</span>
                 </p>
                 <div class="divider mx-auto my-3"></div>
@@ -1245,7 +1318,7 @@
                     <div class="swiper-wrapper">
                         @foreach ($testimoni as $item)
                             <div class="swiper-slide">
-                                <div class="card shadow-lg border-0 text-center p-4 h-100 testimonial-card">
+                                <div class="card testimonial-card text-center p-4 h-100">
                                     <!-- Rating Stars -->
                                     <div class="rating mb-3">
                                         @for ($i = 0; $i < 5; $i++)
@@ -1256,14 +1329,9 @@
 
                                     <!-- Foto -->
                                     <div class="position-relative mb-3">
-                                        @if ($item->foto)
-                                            <img src="{{ asset('storage/' . $item->foto) }}"
-                                                class="rounded-circle mx-auto shadow testimonial-img"
-                                                alt="{{ $item->nama }}">
-                                        @else
-                                            <img src="{{ asset('gambar/default-user.png') }}"
-                                                class="rounded-circle mx-auto shadow testimonial-img" alt="User">
-                                        @endif
+                                        <img src="{{ $item->foto ? asset('storage/' . $item->foto) : asset('gambar/default-user.png') }}"
+                                            class="rounded-circle mx-auto shadow testimonial-img"
+                                            alt="{{ $item->nama }}">
                                         <div class="quote-icon bg-navy text-white">
                                             <i class="fas fa-quote-left small"></i>
                                         </div>
@@ -1274,8 +1342,7 @@
                                     <small class="text-muted d-block mb-3">{{ ucfirst($item->sebagai) }}</small>
 
                                     <!-- Isi Testimoni -->
-                                    <p class="mt-3 text-muted testimonial-text">"{{ Str::limit($item->testimoni, 150) }}"
-                                    </p>
+                                    <p class="mt-3 text-muted testimonial-text">{{ $item->testimoni }}</p>
                                 </div>
                             </div>
                         @endforeach
@@ -1297,13 +1364,12 @@
         </div>
     </section>
 
-    <!-- SWIPER JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const swiper = new Swiper('.mySwiper', {
                 slidesPerView: 1,
-                centeredSlides: true,
+                centeredSlides: false,
                 spaceBetween: 30,
                 loop: true,
                 grabCursor: true,
@@ -1381,23 +1447,33 @@
             transform: translateY(0);
         }
 
+        /* Card Testimoni */
         .testimonial-card {
             border-radius: 15px;
             transition: all 0.4s ease;
             background: #fff;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .testimonial-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
+        /* Gambar profil */
         .testimonial-img {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            max-width: 120px;
+            aspect-ratio: 1/1;
             object-fit: cover;
+            border-radius: 50%;
             border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease;
         }
 
@@ -1408,7 +1484,8 @@
         .quote-icon {
             position: absolute;
             top: 0;
-            right: 35%;
+            right: 50%;
+            transform: translateX(50%);
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -1421,9 +1498,10 @@
         .testimonial-text {
             font-style: italic;
             line-height: 1.6;
-            min-height: 60px;
+            min-height: 70px;
         }
 
+        /* Tombol navigasi */
         .swiper-btn {
             position: absolute;
             top: 50%;
@@ -1437,7 +1515,7 @@
             justify-content: center;
             background: #fff;
             color: var(--navy-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s ease;
@@ -1450,13 +1528,14 @@
         }
 
         .swiper-btn-prev {
-            left: -20px;
+            left: 0;
         }
 
         .swiper-btn-next {
-            right: -20px;
+            right: 0;
         }
 
+        /* Pagination */
         .swiper-pagination-bullet {
             background: rgba(0, 0, 0, 0.2);
             opacity: 1;
@@ -1468,21 +1547,16 @@
             border-radius: 10px;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
+            .testimonial-img {
+                max-width: 80px;
+            }
+
             .swiper-btn {
-                width: 40px;
-                height: 40px;
-            }
-
-            .swiper-btn-prev {
-                left: 5px;
-            }
-
-            .swiper-btn-next {
-                right: 5px;
+                width: 35px;
+                height: 35px;
             }
         }
     </style>
-
-
 @endsection

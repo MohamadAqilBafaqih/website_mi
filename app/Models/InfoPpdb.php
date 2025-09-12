@@ -17,7 +17,7 @@ class InfoPpdb extends Model
         'jadwal',
         'syarat',
         'biaya',
-        'faq',
+        'link',
         'kalender_akademik',
         'brosur',
     ];

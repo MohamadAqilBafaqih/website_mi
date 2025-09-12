@@ -2,18 +2,35 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">
-                <i class="fas fa-trophy"></i> Kelola Prestasi Siswa
-            </h1>
+        <div class="page-header mb-4"
+            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title" style="color: #ffffff; font-weight: 700;">
+                        <i class="fas fa-trophy me-2"></i> Kelola Prestasi Siswa
+                    </h1>
+                    <p class="mb-0">Atur dan kelola semua prestasi siswa sekolah</p>
+                </div>
+            </div>
+
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Prestasi Siswa</li>
+                <ol class="breadcrumb" style="background-color: transparent; padding: 0; margin-bottom: 0;">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.dashboard') }}" style="color: #e0e0e0;">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page" style="color: #ffffff;">
+                        Prestasi Siswa
+                    </li>
                 </ol>
             </nav>
         </div>
+
 
         <!-- Alert -->
         @if (session('success'))
