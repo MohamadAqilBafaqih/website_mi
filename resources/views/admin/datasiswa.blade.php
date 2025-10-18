@@ -36,58 +36,68 @@
 
         <!-- Card untuk Tabel Data Siswa -->
         <div class="card shadow-sm" style="border-radius: 12px; overflow: hidden; border: none; margin-bottom: 20px;">
-            <div class="card-header bg-white py-3" style="border-bottom: 1px solid #eaeaea;">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0" style="color: #2e7d32; font-weight: 600;">
-                        <i class="fas fa-list me-2"></i> Daftar Siswa
-                    </h5>
-                    <div class="d-flex">
-                        <form method="GET" action="{{ route('admin.datasiswa.index') }}"
-                            class="d-flex align-items-center me-2">
-                            {{-- Input pencarian --}}
-                            <input type="text" name="search" class="form-control form-control-sm me-2"
-                                placeholder="Cari siswa..." style="border-radius: 8px; min-width: 200px;"
-                                value="{{ request('search') }}">
+           <div class="card-header bg-white shadow-sm rounded-top py-3 px-3" style="border-bottom: 1px solid #e0e0e0;">
+            <div class="card-header bg-white shadow-sm rounded-top py-3 px-3" style="border-bottom: 1px solid #e0e0e0;">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
 
-                            {{-- Filter tahun ajaran --}}
-                            <select name="tahun_ajaran" class="form-select form-select-sm me-2"
-                                style="border-radius: 8px; min-width: 150px;">
-                                <option value="">Semua Tahun</option>
-                                @foreach ($tahunAjaranList as $tahun)
-                                    <option value="{{ $tahun }}"
-                                        {{ request('tahun_ajaran') == $tahun ? 'selected' : '' }}>
-                                        {{ $tahun }}
-                                    </option>
-                                @endforeach
-                            </select>
+        <!-- Judul -->
+        <h5 class="mb-0" style="color: #2e7d32; font-weight: 600;">
+            <i class="fas fa-users me-2"></i> Daftar Siswa
+        </h5>
 
-                            {{-- Tombol cari --}}
-                            <button type="submit" class="btn btn-sm btn-primary me-1 p-2" title="Tampilkan">
-                                <i class="fas fa-search"></i>
-                            </button>
+        <!-- Bagian kanan -->
+        <div class="d-flex flex-wrap align-items-center gap-2">
 
-                            {{-- Tombol refresh --}}
-                            <a href="{{ route('admin.datasiswa.index') }}" class="btn btn-sm btn-primary p-2"
-                                title="Refresh">
-                                <i class="fas fa-sync-alt"></i>
-                            </a>
-                        </form>
+            <!-- Form Pencarian dan Filter -->
+            <form method="GET" action="{{ route('admin.datasiswa.index') }}" class="d-flex align-items-center gap-2 mb-0">
 
-                        {{-- Tombol Ekspor & Cetak --}}
-                        <a href="{{ route('admin.datasiswa.export.all') }}" class="btn btn-sm btn-primary me-2">
-                            <i class="fas fa-file-pdf me-1"></i> Ekspor PDF
-                        </a>
-                        <a href="{{ route('admin.datasiswa.export.excel') }}" class="btn btn-sm btn-primary me-2">
-                            <i class="fas fa-file-excel me-1"></i> Ekspor Excel
-                        </a>
+                <!-- Input cari -->
+                <input type="text" name="search" class="form-control form-control-sm"
+                    placeholder="🔍 Cari siswa..." 
+                    style="border-radius: 20px; min-width: 200px; border: 1px solid #c8e6c9;"
+                    value="{{ request('search') }}">
 
-                    </div>
-                    <form id="deleteForm" method="POST" style="display: none;">
-                        @csrf
-                        @method('DELETE')
-                    </form>
-                </div>
-            </div>
+                <!-- Filter tahun ajaran -->
+                <select name="tahun_ajaran" class="form-select form-select-sm"
+                    style="border-radius: 20px; min-width: 150px; border: 1px solid #c8e6c9;">
+                    <option value="">Semua Tahun</option>
+                    @foreach ($tahunAjaranList as $tahun)
+                        <option value="{{ $tahun }}" {{ request('tahun_ajaran') == $tahun ? 'selected' : '' }}>
+                            {{ $tahun }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <!-- Tombol Cari -->
+                <button type="submit" class="btn btn-sm btn-success rounded-pill px-3 py-1" title="Cari siswa">
+                    <i class="fas fa-search me-1"></i> Cari
+                </button>
+
+                <!-- Tombol Reset -->
+                <a href="{{ route('admin.datasiswa.index') }}" class="btn btn-sm btn-secondary rounded-pill px-3 py-1" title="Reset">
+                    <i class="fas fa-sync-alt me-1"></i> Reset
+                </a>
+            </form>
+
+            <!-- Garis pemisah kecil -->
+            <div style="width: 1px; height: 30px; background-color: #e0e0e0;"></div>
+
+            <!-- Tombol Ekspor -->
+            <a href="{{ route('admin.datasiswa.export.all') }}" class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1">
+                <i class="fas fa-file-pdf me-1"></i> PDF
+            </a>
+            <a href="{{ route('admin.datasiswa.export.excel') }}" class="btn btn-sm btn-outline-success rounded-pill px-3 py-1">
+                <i class="fas fa-file-excel me-1"></i> Excel
+            </a>
+        </div>
+
+        <form id="deleteForm" method="POST" style="display: none;">
+            @csrf
+            @method('DELETE')
+        </form>
+    </div>
+</div>
+
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0" id="siswaTable">
@@ -112,40 +122,46 @@
                                         {{ $siswa->firstItem() + $key }}
                                     </td>
                                     <td style="padding: 12px 15px; vertical-align: middle; font-weight: 500;">
-                                        {{ $item->nama_lengkap }}</td>
+                                        {{ $item->nama_lengkap }}
+                                    </td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">{{ $item->nik }}</td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">{{ $item->jenis_kelamin }}</td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">{{ $item->tempat_lahir }},
-                                        {{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d/m/Y') }}</td>
+                                        {{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d/m/Y') }}
+                                    </td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">
-                                        {{ Str::limit($item->alamat, 20) }}...</td>
+                                        {{ Str::limit($item->alamat, 20) }}...
+                                    </td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">{{ $item->no_hp }}</td>
                                     <td style="padding: 12px 15px; vertical-align: middle;">
-                                        {{ Str::limit($item->asal_sekolah, 15) }}...</td>
-                                    <td style="padding: 12px 15px; vertical-align: middle;">
-                                        <div class="d-flex justify-content-center gap-2">
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#detailModal{{ $item->id }}"
-                                                style="border-radius: 6px; padding: 5px 10px;">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <form action="{{ route('admin.datasiswa.destroy', $item->id) }}"
-                                                method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                                    style="border-radius: 6px; padding: 5px 10px;">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                            <a href="{{ route('admin.datasiswa.export', $item->id) }}"
-                                                class="btn btn-sm btn-success"
-                                                style="border-radius: 6px; padding: 5px 10px;">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </a>
-                                        </div>
+                                        {{ Str::limit($item->asal_sekolah, 15) }}...
                                     </td>
+                                    <td>
+    <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <!-- Tombol Detail -->
+        <button class="btn btn-sm btn-outline-info d-flex align-items-center"
+            data-bs-toggle="modal" data-bs-target="#detailModal{{ $item->id }}">
+            <i class="fas fa-eye me-1"></i> Detail
+        </button>
+
+        <!-- Tombol Hapus -->
+        <form action="{{ route('admin.datasiswa.destroy', $item->id) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center"
+                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                <i class="fas fa-trash me-1"></i> Hapus
+            </button>
+        </form>
+
+        <!-- Tombol Export PDF -->
+        <a href="{{ route('admin.datasiswa.export', $item->id) }}"
+            class="btn btn-sm btn-outline-success d-flex align-items-center">
+            <i class="fas fa-file-pdf me-1"></i> PDF
+        </a>
+    </div>
+</td>
+
                                 </tr>
                             @empty
                                 <tr>
@@ -169,236 +185,165 @@
 
     <!-- Modal Detail -->
     @foreach ($siswa as $item)
-        <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1"
-            aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
+        <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $item->id }}"
+            aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
-                    <div class="modal-header"
-                        style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white;">
-                        <h5 class="modal-title" id="detailModalLabel{{ $item->id }}">
-                            <i class="fas fa-user-graduate me-2"></i>Detail Data Siswa: {{ $item->nama_lengkap }}
+                <div class="modal-content shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="modal-header text-white" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);">
+                        <h5 class="modal-title fw-semibold" id="detailModalLabel{{ $item->id }}">
+                            <i class="fas fa-user-graduate me-2"></i>Detail Siswa: {{ $item->nama_lengkap }}
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" style="padding: 20px;">
-                        <div class="row">
-                            <!-- Data Pribadi -->
+
+                    <div class="modal-body bg-light" style="padding: 25px;">
+                        <!-- ================= DATA PRIBADI & ALAMAT ================= -->
+                        <div class="row g-3 mb-4">
                             <div class="col-md-6">
-                                <div class="info-card mb-4"
-                                    style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-user me-2"></i>Data Pribadi
-                                    </h6>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Nama Lengkap</label>
-                                            <p class="mb-0">{{ $item->nama_lengkap }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">NIK</label>
-                                            <p class="mb-0">{{ $item->nik }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Jenis Kelamin</label>
-                                            <p class="mb-0">{{ $item->jenis_kelamin }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Tempat Lahir</label>
-                                            <p class="mb-0">{{ $item->tempat_lahir }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Tanggal Lahir</label>
-                                            <p class="mb-0">
-                                                {{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d F Y') }}
-                                            </p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Status Pendaftaran</label>
-                                            <p class="mb-0">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-success mb-3 border-bottom pb-2">
+                                            <i class="fas fa-user me-2"></i>Data Pribadi
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-6 mb-2"><strong>Nama Lengkap:</strong> <br>{{ $item->nama_lengkap }}
+                                            </div>
+                                            <div class="col-6 mb-2"><strong>NIK:</strong> <br>{{ $item->nik }}</div>
+                                            <div class="col-6 mb-2"><strong>Jenis Kelamin:</strong>
+                                                <br>{{ $item->jenis_kelamin }}</div>
+                                            <div class="col-6 mb-2"><strong>Tempat Lahir:</strong> <br>{{ $item->tempat_lahir }}
+                                            </div>
+                                            <div class="col-6 mb-2"><strong>Tanggal Lahir:</strong>
+                                                <br>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d F Y') }}
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <strong>Status:</strong><br>
                                                 <span
                                                     class="badge bg-{{ $item->status_pendaftaran == 'Diterima' ? 'success' : ($item->status_pendaftaran == 'Ditolak' ? 'danger' : 'warning') }}">
                                                     {{ $item->status_pendaftaran }}
                                                 </span>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Nomor KIP</label>
-                                            @if ($item->no_kip)
-                                                <p class="mb-0">{{ $item->no_kip }}</p>
-                                            @else
-                                                <p class="mb-0 text-muted">Tidak tersedia</p>
-                                            @endif
+                                            </div>
+                                            <div class="col-6 mb-2"><strong>Nomor KIP:</strong>
+                                                <br>{{ $item->no_kip ?? 'Tidak tersedia' }}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Kontak & Alamat -->
                             <div class="col-md-6">
-                                <div class="info-card mb-4"
-                                    style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-address-book me-2"></i>Kontak &
-                                        Alamat</h6>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">No. HP</label>
-                                            <p class="mb-0">{{ $item->no_hp }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Email</label>
-                                            <p class="mb-0">{{ $item->email }}</p>
-                                        </div>
-                                        <div class="col-12 mb-2">
-                                            <label class="form-label fw-bold">Alamat Lengkap</label>
-                                            <p class="mb-0">{{ $item->alamat }}</p>
-                                        </div>
-                                        <div class="col-md-4 mb-2">
-                                            <label class="form-label fw-bold">Kelurahan</label>
-                                            <p class="mb-0">{{ $item->kelurahan }}</p>
-                                        </div>
-                                        <div class="col-md-4 mb-2">
-                                            <label class="form-label fw-bold">Kecamatan</label>
-                                            <p class="mb-0">{{ $item->kecamatan }}</p>
-                                        </div>
-                                        <div class="col-md-4 mb-2">
-                                            <label class="form-label fw-bold">Kabupaten</label>
-                                            <p class="mb-0">{{ $item->kabupaten }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Provinsi</label>
-                                            <p class="mb-0">{{ $item->provinsi }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Kode Pos</label>
-                                            <p class="mb-0">{{ $item->kode_pos }}</p>
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-success mb-3 border-bottom pb-2">
+                                            <i class="fas fa-address-book me-2"></i>Kontak & Alamat
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-6 mb-2"><strong>No. HP:</strong> <br>{{ $item->no_hp }}</div>
+                                            <div class="col-6 mb-2"><strong>Email:</strong> <br>{{ $item->email }}</div>
+                                            <div class="col-12 mb-2"><strong>Alamat:</strong> <br>{{ $item->alamat }}</div>
+                                            <div class="col-4 mb-2"><strong>Kelurahan:</strong> <br>{{ $item->kelurahan }}</div>
+                                            <div class="col-4 mb-2"><strong>Kecamatan:</strong> <br>{{ $item->kecamatan }}</div>
+                                            <div class="col-4 mb-2"><strong>Kabupaten:</strong> <br>{{ $item->kabupaten }}</div>
+                                            <div class="col-6 mb-2"><strong>Provinsi:</strong> <br>{{ $item->provinsi }}</div>
+                                            <div class="col-6 mb-2"><strong>Kode Pos:</strong> <br>{{ $item->kode_pos }}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <!-- Data Sekolah -->
+                        <!-- ================= DATA SEKOLAH & ORANG TUA ================= -->
+                        <div class="row g-3 mb-4">
                             <div class="col-md-6">
-                                <div class="info-card mb-4"
-                                    style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-school me-2"></i>Data Sekolah
-                                    </h6>
-                                    <div class="row">
-                                        <div class="col-md-8 mb-2">
-                                            <label class="form-label fw-bold">Asal Sekolah</label>
-                                            <p class="mb-0">{{ $item->asal_sekolah }}</p>
-                                        </div>
-                                        <div class="col-md-4 mb-2">
-                                            <label class="form-label fw-bold">Tahun Lulus</label>
-                                            <p class="mb-0">{{ $item->tahun_lulus }}</p>
-                                        </div>
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-success mb-3 border-bottom pb-2">
+                                            <i class="fas fa-school me-2"></i>Data Sekolah
+                                        </h6>
+                                        <p class="mb-1"><strong>Asal Sekolah:</strong> {{ $item->asal_sekolah }}</p>
+                                        <p class="mb-0"><strong>Tahun Lulus:</strong> {{ $item->tahun_lulus }}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Data Orang Tua -->
                             <div class="col-md-6">
-                                <div class="info-card mb-4"
-                                    style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                                    <h6 class="fw-bold mb-3 text-success"><i class="fas fa-users me-2"></i>Data Orang Tua
-                                    </h6>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Nama Ayah</label>
-                                            <p class="mb-0">{{ $item->nama_ayah }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Pekerjaan Ayah</label>
-                                            <p class="mb-0">{{ $item->pekerjaan_ayah }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Pendidikan Ayah</label>
-                                            <p class="mb-0">{{ $item->pendidikan_ayah }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Penghasilan Ayah</label>
-                                            <p class="mb-0">{{ $item->penghasilan_ayah ?? '0' }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Nama Ibu</label>
-                                            <p class="mb-0">{{ $item->nama_ibu }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Pekerjaan Ibu</label>
-                                            <p class="mb-0">{{ $item->pekerjaan_ibu }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Pendidikan Ibu</label>
-                                            <p class="mb-0">{{ $item->pendidikan_ibu }}</p>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label fw-bold">Penghasilan Ibu</label>
-                                            <p class="mb-0">{{ $item->penghasilan_ibu ?? '0' }}</p>
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-success mb-3 border-bottom pb-2">
+                                            <i class="fas fa-users me-2"></i>Data Orang Tua
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-6 mb-2"><strong>Nama Ayah:</strong> <br>{{ $item->nama_ayah }}</div>
+                                            <div class="col-6 mb-2"><strong>Pekerjaan Ayah:</strong>
+                                                <br>{{ $item->pekerjaan_ayah }}</div>
+                                            <div class="col-6 mb-2"><strong>Pendidikan Ayah:</strong>
+                                                <br>{{ $item->pendidikan_ayah }}</div>
+                                            <div class="col-6 mb-2"><strong>Penghasilan Ayah:</strong> <br>Rp
+                                                {{ is_numeric($item->penghasilan_ayah) ? number_format($item->penghasilan_ayah, 0, ',', '.') : $item->penghasilan_ayah }}
+                                            </div>
+                                            <div class="col-6 mb-2"><strong>Nama Ibu:</strong> <br>{{ $item->nama_ibu }}</div>
+                                            <div class="col-6 mb-2"><strong>Pekerjaan Ibu:</strong>
+                                                <br>{{ $item->pekerjaan_ibu }}</div>
+                                            <div class="col-6 mb-2"><strong>Pendidikan Ibu:</strong>
+                                                <br>{{ $item->pendidikan_ibu }}</div>
+                                            <div class="col-6 mb-2"><strong>Penghasilan Ibu:</strong> <br>Rp
+                                                {{ is_numeric($item->penghasilan_ibu) ? number_format($item->penghasilan_ibu, 0, ',', '.') : $item->penghasilan_ibu }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Dokumen -->
-                        <div class="info-card mb-4"
-                            style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-                            <h6 class="fw-bold mb-3 text-success"><i class="fas fa-file-alt me-2"></i>Dokumen</h6>
-                            <div class="d-flex gap-2 flex-wrap">
-                                {{-- Akta Kelahiran --}}
-                                @if ($item->akta_kelahiran)
-                                    <a href="{{ asset('uploads/akta/' . $item->akta_kelahiran) }}" target="_blank"
-                                        class="btn btn-sm btn-primary mb-2">
-                                        <i class="fas fa-file-pdf me-1"></i> Lihat Akta Kelahiran
-                                    </a>
-                                @else
-                                    <span class="text-muted mb-2">Akta Kelahiran tidak tersedia</span>
-                                @endif
+                        <!-- ================= DOKUMEN ================= -->
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-success mb-3 border-bottom pb-2">
+                                    <i class="fas fa-file-alt me-2"></i>Dokumen Pendukung
+                                </h6>
+                                <div class="d-flex flex-wrap gap-2">
+                                    @if ($item->akta_kelahiran)
+                                        <a href="{{ asset('uploads/akta/' . $item->akta_kelahiran) }}" target="_blank"
+                                            class="btn btn-outline-primary btn-sm"><i class="fas fa-file-pdf me-1"></i>Akta
+                                            Kelahiran</a>
+                                    @endif
+                                    @if ($item->kartu_keluarga)
+                                        <a href="{{ asset('uploads/kk/' . $item->kartu_keluarga) }}" target="_blank"
+                                            class="btn btn-outline-primary btn-sm"><i class="fas fa-file me-1"></i>Kartu
+                                            Keluarga</a>
+                                    @endif
+                                    @if ($item->foto_siswa)
+                                        <a href="{{ asset('uploads/foto_siswa/' . $item->foto_siswa) }}" target="_blank"
+                                            class="btn btn-outline-success btn-sm"><i class="fas fa-image me-1"></i>Foto
+                                            Siswa</a>
+                                    @endif
+                                    @if ($item->foto_kip)
+                                        <a href="{{ asset('uploads/foto_kip/' . $item->foto_kip) }}" target="_blank"
+                                            class="btn btn-outline-success btn-sm"><i class="fas fa-id-card me-1"></i>Foto
+                                            KIP</a>
+                                    @endif
 
-                                {{-- Kartu Keluarga --}}
-                                @if ($item->kartu_keluarga)
-                                    <a href="{{ asset('uploads/kk/' . $item->kartu_keluarga) }}" target="_blank"
-                                        class="btn btn-sm btn-secondary mb-2">
-                                        <i class="fas fa-file-pdf me-1"></i> Lihat Kartu Keluarga
-                                    </a>
-                                @else
-                                    <span class="text-muted mb-2">Kartu Keluarga tidak tersedia</span>
-                                @endif
-
-                                {{-- Foto Siswa --}}
-                                @if ($item->foto_siswa)
-                                    <a href="{{ asset('uploads/foto_siswa/' . $item->foto_siswa) }}" target="_blank"
-                                        class="btn btn-sm btn-success mb-2">
-                                        <i class="fas fa-image me-1"></i> Lihat Foto Siswa
-                                    </a>
-                                @else
-                                    <span class="text-muted mb-2">Foto siswa tidak tersedia</span>
-                                @endif
-
-                                {{-- Foto KIP --}}
-                                @if ($item->foto_kip)
-                                    <a href="{{ asset('uploads/foto_kip/' . $item->foto_kip) }}" target="_blank"
-                                        class="btn btn-sm btn-warning mb-2">
-                                        <i class="fas fa-image me-1"></i> Lihat Foto KIP
-                                    </a>
-                                @else
-                                    <span class="text-muted mb-2">Foto KIP tidak tersedia</span>
-                                @endif
+                                    @if (!$item->akta_kelahiran && !$item->kartu_keluarga && !$item->foto_siswa && !$item->foto_kip)
+                                        <span class="text-muted">Tidak ada dokumen yang diunggah</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+
+                    <div class="modal-footer bg-white">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i>Tutup
+                        </button>
                         <a href="{{ route('admin.datasiswa.export', $item->id) }}" class="btn btn-success">
-                            <i class="fas fa-file-pdf me-1"></i> Ekspor PDF
+                            <i class="fas fa-file-pdf me-1"></i>Ekspor PDF
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
+
 
     <style>
         body {

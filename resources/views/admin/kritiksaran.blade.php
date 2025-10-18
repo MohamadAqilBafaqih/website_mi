@@ -2,13 +2,12 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="page-header mb-4"
-            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <div class="page-header mb-4" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -86,42 +85,55 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <div class="d-flex gap-1 flex-wrap">
+                                                <div class="d-flex flex-wrap justify-content-center gap-2">
+
+                                                    {{-- Tombol Tandai Dibaca --}}
                                                     @if ($item->status != 'Dibaca')
                                                         <form action="{{ route('admin.kritiksaran.update', $item->id) }}"
-                                                            method="POST">
+                                                            method="POST" class="m-0">
                                                             @csrf
                                                             @method('PUT')
                                                             <input type="hidden" name="status" value="Dibaca">
-                                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                            <button type="submit"
+                                                                class="btn btn-outline-warning btn-sm rounded-pill px-3 d-flex align-items-center shadow-sm"
+                                                                title="Tandai sebagai Dibaca">
                                                                 <i class="fas fa-envelope-open me-1"></i> Dibaca
                                                             </button>
                                                         </form>
                                                     @endif
 
+                                                    {{-- Tombol Tandai Ditindaklanjuti --}}
                                                     @if ($item->status != 'Ditindaklanjuti')
                                                         <form action="{{ route('admin.kritiksaran.update', $item->id) }}"
-                                                            method="POST">
+                                                            method="POST" class="m-0">
                                                             @csrf
                                                             @method('PUT')
                                                             <input type="hidden" name="status" value="Ditindaklanjuti">
-                                                            <button type="submit" class="btn btn-success btn-sm">
-                                                                <i class="fas fa-check-circle me-1"></i> Ditindaklanjuti
+                                                            <button type="submit"
+                                                                class="btn btn-outline-success btn-sm rounded-pill px-3 d-flex align-items-center shadow-sm"
+                                                                title="Tandai sebagai Ditindaklanjuti">
+                                                                <i class="fas fa-check-circle me-1"></i> Tindaklanjuti
                                                             </button>
                                                         </form>
                                                     @endif
 
-                                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                                        data-bs-target="#detailModal" data-nama="{{ $item->nama ?? '-' }}"
+                                                    {{-- Tombol Detail --}}
+                                                    <button
+                                                        class="btn btn-outline-info btn-sm rounded-pill px-3 d-flex align-items-center shadow-sm"
+                                                        data-bs-toggle="modal" data-bs-target="#detailModal"
+                                                        data-nama="{{ $item->nama ?? '-' }}"
                                                         data-email="{{ $item->email ?? '-' }}"
                                                         data-nohp="{{ $item->no_hp ?? '-' }}"
                                                         data-kritik="{{ $item->kritik ?? '-' }}"
                                                         data-saran="{{ $item->saran ?? '-' }}"
-                                                        data-tanggal="{{ $item->created_at->format('d M Y H:i') }}">
+                                                        data-tanggal="{{ $item->created_at->format('d M Y H:i') }}"
+                                                        title="Lihat Detail">
                                                         <i class="fas fa-eye me-1"></i> Detail
                                                     </button>
+
                                                 </div>
                                             </td>
+
                                         </tr>
                                     @empty
                                         <tr>
@@ -166,7 +178,7 @@
 
     <script>
         document.querySelectorAll('[data-bs-target="#detailModal"]').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 document.getElementById('detail-nama').textContent = this.getAttribute('data-nama');
                 document.getElementById('detail-email').textContent = this.getAttribute('data-email');
                 document.getElementById('detail-nohp').textContent = this.getAttribute('data-nohp');

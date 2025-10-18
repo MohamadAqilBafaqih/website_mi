@@ -54,8 +54,7 @@
                         <select class="form-select" id="tahunAjaranFilter" name="tahun_ajaran">
                             <option value="">Semua Tahun</option>
                             @foreach ($tahunAjaranList as $tahun)
-                                <option value="{{ $tahun }}"
-                                    {{ request('tahun_ajaran') == $tahun ? 'selected' : '' }}>
+                                <option value="{{ $tahun }}" {{ request('tahun_ajaran') == $tahun ? 'selected' : '' }}>
                                     {{ $tahun }}
                                 </option>
                             @endforeach
@@ -148,16 +147,14 @@
                                     </td>
                                     <td>
                                         @if ($siswa->status_pendaftaran == 'Baru')
-                                            <span class="badge bg-warning text-dark mb-2"><i
-                                                    class="fas fa-clock me-1"></i>
+                                            <span class="badge bg-warning text-dark mb-2"><i class="fas fa-clock me-1"></i>
                                                 Baru</span>
                                             <div class="d-flex flex-wrap gap-1">
                                                 <form action="{{ route('admin.seleksisiswa.updateStatus', $siswa->id) }}"
                                                     method="POST" class="d-inline">
                                                     @csrf
                                                     <input type="hidden" name="status" value="Diterima">
-                                                    <button class="btn btn-sm btn-success" type="submit"
-                                                        title="Terima Siswa">
+                                                    <button class="btn btn-sm btn-success" type="submit" title="Terima Siswa">
                                                         <i class="fas fa-check"></i> Terima
                                                     </button>
                                                 </form>
@@ -165,8 +162,7 @@
                                                     method="POST" class="d-inline">
                                                     @csrf
                                                     <input type="hidden" name="status" value="Ditolak">
-                                                    <button class="btn btn-sm btn-outline-danger" type="submit"
-                                                        title="Tolak Siswa">
+                                                    <button class="btn btn-sm btn-outline-danger" type="submit" title="Tolak Siswa">
                                                         <i class="fas fa-times"></i> Tolak
                                                     </button>
                                                 </form>
@@ -197,12 +193,12 @@
                                                 data-bs-target="#detailModal{{ $siswa->id }}">
                                                 <i class="fas fa-eye me-1"></i> Detail
                                             </button>
-                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                            <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal"
                                                 data-bs-target="#editModal{{ $siswa->id }}">
                                                 <i class="fas fa-edit me-1"></i> Edit
                                             </button>
-                                            <form action="{{ route('admin.seleksisiswa.destroy', $siswa->id) }}"
-                                                method="POST" class="d-inline">
+                                            <form action="{{ route('admin.seleksisiswa.destroy', $siswa->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger"
@@ -428,8 +424,8 @@
                                                                 target="_blank" class="btn btn-sm btn-info text-white">
                                                                 <i class="fas fa-eye"></i> Lihat
                                                             </a>
-                                                            <a href="{{ asset('uploads/akta/' . $siswa->akta_kelahiran) }}"
-                                                                download class="btn btn-sm btn-success">
+                                                            <a href="{{ asset('uploads/akta/' . $siswa->akta_kelahiran) }}" download
+                                                                class="btn btn-sm btn-success">
                                                                 <i class="fas fa-download"></i> Download
                                                             </a>
                                                         @else
@@ -446,8 +442,8 @@
                                                                 target="_blank" class="btn btn-sm btn-info text-white">
                                                                 <i class="fas fa-eye"></i> Lihat
                                                             </a>
-                                                            <a href="{{ asset('uploads/kk/' . $siswa->kartu_keluarga) }}"
-                                                                download class="btn btn-sm btn-success">
+                                                            <a href="{{ asset('uploads/kk/' . $siswa->kartu_keluarga) }}" download
+                                                                class="btn btn-sm btn-success">
                                                                 <i class="fas fa-download"></i> Download
                                                             </a>
                                                         @else
@@ -482,8 +478,8 @@
                                                                 target="_blank" class="btn btn-sm btn-info text-white">
                                                                 <i class="fas fa-eye"></i> Lihat
                                                             </a>
-                                                            <a href="{{ asset('uploads/foto_kip/' . $siswa->foto_kip) }}"
-                                                                download class="btn btn-sm btn-success">
+                                                            <a href="{{ asset('uploads/foto_kip/' . $siswa->foto_kip) }}" download
+                                                                class="btn btn-sm btn-success">
                                                                 <i class="fas fa-download"></i> Download
                                                             </a>
                                                         @else
@@ -565,8 +561,8 @@
                                     <!-- NIK -->
                                     <div class="col-md-6 mb-3">
                                         <label for="nik{{ $siswa->id }}" class="form-label">NIK *</label>
-                                        <input type="text" class="form-control" id="nik{{ $siswa->id }}"
-                                            name="nik" value="{{ old('nik', $siswa->nik) }}" required>
+                                        <input type="text" class="form-control" id="nik{{ $siswa->id }}" name="nik"
+                                            value="{{ old('nik', $siswa->nik) }}" required>
                                         @error('nik')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -576,14 +572,12 @@
                                     <div class="col-md-6 mb-3">
                                         <label for="jenis_kelamin{{ $siswa->id }}" class="form-label">Jenis Kelamin
                                             *</label>
-                                        <select class="form-select" id="jenis_kelamin{{ $siswa->id }}"
-                                            name="jenis_kelamin" required>
-                                            <option value="Laki-laki"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
+                                        <select class="form-select" id="jenis_kelamin{{ $siswa->id }}" name="jenis_kelamin"
+                                            required>
+                                            <option value="Laki-laki" {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
                                                 Laki-laki
                                             </option>
-                                            <option value="Perempuan"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
+                                            <option value="Perempuan" {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
                                                 Perempuan
                                             </option>
 
@@ -622,8 +616,8 @@
                                     <!-- No HP -->
                                     <div class="col-md-6 mb-3">
                                         <label for="no_hp{{ $siswa->id }}" class="form-label">No. HP</label>
-                                        <input type="text" class="form-control" id="no_hp{{ $siswa->id }}"
-                                            name="no_hp" value="{{ old('no_hp', $siswa->no_hp) }}">
+                                        <input type="text" class="form-control" id="no_hp{{ $siswa->id }}" name="no_hp"
+                                            value="{{ old('no_hp', $siswa->no_hp) }}">
                                         @error('no_hp')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -632,8 +626,8 @@
                                     <!-- Email -->
                                     <div class="col-md-6 mb-3">
                                         <label for="email{{ $siswa->id }}" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email{{ $siswa->id }}"
-                                            name="email" value="{{ old('email', $siswa->email) }}">
+                                        <input type="email" class="form-control" id="email{{ $siswa->id }}" name="email"
+                                            value="{{ old('email', $siswa->email) }}">
                                         @error('email')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -655,8 +649,8 @@
                                         <label for="tahun_lulus{{ $siswa->id }}" class="form-label">Tahun
                                             Lulus</label>
                                         <input type="number" class="form-control" id="tahun_lulus{{ $siswa->id }}"
-                                            name="tahun_lulus" value="{{ old('tahun_lulus', $siswa->tahun_lulus) }}"
-                                            min="2000" max="{{ date('Y') + 1 }}">
+                                            name="tahun_lulus" value="{{ old('tahun_lulus', $siswa->tahun_lulus) }}" min="2000"
+                                            max="{{ date('Y') + 1 }}">
                                         @error('tahun_lulus')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -665,7 +659,8 @@
                                     <!-- Alamat -->
                                     <div class="col-12 mb-3">
                                         <label for="alamat{{ $siswa->id }}" class="form-label">Alamat</label>
-                                        <textarea class="form-control" id="alamat{{ $siswa->id }}" name="alamat" rows="2">{{ old('alamat', $siswa->alamat) }}</textarea>
+                                        <textarea class="form-control" id="alamat{{ $siswa->id }}" name="alamat"
+                                            rows="2">{{ old('alamat', $siswa->alamat) }}</textarea>
                                         @error('alamat')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -674,8 +669,8 @@
                                     <!-- Kelurahan, Kecamatan, Kabupaten -->
                                     <div class="col-md-4 mb-3">
                                         <label for="kelurahan{{ $siswa->id }}" class="form-label">Kelurahan</label>
-                                        <input type="text" class="form-control" id="kelurahan{{ $siswa->id }}"
-                                            name="kelurahan" value="{{ old('kelurahan', $siswa->kelurahan) }}">
+                                        <input type="text" class="form-control" id="kelurahan{{ $siswa->id }}" name="kelurahan"
+                                            value="{{ old('kelurahan', $siswa->kelurahan) }}">
                                         @error('kelurahan')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -683,8 +678,8 @@
 
                                     <div class="col-md-4 mb-3">
                                         <label for="kecamatan{{ $siswa->id }}" class="form-label">Kecamatan</label>
-                                        <input type="text" class="form-control" id="kecamatan{{ $siswa->id }}"
-                                            name="kecamatan" value="{{ old('kecamatan', $siswa->kecamatan) }}">
+                                        <input type="text" class="form-control" id="kecamatan{{ $siswa->id }}" name="kecamatan"
+                                            value="{{ old('kecamatan', $siswa->kecamatan) }}">
                                         @error('kecamatan')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -692,8 +687,8 @@
 
                                     <div class="col-md-4 mb-3">
                                         <label for="kabupaten{{ $siswa->id }}" class="form-label">Kabupaten</label>
-                                        <input type="text" class="form-control" id="kabupaten{{ $siswa->id }}"
-                                            name="kabupaten" value="{{ old('kabupaten', $siswa->kabupaten) }}">
+                                        <input type="text" class="form-control" id="kabupaten{{ $siswa->id }}" name="kabupaten"
+                                            value="{{ old('kabupaten', $siswa->kabupaten) }}">
                                         @error('kabupaten')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -702,8 +697,8 @@
                                     <!-- Provinsi, Kode Pos -->
                                     <div class="col-md-6 mb-3">
                                         <label for="provinsi{{ $siswa->id }}" class="form-label">Provinsi</label>
-                                        <input type="text" class="form-control" id="provinsi{{ $siswa->id }}"
-                                            name="provinsi" value="{{ old('provinsi', $siswa->provinsi) }}">
+                                        <input type="text" class="form-control" id="provinsi{{ $siswa->id }}" name="provinsi"
+                                            value="{{ old('provinsi', $siswa->provinsi) }}">
                                         @error('provinsi')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -711,8 +706,8 @@
 
                                     <div class="col-md-6 mb-3">
                                         <label for="kode_pos{{ $siswa->id }}" class="form-label">Kode Pos</label>
-                                        <input type="text" class="form-control" id="kode_pos{{ $siswa->id }}"
-                                            name="kode_pos" value="{{ old('kode_pos', $siswa->kode_pos) }}">
+                                        <input type="text" class="form-control" id="kode_pos{{ $siswa->id }}" name="kode_pos"
+                                            value="{{ old('kode_pos', $siswa->kode_pos) }}">
                                         @error('kode_pos')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -721,89 +716,158 @@
                                     <!-- Data Ayah -->
                                     <div class="col-md-6 mb-3">
                                         <label for="nama_ayah{{ $siswa->id }}" class="form-label">Nama Ayah</label>
-                                        <input type="text" class="form-control" id="nama_ayah{{ $siswa->id }}"
-                                            name="nama_ayah" value="{{ old('nama_ayah', $siswa->nama_ayah) }}">
+                                        <input type="text" class="form-control" id="nama_ayah{{ $siswa->id }}" name="nama_ayah"
+                                            value="{{ old('nama_ayah', $siswa->nama_ayah) }}">
                                         @error('nama_ayah')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="pekerjaan_ayah{{ $siswa->id }}" class="form-label">Pekerjaan
-                                            Ayah</label>
-                                        <input type="text" class="form-control"
-                                            id="pekerjaan_ayah{{ $siswa->id }}" name="pekerjaan_ayah"
-                                            value="{{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) }}">
+                                        <label for="pekerjaan_ayah{{ $siswa->id }}" class="form-label">Pekerjaan Ayah</label>
+                                        <select id="pekerjaan_ayah{{ $siswa->id }}" name="pekerjaan_ayah"
+                                            class="form-control @error('pekerjaan_ayah') is-invalid @enderror" required>
+                                            <option value="">Pilih Pekerjaan Ayah</option>
+                                            <option value="PNS" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'PNS' ? 'selected' : '' }}>PNS</option>
+                                            <option value="TNI/POLRI" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'TNI/POLRI' ? 'selected' : '' }}>TNI/POLRI</option>
+                                            <option value="Guru/Dosen" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Guru/Dosen' ? 'selected' : '' }}>Guru/Dosen</option>
+                                            <option value="Petani" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Petani' ? 'selected' : '' }}>Petani</option>
+                                            <option value="Wiraswasta" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Wiraswasta' ? 'selected' : '' }}>Wiraswasta</option>
+                                            <option value="Karyawan Swasta" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Karyawan Swasta' ? 'selected' : '' }}>Karyawan Swasta
+                                            </option>
+                                            <option value="Buruh" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Buruh' ? 'selected' : '' }}>Buruh</option>
+                                            <option value="Tidak Bekerja" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Tidak Bekerja' ? 'selected' : '' }}>Tidak Bekerja
+                                            </option>
+                                            <option value="Lainnya" {{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                        </select>
                                         @error('pekerjaan_ayah')
-                                            <div class="text-danger small">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
 
+
                                     <div class="col-md-6 mb-3">
-                                        <label for="pendidikan_ayah{{ $siswa->id }}" class="form-label">Pendidikan
-                                            Ayah</label>
-                                        <input type="text" class="form-control"
-                                            id="pendidikan_ayah{{ $siswa->id }}" name="pendidikan_ayah"
-                                            value="{{ old('pendidikan_ayah', $siswa->pendidikan_ayah) }}">
+                                        <label for="pendidikan_ayah{{ $siswa->id }}" class="form-label">Pendidikan Ayah</label>
+                                        <select id="pendidikan_ayah{{ $siswa->id }}" name="pendidikan_ayah"
+                                            class="form-control @error('pendidikan_ayah') is-invalid @enderror" required>
+                                            <option value="">Pilih Pendidikan Ayah</option>
+                                            <option value="Tidak Sekolah" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'Tidak Sekolah' ? 'selected' : '' }}>Tidak Sekolah
+                                            </option>
+                                            <option value="SD/MI" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'SD/MI' ? 'selected' : '' }}>SD / MI</option>
+                                            <option value="SMP/MTs" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'SMP/MTs' ? 'selected' : '' }}>SMP / MTs</option>
+                                            <option value="SMA/MA/SMK" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'SMA/MA/SMK' ? 'selected' : '' }}>SMA / MA / SMK
+                                            </option>
+                                            <option value="Diploma" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'Diploma' ? 'selected' : '' }}>Diploma (D1)</option>
+                                            <option value="D4/S1" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'D4/S1' ? 'selected' : '' }}>Strata 1 (S1)</option>
+                                            <option value="S2" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'S2' ? 'selected' : '' }}>Strata 2 (S2)</option>
+                                            <option value="S3" {{ old('pendidikan_ayah', $siswa->pendidikan_ayah) == 'S3' ? 'selected' : '' }}>Strata 3 (S3)</option>
+                                        </select>
                                         @error('pendidikan_ayah')
-                                            <div class="text-danger small">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+
 
                                     <div class="col-md-6 mb-3">
                                         <label for="penghasilan_ayah{{ $siswa->id }}" class="form-label">Penghasilan
                                             Ayah</label>
-                                        <input type="text" class="form-control"
-                                            id="penghasilan_ayah{{ $siswa->id }}" name="penghasilan_ayah"
-                                            value="{{ old('penghasilan_ayah', $siswa->penghasilan_ayah) }}">
+                                        <select id="penghasilan_ayah{{ $siswa->id }}" name="penghasilan_ayah"
+                                            class="form-control @error('penghasilan_ayah') is-invalid @enderror" required>
+                                            <option value="">Pilih Penghasilan Ayah</option>
+                                            <option value="< Rp. 500.000" {{ old('penghasilan_ayah', $siswa->penghasilan_ayah) == '< Rp. 500.000' ? 'selected' : '' }}>
+                                                < Rp. 500.000</option>
+                                            <option value="Rp. 500.000 - Rp. 1.000.000" {{ old('penghasilan_ayah', $siswa->penghasilan_ayah) == 'Rp. 500.000 - Rp. 1.000.000' ? 'selected' : '' }}>
+                                                Rp. 500.000 - Rp. 1.000.000</option>
+                                            <option value="Rp. 1.000.000 - Rp. 2.000.000" {{ old('penghasilan_ayah', $siswa->penghasilan_ayah) == 'Rp. 1.000.000 - Rp. 2.000.000' ? 'selected' : '' }}>
+                                                Rp. 1.000.000 - Rp. 2.000.000</option>
+                                            <option value="Rp. 2.000.000 - Rp. 5.000.000" {{ old('penghasilan_ayah', $siswa->penghasilan_ayah) == 'Rp. 2.000.000 - Rp. 5.000.000' ? 'selected' : '' }}>
+                                                Rp. 2.000.000 - Rp. 5.000.000</option>
+                                            <option value="Rp. 5.000.000 - Rp. 10.000.000" {{ old('penghasilan_ayah', $siswa->penghasilan_ayah) == 'Rp. 5.000.000 - Rp. 10.000.000' ? 'selected' : '' }}>Rp. 5.000.000 - Rp. 10.000.000</option>
+                                            <option value="> Rp. 10.000.000" {{ old('penghasilan_ayah', $siswa->penghasilan_ayah) == '> Rp. 10.000.000' ? 'selected' : '' }}>> Rp.
+                                                10.000.000</option>
+                                        </select>
                                         @error('penghasilan_ayah')
-                                            <div class="text-danger small">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
 
                                     <!-- Data Ibu -->
                                     <div class="col-md-6 mb-3">
                                         <label for="nama_ibu{{ $siswa->id }}" class="form-label">Nama Ibu</label>
-                                        <input type="text" class="form-control" id="nama_ibu{{ $siswa->id }}"
-                                            name="nama_ibu" value="{{ old('nama_ibu', $siswa->nama_ibu) }}">
+                                        <input type="text" class="form-control" id="nama_ibu{{ $siswa->id }}" name="nama_ibu"
+                                            value="{{ old('nama_ibu', $siswa->nama_ibu) }}">
                                         @error('nama_ibu')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="pekerjaan_ibu{{ $siswa->id }}" class="form-label">Pekerjaan
-                                            Ibu</label>
-                                        <input type="text" class="form-control"
-                                            id="pekerjaan_ibu{{ $siswa->id }}" name="pekerjaan_ibu"
-                                            value="{{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) }}">
+                                        <label for="pekerjaan_ibu{{ $siswa->id }}" class="form-label">Pekerjaan Ibu</label>
+                                        <select id="pekerjaan_ibu{{ $siswa->id }}" name="pekerjaan_ibu"
+                                            class="form-control @error('pekerjaan_ibu') is-invalid @enderror" required>
+                                            <option value="">Pilih Pekerjaan Ibu</option>
+                                            <option value="PNS" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'PNS' ? 'selected' : '' }}>PNS</option>
+                                            <option value="TNI/POLRI" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'TNI/POLRI' ? 'selected' : '' }}>TNI/POLRI</option>
+                                            <option value="Guru/Dosen" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Guru/Dosen' ? 'selected' : '' }}>Guru/Dosen</option>
+                                            <option value="Petani" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Petani' ? 'selected' : '' }}>Petani</option>
+                                            <option value="Wiraswasta" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Wiraswasta' ? 'selected' : '' }}>Wiraswasta</option>
+                                            <option value="Karyawan Swasta" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Karyawan Swasta' ? 'selected' : '' }}>Karyawan Swasta
+                                            </option>
+                                            <option value="Buruh" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Buruh' ? 'selected' : '' }}>Buruh</option>
+                                            <option value="Ibu Rumah Tangga" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Ibu Rumah Tangga' ? 'selected' : '' }}>Ibu Rumah Tangga
+                                            </option>
+                                            <option value="Tidak Bekerja" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Tidak Bekerja' ? 'selected' : '' }}>Tidak Bekerja</option>
+                                            <option value="Lainnya" {{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                        </select>
                                         @error('pekerjaan_ibu')
-                                            <div class="text-danger small">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="pendidikan_ibu{{ $siswa->id }}" class="form-label">Pendidikan
-                                            Ibu</label>
-                                        <input type="text" class="form-control"
-                                            id="pendidikan_ibu{{ $siswa->id }}" name="pendidikan_ibu"
-                                            value="{{ old('pendidikan_ibu', $siswa->pendidikan_ibu) }}">
+                                        <label for="pendidikan_ibu{{ $siswa->id }}" class="form-label">Pendidikan Ibu</label>
+                                        <select id="pendidikan_ibu{{ $siswa->id }}" name="pendidikan_ibu"
+                                            class="form-control @error('pendidikan_ibu') is-invalid @enderror" required>
+                                            <option value="">Pilih Pendidikan Ibu</option>
+                                            <option value="Tidak Sekolah" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'Tidak Sekolah' ? 'selected' : '' }}>Tidak Sekolah
+                                            </option>
+                                            <option value="SD/MI" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'SD/MI' ? 'selected' : '' }}>SD / MI</option>
+                                            <option value="SMP/MTs" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'SMP/MTs' ? 'selected' : '' }}>SMP / MTs</option>
+                                            <option value="SMA/MA/SMK" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'SMA/MA/SMK' ? 'selected' : '' }}>SMA / MA / SMK
+                                            </option>
+                                            <option value="Diploma" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'Diploma' ? 'selected' : '' }}>Diploma (D1)</option>
+                                            <option value="D4/S1" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'D4/S1' ? 'selected' : '' }}>Strata 1 (S1)</option>
+                                            <option value="S2" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'S2' ? 'selected' : '' }}>Strata 2 (S2)</option>
+                                            <option value="S3" {{ old('pendidikan_ibu', $siswa->pendidikan_ibu) == 'S3' ? 'selected' : '' }}>Strata 3 (S3)</option>
+                                        </select>
                                         @error('pendidikan_ibu')
-                                            <div class="text-danger small">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="penghasilan_ibu{{ $siswa->id }}" class="form-label">Penghasilan
-                                            Ibu</label>
-                                        <input type="text" class="form-control"
-                                            id="penghasilan_ibu{{ $siswa->id }}" name="penghasilan_ibu"
-                                            value="{{ old('penghasilan_ibu', $siswa->penghasilan_ibu) }}">
+                                        <label for="penghasilan_ibu{{ $siswa->id }}" class="form-label">Penghasilan Ibu</label>
+                                        <select id="penghasilan_ibu{{ $siswa->id }}" name="penghasilan_ibu"
+                                            class="form-control @error('penghasilan_ibu') is-invalid @enderror" required>
+                                            <option value="">Pilih Penghasilan Ibu</option>
+                                            <option value="< Rp. 500.000" {{ old('penghasilan_ibu', $siswa->penghasilan_ibu) == '< Rp. 500.000' ? 'selected' : '' }}>
+                                                < Rp. 500.000</option>
+                                            <option value="Rp. 500.000 - Rp. 1.000.000" {{ old('penghasilan_ibu', $siswa->penghasilan_ibu) == 'Rp. 500.000 - Rp. 1.000.000' ? 'selected' : '' }}>Rp.
+                                                500.000 - Rp. 1.000.000</option>
+                                            <option value="Rp. 1.000.000 - Rp. 2.000.000" {{ old('penghasilan_ibu', $siswa->penghasilan_ibu) == 'Rp. 1.000.000 - Rp. 2.000.000' ? 'selected' : '' }}>
+                                                Rp. 1.000.000 - Rp. 2.000.000</option>
+                                            <option value="Rp. 2.000.000 - Rp. 5.000.000" {{ old('penghasilan_ibu', $siswa->penghasilan_ibu) == 'Rp. 2.000.000 - Rp. 5.000.000' ? 'selected' : '' }}>
+                                                Rp. 2.000.000 - Rp. 5.000.000</option>
+                                            <option value="Rp. 5.000.000 - Rp. 10.000.000" {{ old('penghasilan_ibu', $siswa->penghasilan_ibu) == 'Rp. 5.000.000 - Rp. 10.000.000' ? 'selected' : '' }}>
+                                                Rp. 5.000.000 - Rp. 10.000.000</option>
+                                            <option value="> Rp. 10.000.000" {{ old('penghasilan_ibu', $siswa->penghasilan_ibu) == '> Rp. 10.000.000' ? 'selected' : '' }}>> Rp.
+                                                10.000.000</option>
+                                        </select>
                                         @error('penghasilan_ibu')
-                                            <div class="text-danger small">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -821,7 +885,7 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const statusFilter = document.getElementById('statusFilter');
             const searchInput = document.getElementById('searchInput');
             const tahunAjaranFilter = document.getElementById('tahunAjaranFilter');
@@ -906,7 +970,7 @@
 
             // Validasi form
             document.querySelectorAll('form').forEach(form => {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function (e) {
                     const requiredFields = this.querySelectorAll('[required]');
                     let valid = true;
 
@@ -943,11 +1007,11 @@
 
             // Hapus error saat input
             document.querySelectorAll('.form-control').forEach(input => {
-                input.addEventListener('input', function() {
+                input.addEventListener('input', function () {
                     if (this.value.trim()) {
                         this.classList.remove('is-invalid');
                         if (this.nextElementSibling && this.nextElementSibling.classList.contains(
-                                'text-danger')) {
+                            'text-danger')) {
                             this.nextElementSibling.remove();
                         }
                     }

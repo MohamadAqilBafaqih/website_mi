@@ -9,8 +9,7 @@
                     @if ($pengumuman && $pengumuman->$fotoField)
                         <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
                             <img src="{{ asset('uploads/pengumuman/' . $pengumuman->$fotoField) }}" class="d-block w-100"
-                                alt="Slide {{ $i }}"
-                                style="object-fit: cover; width: 100%; height: 85vh; filter: brightness(70%);">
+                                alt="Slide {{ $i }}" style="object-fit: cover; width: 100%; height: 85vh; filter: brightness(70%);">
                             <div class="carousel-caption d-flex flex-column justify-content-center h-100">
                                 <div class="container animate-fade">
                                     <h1 class="hero-title">
@@ -20,8 +19,7 @@
                                     </h1>
                                     <p class="hero-subtitle">Madrasah Unggul dalam Iman, Ilmu, dan Akhlak Mulia</p>
                                     <div class="hero-buttons">
-                                        <a href="{{ route('pendaftaran.create') }}"
-                                            class="btn btn-navy rounded-pill px-4 pulse">
+                                        <a href="{{ route('pendaftaran.create') }}" class="btn btn-navy rounded-pill px-4 pulse">
                                             <i class="fas fa-user-plus me-2"></i> Daftar PPDB
                                         </a>
                                         <a href="#akreditasi" class="btn btn-outline-navy rounded-pill px-4">
@@ -269,7 +267,7 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const animatedElements = document.querySelectorAll('.animate-fade');
             animatedElements.forEach(el => {
                 el.classList.add('visible');
@@ -558,7 +556,7 @@
 
         <!-- Scripts -->
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const animatedElements = document.querySelectorAll('.animate-fade');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -580,8 +578,6 @@
             });
         </script>
     </section>
-
-
 
     <section class="py-5 bg-light" id="brosur">
         <div class="container">
@@ -689,7 +685,7 @@
 
         <!-- JS untuk animasi fade -->
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const animatedElements = document.querySelectorAll('.animate-fade');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -754,7 +750,8 @@
 
                                 <h5 class="card-title fw-bold text-navy mb-3">{{ $prestasi->nama_prestasi }}</h5>
                                 <p class="card-text text-muted mb-4">
-                                    {{ Str::limit(strip_tags($prestasi->keterangan ?? '-'), 120) }}</p>
+                                    {{ Str::limit(strip_tags($prestasi->keterangan ?? '-'), 120) }}
+                                </p>
                             </div>
 
                             <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
@@ -895,7 +892,7 @@
         </style>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const animatedElements = document.querySelectorAll('.animate-fade');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -929,9 +926,8 @@
                         <div class="card h-100 shadow-sm border-0 position-relative card-hover">
                             @if ($berita->foto)
                                 <div class="overflow-hidden position-relative">
-                                    <img src="{{ asset('uploads/berita/' . $berita->foto) }}"
-                                        class="card-img-top img-hover" alt="{{ $berita->judul }}"
-                                        style="height: 250px; object-fit: cover;">
+                                    <img src="{{ asset('uploads/berita/' . $berita->foto) }}" class="card-img-top img-hover"
+                                        alt="{{ $berita->judul }}" style="height: 250px; object-fit: cover;">
                                     <div class="position-absolute top-0 start-0 m-3">
                                         <span class="badge bg-navy text-light px-3 py-2">
                                             <i class="far fa-newspaper me-1"></i> Berita
@@ -1064,7 +1060,7 @@
         </style>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const animatedElements = document.querySelectorAll('.animate-fade');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -1095,8 +1091,7 @@
 
             <div class="row g-4">
                 @foreach ($galeriFoto as $foto)
-                    <div class="col-6 col-md-4 col-lg-3 animate-fade"
-                        style="animation-delay: {{ $loop->index * 0.1 }}s;">
+                    <div class="col-6 col-md-4 col-lg-3 animate-fade" style="animation-delay: {{ $loop->index * 0.1 }}s;">
                         <div class="gallery-card overflow-hidden rounded-4 shadow-sm position-relative card-hover">
                             <img src="{{ asset('uploads/galeri_kegiatan/' . $foto->foto) }}" class="gallery-img w-100"
                                 alt="{{ $foto->judul_kegiatan }}" style="height: 220px; object-fit: cover;"
@@ -1135,8 +1130,8 @@
                         <button type="button"
                             class="btn-close position-absolute top-0 end-0 m-3 bg-light rounded-circle p-2"
                             data-bs-dismiss="modal" aria-label="Close"></button>
-                        <img src="" id="galleryModalImg" class="w-100"
-                            style="max-height: 80vh; object-fit: contain;" alt="">
+                        <img src="" id="galleryModalImg" class="w-100" style="max-height: 80vh; object-fit: contain;"
+                            alt="">
                         <div class="caption p-4 text-center bg-dark text-white">
                             <h5 class="mb-0" id="galleryModalCaption"></h5>
                         </div>
@@ -1257,7 +1252,7 @@
         </style>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 // Animate fade-in
                 const animateElems = document.querySelectorAll('.animate-fade');
                 const observer = new IntersectionObserver((entries) => {
@@ -1281,14 +1276,14 @@
                 const imgs = document.querySelectorAll('.gallery-img');
 
                 imgs.forEach(img => {
-                    img.addEventListener('click', function() {
+                    img.addEventListener('click', function () {
                         modalImg.src = this.dataset.bsImg;
                         modalCaption.textContent = this.dataset.bsCaption;
                     });
                 });
 
                 // Enhanced modal functionality
-                modal.addEventListener('shown.bs.modal', function() {
+                modal.addEventListener('shown.bs.modal', function () {
                     modalImg.style.opacity = '0';
                     setTimeout(() => {
                         modalImg.style.transition = 'opacity 0.5s ease';
@@ -1317,34 +1312,35 @@
                 <div class="swiper mySwiper animate-fade" style="animation-delay: 0.2s;">
                     <div class="swiper-wrapper">
                         @foreach ($testimoni as $item)
-                            <div class="swiper-slide">
-                                <div class="card testimonial-card text-center p-4 h-100">
-                                    <!-- Rating Stars -->
-                                    <div class="rating mb-3">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <i
-                                                class="fas fa-star {{ $i < ($item->rating ?? 5) ? 'text-warning' : 'text-light' }}"></i>
-                                        @endfor
-                                    </div>
-
-                                    <!-- Foto -->
-                                    <div class="position-relative mb-3">
-                                        <img src="{{ $item->foto ? asset('storage/' . $item->foto) : asset('gambar/default-user.png') }}"
-                                            class="rounded-circle mx-auto shadow testimonial-img"
-                                            alt="{{ $item->nama }}">
-                                        <div class="quote-icon bg-navy text-white">
-                                            <i class="fas fa-quote-left small"></i>
+                                <div class="swiper-slide">
+                                    <div class="card testimonial-card text-center p-4 h-100">
+                                        <!-- Rating Stars -->
+                                        <div class="rating mb-3">
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <i class="fas fa-star {{ $i < ($item->rating ?? 5) ? 'text-warning' : 'text-light' }}"></i>
+                                            @endfor
                                         </div>
+
+                                        <!-- Foto -->
+                                        <div class="position-relative mb-3">
+                                            <img src="{{ $item->foto && file_exists(public_path('uploads/testimoni/' . basename($item->foto)))
+                            ? asset('uploads/testimoni/' . basename($item->foto))
+                            : asset('uploads/testimoni/default.jpg') }}" class="rounded-circle mx-auto shadow testimonial-img"
+                                                alt="{{ $item->nama }}" style="width:100px; height:100px; object-fit:cover;">
+
+                                            <div class="quote-icon bg-navy text-white">
+                                                <i class="fas fa-quote-left small"></i>
+                                            </div>
+                                        </div>
+
+                                        <!-- Nama & Sebagai -->
+                                        <h5 class="fw-bold mb-1 text-navy">{{ $item->nama }}</h5>
+                                        <small class="text-muted d-block mb-3">{{ ucfirst($item->sebagai) }}</small>
+
+                                        <!-- Isi Testimoni -->
+                                        <p class="mt-3 text-muted testimonial-text">{{ $item->testimoni }}</p>
                                     </div>
-
-                                    <!-- Nama & Sebagai -->
-                                    <h5 class="fw-bold mb-1 text-navy">{{ $item->nama }}</h5>
-                                    <small class="text-muted d-block mb-3">{{ ucfirst($item->sebagai) }}</small>
-
-                                    <!-- Isi Testimoni -->
-                                    <p class="mt-3 text-muted testimonial-text">{{ $item->testimoni }}</p>
                                 </div>
-                            </div>
                         @endforeach
                     </div>
 
@@ -1366,7 +1362,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const swiper = new Swiper('.mySwiper', {
                 slidesPerView: 1,
                 centeredSlides: false,
@@ -1412,151 +1408,161 @@
     </script>
 
     <style>
-        :root {
-            --navy-color: #1b5e20;
-        }
+    :root {
+        --navy-color: #1b5e20;
+    }
 
-        .text-navy {
-            color: var(--navy-color) !important;
-        }
+    .text-navy {
+        color: var(--navy-color) !important;
+    }
 
-        .bg-navy {
-            background-color: var(--navy-color) !important;
-        }
+    .bg-navy {
+        background-color: var(--navy-color) !important;
+    }
 
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-        }
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+    }
 
-        .divider {
-            width: 70px;
-            height: 4px;
-            border-radius: 2px;
-            background: var(--navy-color);
-        }
+    .divider {
+        width: 70px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--navy-color);
+    }
 
-        .animate-fade {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
+    .animate-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
 
-        .animate-fade.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .animate-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-        /* Card Testimoni */
-        .testimonial-card {
-            border-radius: 15px;
-            transition: all 0.4s ease;
-            background: #fff;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
+    /* Card Testimoni */
+    .testimonial-card {
+        border-radius: 15px;
+        transition: all 0.4s ease;
+        background: #fff;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
 
-        .testimonial-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-        }
+    .testimonial-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
 
-        /* Gambar profil */
+    /* ==== FOTO TESTIMONI ==== */
+    .testimonial-card .position-relative {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto !important;
+    }
+
+    .testimonial-img {
+        width: 100px !important;
+        height: 100px !important;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .testimonial-card:hover .testimonial-img {
+        transform: scale(1.05);
+    }
+
+    .quote-icon {
+        position: absolute;
+        top: 0;
+        right: 50%;
+        transform: translateX(50%);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        line-height: 1.6;
+        min-height: 70px;
+    }
+
+    /* Tombol navigasi */
+    .swiper-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        color: var(--navy-color);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+
+    .swiper-btn:hover {
+        background: var(--navy-color);
+        color: #fff;
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .swiper-btn-prev {
+        left: 0;
+    }
+
+    .swiper-btn-next {
+        right: 0;
+    }
+
+    /* Pagination */
+    .swiper-pagination-bullet {
+        background: rgba(0, 0, 0, 0.2);
+        opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--navy-color);
+        width: 30px;
+        border-radius: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
         .testimonial-img {
-            width: 100%;
-            max-width: 120px;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
+            width: 100px !important;
+            height: 100px !important;
         }
 
-        .testimonial-card:hover .testimonial-img {
-            transform: scale(1.05);
-        }
-
-        .quote-icon {
-            position: absolute;
-            top: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            line-height: 1.6;
-            min-height: 70px;
-        }
-
-        /* Tombol navigasi */
         .swiper-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            color: var(--navy-color);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
+            width: 35px;
+            height: 35px;
         }
+    }
+</style>
 
-        .swiper-btn:hover {
-            background: var(--navy-color);
-            color: #fff;
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        .swiper-btn-prev {
-            left: 0;
-        }
-
-        .swiper-btn-next {
-            right: 0;
-        }
-
-        /* Pagination */
-        .swiper-pagination-bullet {
-            background: rgba(0, 0, 0, 0.2);
-            opacity: 1;
-        }
-
-        .swiper-pagination-bullet-active {
-            background: var(--navy-color);
-            width: 30px;
-            border-radius: 10px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .testimonial-img {
-                max-width: 80px;
-            }
-
-            .swiper-btn {
-                width: 35px;
-                height: 35px;
-            }
-        }
-    </style>
 @endsection

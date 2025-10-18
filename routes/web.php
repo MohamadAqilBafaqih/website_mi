@@ -344,3 +344,10 @@ Route::get('admin/seleksisiswa/file/{type}/{filename}',
 Route::get('admin/seleksisiswa/file/{type}/{filename}/download', 
     [AdminFileController::class, 'downloadFile'])
     ->name('admin.seleksisiswa.downloadfile');
+
+    use App\Http\Controllers\UserController;
+
+// Hanya untuk menampilkan list dan edit/update
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');

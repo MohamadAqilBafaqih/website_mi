@@ -298,20 +298,31 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.dataguru.edit', $item->id) }}"
-                                                    class="btn btn-sm btn-info mb-1">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <form action="{{ route('admin.dataguru.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Hapus data guru ini?')">
-                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                    </button>
-                                                </form>
-                                            </td>
+    <div class="d-flex justify-content-center flex-wrap gap-2">
+
+        {{-- Tombol Edit --}}
+        <a href="{{ route('admin.dataguru.edit', $item->id) }}"
+            class="btn btn-outline-primary btn-sm rounded-pill px-3 py-1 shadow-sm"
+            title="Edit Data Guru">
+            <i class="fas fa-edit me-1"></i> Edit
+        </a>
+
+        {{-- Tombol Hapus --}}
+        <form action="{{ route('admin.dataguru.destroy', $item->id) }}"
+            method="POST" class="m-0">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 shadow-sm"
+                onclick="return confirm('Apakah Anda yakin ingin menghapus data guru ini?')"
+                title="Hapus Data Guru">
+                <i class="fas fa-trash-alt me-1"></i> Hapus
+            </button>
+        </form>
+
+    </div>
+</td>
+
                                         </tr>
                                     @empty
                                         <tr>

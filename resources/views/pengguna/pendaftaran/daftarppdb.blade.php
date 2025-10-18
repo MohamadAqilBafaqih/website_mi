@@ -482,6 +482,9 @@
             border-radius: 12px;
             overflow: hidden;
             transition: 0.3s;
+            height: auto;
+            /* otomatis menyesuaikan isi */
+            min-height: unset;
         }
 
         .card:hover {

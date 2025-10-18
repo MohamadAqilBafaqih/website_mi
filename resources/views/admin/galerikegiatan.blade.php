@@ -2,13 +2,12 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="page-header mb-4"
-            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <div class="page-header mb-4" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -99,8 +98,8 @@
                                 @enderror
                                 @if (!empty($galeri) && $galeri->foto)
                                     <div class="mt-2">
-                                        <img src="{{ asset('uploads/galeri_kegiatan/' . $galeri->foto) }}"
-                                            alt="Foto Kegiatan" width="150" class="img-thumbnail">
+                                        <img src="{{ asset('uploads/galeri_kegiatan/' . $galeri->foto) }}" alt="Foto Kegiatan"
+                                            width="150" class="img-thumbnail">
                                         <p class="small text-muted mt-1">Foto saat ini</p>
                                     </div>
                                 @endif
@@ -176,20 +175,31 @@
                                             <td>{{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('d M Y') : '-' }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.galerikegiatan.edit', $item->id) }}"
-                                                    class="btn btn-sm btn-info mb-1">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <form action="{{ route('admin.galerikegiatan.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Hapus galeri kegiatan ini?')">
-                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                    </button>
-                                                </form>
+                                                <div class="d-flex flex-wrap justify-content-center gap-2">
+
+                                                    {{-- Tombol Edit --}}
+                                                    <a href="{{ route('admin.galerikegiatan.edit', $item->id) }}"
+                                                        class="btn btn-outline-success btn-sm rounded-pill px-3 py-1 shadow-sm"
+                                                        title="Edit Galeri">
+                                                        <i class="fas fa-edit me-1"></i> Edit
+                                                    </a>
+
+                                                    {{-- Tombol Hapus --}}
+                                                    <form action="{{ route('admin.galerikegiatan.destroy', $item->id) }}"
+                                                        method="POST" class="m-0">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 shadow-sm"
+                                                            onclick="return confirm('Hapus galeri kegiatan ini?')"
+                                                            title="Hapus Galeri">
+                                                            <i class="fas fa-trash-alt me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
+
+                                                </div>
                                             </td>
+
                                         </tr>
                                     @empty
                                         <tr>

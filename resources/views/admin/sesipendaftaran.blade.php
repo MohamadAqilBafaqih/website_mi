@@ -3,13 +3,12 @@
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->
-        <div class="page-header mb-4"
-            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-           color: white;
-           padding: 20px;
-           border-radius: 10px;
-           margin-bottom: 20px;
-           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <div class="page-header mb-4" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+               color: white;
+               padding: 20px;
+               border-radius: 10px;
+               margin-bottom: 20px;
+               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -69,8 +68,8 @@
                                 <label for="tahun_ajaran" class="form-label fw-bold text-success">
                                     <i class="fas fa-calendar me-1"></i> Tahun Ajaran
                                 </label>
-                                <input type="text" name="tahun_ajaran" id="tahun_ajaran"
-                                    class="form-control border-success" placeholder="2025/2026" required>
+                                <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control border-success"
+                                    placeholder="2025/2026" required>
                             </div>
 
                             <div class="row">
@@ -146,28 +145,37 @@
                                             <td>{{ $item->tanggal_mulai->format('Y-m-d') }}</td>
                                             <td>{{ $item->tanggal_selesai->format('Y-m-d') }}</td>
                                             <td>
-                                                <span
-                                                    class="badge bg-{{ $item->status == 'aktif' ? 'success' : 'secondary' }}">
+                                                <span class="badge bg-{{ $item->status == 'aktif' ? 'success' : 'secondary' }}">
                                                     {{ ucfirst($item->status) }}
                                                 </span>
                                             </td>
                                             <td>
-                                                <div class="d-flex gap-1">
-                                                    <button class="btn btn-sm btn-info"
-                                                        onclick="editSesi({{ $item->id }}, '{{ $item->nama_sesi }}', '{{ $item->tahun_ajaran }}', '{{ $item->tanggal_mulai->format('Y-m-d') }}', '{{ $item->tanggal_selesai->format('Y-m-d') }}', '{{ $item->status }}')">
-                                                        <i class="fas fa-edit"></i> Edit
+                                                <div class="d-flex justify-content-center flex-wrap gap-2">
+
+                                                    {{-- Tombol Edit --}}
+                                                    <button
+                                                        class="btn btn-outline-success btn-sm rounded-pill px-3 py-1 shadow-sm"
+                                                        onclick="editSesi({{ $item->id }}, '{{ $item->nama_sesi }}', '{{ $item->tahun_ajaran }}', '{{ $item->tanggal_mulai->format('Y-m-d') }}', '{{ $item->tanggal_selesai->format('Y-m-d') }}', '{{ $item->status }}')"
+                                                        title="Edit Sesi">
+                                                        <i class="fas fa-edit me-1"></i> Edit
                                                     </button>
+
+                                                    {{-- Tombol Hapus --}}
                                                     <form action="{{ route('admin.sesipendaftaran.destroy', $item->id) }}"
-                                                        method="POST" class="d-inline">
+                                                        method="POST" class="m-0">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Hapus sesi ini?')">
-                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                        <button type="submit"
+                                                            class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 shadow-sm"
+                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus sesi ini?')"
+                                                            title="Hapus Sesi">
+                                                            <i class="fas fa-trash-alt me-1"></i> Hapus
                                                         </button>
                                                     </form>
+
                                                 </div>
                                             </td>
+
 
                                         </tr>
                                     @empty

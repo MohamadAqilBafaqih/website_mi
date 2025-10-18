@@ -3,13 +3,12 @@
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->
-        <div class="page-header mb-4"
-            style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-           color: white;
-           padding: 20px;
-           border-radius: 10px;
-           margin-bottom: 20px;
-           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <div class="page-header mb-4" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+               color: white;
+               padding: 20px;
+               border-radius: 10px;
+               margin-bottom: 20px;
+               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -80,7 +79,8 @@
                                     <i class="fas fa-align-left me-1"></i> Isi Berita
                                 </label>
                                 <textarea name="isi" id="isi" rows="6" class="form-control border-success"
-                                    placeholder="Masukkan isi berita" required>{{ empty($berita) ? old('isi') : $berita->isi }}</textarea>
+                                    placeholder="Masukkan isi berita"
+                                    required>{{ empty($berita) ? old('isi') : $berita->isi }}</textarea>
                                 @error('isi')
                                     <div class="text-danger small mt-2">
                                         <i class="fas fa-exclamation-circle me-1"></i> {{ $message }}
@@ -101,8 +101,8 @@
                                 @enderror
                                 @if (!empty($berita) && $berita->foto)
                                     <div class="mt-2">
-                                        <img src="{{ asset('uploads/berita/' . $berita->foto) }}" alt="Foto Berita"
-                                            width="150" class="img-thumbnail">
+                                        <img src="{{ asset('uploads/berita/' . $berita->foto) }}" alt="Foto Berita" width="150"
+                                            class="img-thumbnail">
                                     </div>
                                 @endif
                             </div>
@@ -184,8 +184,8 @@
                                             <td>{{ Str::limit($item->isi, 50) }}</td>
                                             <td>
                                                 @if ($item->foto)
-                                                    <img src="{{ asset('uploads/berita/' . $item->foto) }}"
-                                                        alt="Foto Berita" width="80">
+                                                    <img src="{{ asset('uploads/berita/' . $item->foto) }}" alt="Foto Berita"
+                                                        width="80">
                                                 @else
                                                     -
                                                 @endif
@@ -194,20 +194,30 @@
                                             <td>{{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('d M Y') : '-' }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.berita.edit', $item->id) }}"
-                                                    class="btn btn-sm btn-info mb-1">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <form action="{{ route('admin.berita.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Hapus berita ini?')">
-                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                    </button>
-                                                </form>
+                                                <div class="d-flex justify-content-center flex-wrap gap-2">
+
+                                                    {{-- Tombol Edit --}}
+                                                    <a href="{{ route('admin.berita.edit', $item->id) }}"
+                                                        class="btn btn-outline-primary btn-sm rounded-pill px-3 py-1 shadow-sm"
+                                                        title="Edit Berita">
+                                                        <i class="fas fa-edit me-1"></i> Edit
+                                                    </a>
+
+                                                    {{-- Tombol Hapus --}}
+                                                    <form action="{{ route('admin.berita.destroy', $item->id) }}" method="POST"
+                                                        class="m-0">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 shadow-sm"
+                                                            onclick="return confirm('Hapus berita ini?')" title="Hapus Berita">
+                                                            <i class="fas fa-trash-alt me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
+
+                                                </div>
                                             </td>
+
                                         </tr>
                                     @empty
                                         <tr>

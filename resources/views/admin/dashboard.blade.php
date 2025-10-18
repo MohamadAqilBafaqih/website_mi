@@ -7,7 +7,8 @@
     <title>Admin Dashboard - MI Diponegoro 03 Karangklesem</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary-color: #2e7d32;
@@ -229,6 +230,7 @@
         }
 
         .menu-text {
+            color: var(--primary-color);
             transition: var(--transition);
         }
 
@@ -753,11 +755,7 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profil</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                  
                     <li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -904,8 +902,6 @@
                     <span class="menu-text">Pengumuman</span>
                 </a>
             </li>
-
-
         </ul>
     </aside>
 
@@ -930,7 +926,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
         // Sidebar Toggle
-        document.getElementById('sidebarToggler').addEventListener('click', function() {
+        document.getElementById('sidebarToggler').addEventListener('click', function () {
             document.getElementById('sidebar').classList.toggle('sidebar-collapsed');
 
             // Toggle icon between bars and times
@@ -948,7 +944,7 @@
         if (window.innerWidth < 992) {
             document.getElementById('sidebar').classList.add('sidebar-collapsed');
 
-            document.getElementById('sidebarToggler').addEventListener('click', function() {
+            document.getElementById('sidebarToggler').addEventListener('click', function () {
                 document.getElementById('sidebar').classList.toggle('show');
             });
         }
@@ -959,7 +955,7 @@
         // Submenu toggle
         const menuItems = document.querySelectorAll('.menu-item > a[data-bs-toggle="collapse"]');
         menuItems.forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 if (window.innerWidth < 992) {
                     e.preventDefault();
                     const submenu = this.nextElementSibling;
@@ -981,7 +977,7 @@
         // Add active class to clicked menu item
         const menuLinks = document.querySelectorAll('.menu-link:not([data-bs-toggle="collapse"])');
         menuLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 // Jika link adalah anchor biasa, biarkan berperilaku normal
                 if (this.getAttribute('href') === '#' || this.getAttribute('href') === '') {
                     e.preventDefault();
@@ -1009,10 +1005,10 @@
         // Stats card hover effect
         const statsCards = document.querySelectorAll('.stats-card');
         statsCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-5px)';
             });
-            card.addEventListener('mouseleave', function() {
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0)';
             });
         });
@@ -1020,18 +1016,18 @@
         // Quick links hover effect
         const quickLinks = document.querySelectorAll('.quick-link');
         quickLinks.forEach(link => {
-            link.addEventListener('mouseenter', function() {
+            link.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-5px)';
                 this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
             });
-            link.addEventListener('mouseleave', function() {
+            link.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0)';
                 this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
             });
         });
 
         // Responsive adjustments
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             if (window.innerWidth >= 992) {
                 document.getElementById('sidebar').classList.remove('show');
                 const icon = document.getElementById('sidebarToggler').querySelector('i');
@@ -1054,7 +1050,7 @@
 
         // Submenu toggle handler
         document.querySelectorAll('.menu-item > a[data-bs-toggle="collapse"]').forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 // Untuk desktop, biarkan Bootstrap menangani collapse
                 if (window.innerWidth >= 992) return;
 
@@ -1090,7 +1086,7 @@
         });
 
         // Event listener untuk link dashboard
-        document.getElementById('dashboard-link').addEventListener('click', function(e) {
+        document.getElementById('dashboard-link').addEventListener('click', function (e) {
             localStorage.setItem('activeMenu', this.getAttribute('href'));
         });
 
@@ -1163,7 +1159,7 @@
         }
 
         // Jalankan fungsi saat halaman pertama kali dimuat
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             setActiveMenu();
 
             // Handle case khusus untuk dashboard
@@ -1199,7 +1195,7 @@
             }
 
             // 🔹 Simpan posisi scroll saat di-scroll
-            sidebar.addEventListener('scroll', function() {
+            sidebar.addEventListener('scroll', function () {
                 localStorage.setItem('sidebar-scroll', sidebar.scrollTop);
             });
         });
